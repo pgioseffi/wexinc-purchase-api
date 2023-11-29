@@ -6,7 +6,7 @@
 
 	<parent>
 		<groupId>com.wexinc.purchase</groupId>
-		<artifactId>api</artifactId>
+		<artifactId>wexinc-purchase-api</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
