@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.0</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.wexinc.purchase</groupId>
+	<artifactId>wexinc-purchase-api</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>WEX Inc API - Recruitment Test</name>
+	<description>Inc API - Recruitment Test.</description>
+
+	<modules>
+		<module>core</module>
+		<module>infrastructure</module>
+		<module>presentation</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<jacoco.version>0.8.11</jacoco.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<show>private</show>
+					<links>
+						<link>https://javadoc.io/doc/io.projectreactor/reactor-core/3.5.5</link>
+						<link>https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api</link>
+						<link>https://docs.spring.io/spring-data/r2dbc/docs/3.0.5/api/</link>
+						<link>https://docs.spring.io/spring-data/commons/docs/3.0.5/api/</link>
+						<link>https://javadoc.io/doc/io.projectreactor/reactor-core/3.5.5</link>
+						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
+						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
+						<link>https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/</link>
+						<link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/latest/</link>
+						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
+						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
+						<link>https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/</link>
+						<link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/latest/</link>
+					</links>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<!-- Rules defining minimal coverage limits. Build will fail in case of not attending these minimal coverage limits. -->
+						<configuration>
+							<rules>
+								<rule>
+									<element>CLASS</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.8</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
