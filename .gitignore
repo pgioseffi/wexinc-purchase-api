@@ -33,5 +33,5 @@ target/
 .factorypath
 
 # IntelliJ
-api.iml
+*.iml
 .idea/
