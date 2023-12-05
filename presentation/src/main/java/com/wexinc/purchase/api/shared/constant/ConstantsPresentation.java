@@ -92,6 +92,13 @@ public final class ConstantsPresentation {
 	 *
 	 * @since 1.0.0
 	 */
+	public static final String RESPONSE_STATUS_CODE_204 = "204";
+
+	/**
+	 * Constant holding the value {@value}.
+	 *
+	 * @since 1.0.0
+	 */
 	public static final String RESPONSE_STATUS_CODE_400 = "400";
 
 	/**
