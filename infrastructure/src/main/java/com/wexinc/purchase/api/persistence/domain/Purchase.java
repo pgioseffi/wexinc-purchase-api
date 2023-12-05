@@ -14,7 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
@@ -50,7 +50,7 @@ public class Purchase {
 	 *
 	 * @since 1.0.0
 	 */
-	@NotEmpty
+	@NotBlank
 	@Size(max = 50)
 	private String description;
 
@@ -90,7 +90,7 @@ public class Purchase {
 	 * @param amountParam          Parameter responsible to set the value of the {@link #amount} field.
 	 * @since 1.0.0
 	 */
-	public Purchase(@Positive final Long idParam, @NotEmpty @Size(max = 50) final String descriptionParam,
+	public Purchase(@Positive final Long idParam, @NotBlank @Size(max = 50) final String descriptionParam,
 			@NotNull @Past final LocalDateTime transactionDateParam, @NotNull @Positive final BigDecimal amountParam) {
 		this();
 		this.id = idParam;

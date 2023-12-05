@@ -92,6 +92,13 @@ public final class ConstantsPresentation {
 	 *
 	 * @since 1.0.0
 	 */
+	public static final String RESPONSE_STATUS_CODE_204 = "204";
+
+	/**
+	 * Constant holding the value {@value}.
+	 *
+	 * @since 1.0.0
+	 */
 	public static final String RESPONSE_STATUS_CODE_400 = "400";
 
 	/**
@@ -163,6 +170,13 @@ public final class ConstantsPresentation {
 	 * @since 1.0.0
 	 */
 	public static final String OPENAPI_DOCUMENTATION_PURCHASE_AMOUNT = "Mandatory field responsible for holding the purchase transaction amount. Must be a positive decimal number.";
+
+	/**
+	 * Constant holding the value {@value}.
+	 *
+	 * @since 1.0.0
+	 */
+	public static final int TWO = 2;
 
 	/**
 	 * Default constructor that forbids the class to be instantiated.

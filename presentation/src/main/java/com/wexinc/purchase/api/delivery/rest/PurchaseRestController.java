@@ -195,7 +195,7 @@ public class PurchaseRestController implements PurchaseRestAPI {
 	public EnhancedPurchaseResponseModel findEnhancedPurchaseByID(@PathVariable final Long id,
 			@RequestParam final Set<Country> countries) {
 		return this.findEnhancedPurchaseByIdInputBoundary
-				.andThen(this.purchasePresentationMapper::fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel)
+				.andThen(PurchasePresentationMapper::fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel)
 				.apply(id, countries);
 	}
 

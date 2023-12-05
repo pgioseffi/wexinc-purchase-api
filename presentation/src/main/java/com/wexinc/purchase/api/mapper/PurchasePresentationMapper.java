@@ -3,6 +3,7 @@ package com.wexinc.purchase.api.mapper;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import com.wexinc.purchase.api.dto.EnhancedPurchaseDTO;
 import com.wexinc.purchase.api.dto.PurchaseDTO;
@@ -21,8 +22,11 @@ import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
  * @see PurchaseRequestModel
  * @see PurchaseResponseModel
  */
-@Mapper(uses = ExchangeRatePresentationMapper.class)
-public interface PurchasePresentationMapper {
+@Mapper
+public abstract class PurchasePresentationMapper {
+
+	private static final ExchangeRatePresentationMapper EXCHANGE_RATE_PRESENTATION_MAPPER = Mappers
+			.getMapper(ExchangeRatePresentationMapper.class);
 
 	/**
 	 * Method responsible for mapping a {@link PurchaseDTO} into a {@link PurchaseResponseModel}.
@@ -35,7 +39,7 @@ public interface PurchasePresentationMapper {
 	 * @see PurchaseResponseModel
 	 * @since 1.0.0
 	 */
-	PurchaseResponseModel fromDTOToResponseModel(PurchaseDTO purchaseDTO);
+	public abstract PurchaseResponseModel fromDTOToResponseModel(PurchaseDTO purchaseDTO);
 
 	/**
 	 * Method responsible for mapping a {@link PurchaseRequestModel} into a {@link PurchaseDTO}.
@@ -50,7 +54,7 @@ public interface PurchasePresentationMapper {
 	 */
 	@Mapping(target = "id", ignore = true)
 	@InheritInverseConfiguration
-	PurchaseDTO fromRequestModelToDTO(PurchaseRequestModel purchaseRequestModel);
+	public abstract PurchaseDTO fromRequestModelToDTO(PurchaseRequestModel purchaseRequestModel);
 
 	/**
 	 * Method responsible for mapping a {@link EnhancedPurchaseDTO} into a {@link EnhancedPurchaseResponseModel}.
@@ -65,6 +69,18 @@ public interface PurchasePresentationMapper {
 	 * @see EnhancedPurchaseResponseModel
 	 * @since 1.0.0
 	 */
-	EnhancedPurchaseResponseModel fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(EnhancedPurchaseDTO dto);
+	public static EnhancedPurchaseResponseModel fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
+			final EnhancedPurchaseDTO dto) {
+		if (dto == null) {
+			return null;
+		}
 
+		final var exchangeRateData = dto.exchangeRateData();
+		return new EnhancedPurchaseResponseModel(dto.id(), dto.description(), dto.transactionDate(), dto.amount(),
+				exchangeRateData == null ? null
+						: exchangeRateData.stream()
+								.map(item -> PurchasePresentationMapper.EXCHANGE_RATE_PRESENTATION_MAPPER
+										.fromDTOToResponseModel(dto.amount(), item))
+								.toList());
+	}
 }

@@ -44,6 +44,10 @@ public interface PurchaseRestAPI {
 	 *         be obtained in the Swagger of the application.
 	 * @since 1.0.0
 	 */
+	@Operation(summary = "Search for all purchases in the database.", description = "Search for all purchases in the database.")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_500, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_500, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))) })
 	List<PurchaseResponseModel> findAll();
 
 	/**
@@ -54,7 +58,7 @@ public interface PurchaseRestAPI {
 	 *         application.
 	 * @since 1.0.0
 	 */
-	@Operation(summary = "Search for a purchase in the database using a numeric identifier.", description = "Receives a numerical purchase identifier and searches the database.")
+	@Operation(summary = "Search for a purchase in the database using a numeric identifier.", description = "Receives a numerical purchase identifier and searches for it in the database.")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_400, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_400, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
@@ -72,11 +76,10 @@ public interface PurchaseRestAPI {
 	 *         identifier.
 	 * @since 1.0.0
 	 */
-	@Operation(summary = "Search for a purchase in the database using a numeric identifier.", description = "Receives a numerical purchase identifier and searches the database.")
+	@Operation(summary = "Save a purchase in the database.", description = "Receives purchase information and save it in the database.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_201, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_400, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_400, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
-			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_404, description = "Purchase not found.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_422, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_422, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_500, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_500, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))) })
 	PurchaseResponseModel save(@Valid PurchaseRequestModel body);
@@ -89,9 +92,9 @@ public interface PurchaseRestAPI {
 	 * @return An {@link PurchaseResponseModel} object containing the already updated purchase information.
 	 * @since 1.0.0
 	 */
-	@Operation(summary = "Search for a purchase in the database using a numeric identifier.", description = "Receives a numerical purchase identifier and searches the database.")
+	@Operation(summary = "Search for a purchase in the database using a numeric identifier and update it.", description = "Receives a numerical purchase identifier and updates its information in the database.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data updated successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_400, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_400, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_404, description = "Purchase not found.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_422, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_422, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
@@ -106,9 +109,9 @@ public interface PurchaseRestAPI {
 	 * @param id The numeric identifier of a purchase. It cannot be negative or zero.
 	 * @since 1.0.0
 	 */
-	@Operation(summary = "Search for a purchase in the database using a numeric identifier.", description = "Receives a numerical purchase identifier and searches the database.")
+	@Operation(summary = "Search for a purchase in the database using a numeric identifier and delete it.", description = "Receives a numerical purchase identifier and deletes it from the database.")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = PurchaseResponseModel.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_204, description = "Purchase found and data returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Void.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_400, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_400, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_404, description = "Purchase not found.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_422, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_422, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
@@ -117,11 +120,22 @@ public interface PurchaseRestAPI {
 			@Positive(message = "You cannot pass a negative or zero ID for this exclusion.") @NotNull(message = "You cannot pass a null id for this exclusion.") @Parameter(description = "The numeric identifier of a purchase.", example = "98767367", name = "id", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, schema = @Schema(implementation = Long.class))) Long id);
 
 	/**
-	 * {@inheritDoc}
+	 * Method responsble for searching for a purchase in the database using a numeric identifier and enhance its
+	 * information with exchange rate conversion information acording to the country.
 	 *
-	 * @param id The numeric identifier of a purchase. It cannot be negative or zero.
+	 * @param id        The numeric identifier of a purchase. It cannot be negative or zero.
+	 * @param countries The {@link Set} of countries to search for exchange rate conversion.
+	 * @return The {@link EnhancedPurchaseResponseModel} object containing the purchase information plus the exchange
+	 *         rate conversion information.
 	 * @since 1.0.0
 	 */
+	@Operation(summary = "Search for a purchase in the database using a numeric identifier and enhance its information with exchange rate conversion information acording to the country.", description = "Search for a purchase in the database using a numeric identifier and enhance its information with exchange rate conversion information acording to the country.")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_200, description = "Purchase found and data improved and returned successfully.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = EnhancedPurchaseResponseModel.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_400, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_400, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_404, description = "Purchase not found.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_422, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_422, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
+			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_500, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_500, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))) })
 	EnhancedPurchaseResponseModel findEnhancedPurchaseByID(Long id, Set<Country> countries);
 
 }

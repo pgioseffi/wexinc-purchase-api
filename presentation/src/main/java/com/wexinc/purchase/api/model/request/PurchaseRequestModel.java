@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
@@ -24,7 +24,7 @@ import jakarta.validation.constraints.Size;
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
  * @since 1.0.0
  * @version 1.0.0
- * @see NotEmpty
+ * @see NotBlank
  * @see NotNull
  * @see Past
  * @see Positive
@@ -33,7 +33,7 @@ import jakarta.validation.constraints.Size;
  * @see BigDecimal
  */
 public record PurchaseRequestModel(
-		@Schema(description = ConstantsPresentation.OPENAPI_DOCUMENTATION_PURCHASE_DESCRIPTION) @NotEmpty @Size(max = 50) String description,
+		@Schema(description = ConstantsPresentation.OPENAPI_DOCUMENTATION_PURCHASE_DESCRIPTION) @NotBlank @Size(max = 50) String description,
 		@Schema(description = ConstantsPresentation.OPENAPI_DOCUMENTATION_PURCHASE_TRANSACTION_DATE) @NotNull @Past LocalDateTime transactionDate,
 		@Schema(description = ConstantsPresentation.OPENAPI_DOCUMENTATION_PURCHASE_ID) @NotNull @Positive BigDecimal amount) {
 }

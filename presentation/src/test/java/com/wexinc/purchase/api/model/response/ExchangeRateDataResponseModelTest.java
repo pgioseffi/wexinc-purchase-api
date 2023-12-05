@@ -11,7 +11,7 @@ import com.wexinc.purchase.api.shared.constant.Country;
 class ExchangeRateDataResponseModelTest {
 
 	private static final ExchangeRateDataResponseModel ACTUAL = new ExchangeRateDataResponseModel(Country.BRAZIL.name(),
-			BigDecimal.ZERO);
+			BigDecimal.ZERO, BigDecimal.ZERO);
 
 	@Test
 	void testCountry() {
@@ -22,6 +22,12 @@ class ExchangeRateDataResponseModelTest {
 	@Test
 	void testDescription() {
 		Assertions.assertEquals(BigDecimal.ZERO, ExchangeRateDataResponseModelTest.ACTUAL.exchangeRate(),
+				Constantes.EXPECTED_THE_SAME_RESULT);
+	}
+
+	@Test
+	void testConvertedAmount() {
+		Assertions.assertEquals(BigDecimal.ZERO, ExchangeRateDataResponseModelTest.ACTUAL.convertedAmount(),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }
