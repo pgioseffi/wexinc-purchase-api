@@ -1,0 +1,18 @@
+[
+	{
+		"Key": "wexinc/purchase-api/currency.conversion.URL",
+		"Value": "aHR0cHM6Ly9hcGkuZmlzY2FsZGF0YS50cmVhc3VyeS5nb3Yvc2VydmljZXMvYXBpL2Zpc2NhbF9zZXJ2aWNlL3YxL2FjY291bnRpbmcvb2QvcmF0ZXNfb2ZfZXhjaGFuZ2U/ZmlsdGVyPWVmZmVjdGl2ZV9kYXRlOmd0ZTolcyxlZmZlY3RpdmVfZGF0ZTpsdGU6JXMsY291bnRyeTppbjooJXMpJnNvcnQ9LWVmZmVjdGl2ZV9kYXRlLGNvdW50cnkmcGFnZVtudW1iZXJdPTEmcGFnZVtzaXplXT0xMDAwMCZmaWVsZHM9Y291bnRyeSxleGNoYW5nZV9yYXRlLGVmZmVjdGl2ZV9kYXRl"
+	},
+	{
+		"Key": "wexinc/purchase-api/currency.conversion.leniencyin.months",
+		"Value": "Ng=="
+	},
+	{
+		"Key": "wexinc/purchase-api/spring.datasource.username",
+		"Value": "c2E="
+	},
+	{
+		"Key": "wexinc/purchase-api/spring.datasource.password",
+		"Value": "UHVyY2g0c2UtNHBpLXA0c3N3MHJkIQ=="
+	}
+]
