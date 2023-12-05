@@ -1,6 +1,7 @@
 package com.wexinc.purchase.api.mapper;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.wexinc.purchase.api.dto.ExchangeRateDTO;
 import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
+import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.resource.ExchangeRateDataResource;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
 import com.wexinc.purchase.api.shared.constant.Constantes;
@@ -54,7 +56,34 @@ class ExchangeRatePresentationMapperImplTest {
 
 	@Test
 	void shouldNotMapFromDTOToResponseModel() {
-		Assertions.assertNull(ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null),
+		Assertions.assertNull(ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null, null),
 				Constantes.SHOULD_HAVE_RETURNED_NULL);
+	}
+
+	@Test
+	void shouldMapJustAmount() {
+		Assertions.assertEquals(new ExchangeRateDataResponseModel(null, null, null),
+				ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(BigDecimal.TEN, null),
+				Constantes.EXPECTED_THE_SAME_RESULT);
+	}
+
+	@Test
+	void shouldMapFromDTOToResponseModel() {
+		Assertions.assertEquals(
+				new ExchangeRateDataResponseModel(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO,
+						BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)),
+				ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(BigDecimal.TEN,
+						new ExchangeRateDataDTO(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO,
+								Constantes.NOW_AS_LOCAL_DATE)),
+				Constantes.EXPECTED_THE_SAME_RESULT);
+	}
+
+	@Test
+	void shouldMapFromDTOToResponseModels() {
+		Assertions.assertEquals(
+				new ExchangeRateDataResponseModel(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, null),
+				ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null, new ExchangeRateDataDTO(
+						Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE)),
+				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }

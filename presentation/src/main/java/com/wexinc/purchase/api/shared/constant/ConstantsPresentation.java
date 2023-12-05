@@ -165,6 +165,13 @@ public final class ConstantsPresentation {
 	public static final String OPENAPI_DOCUMENTATION_PURCHASE_AMOUNT = "Mandatory field responsible for holding the purchase transaction amount. Must be a positive decimal number.";
 
 	/**
+	 * Constant holding the value {@value}.
+	 *
+	 * @since 1.0.0
+	 */
+	public static final int TWO = 2;
+
+	/**
 	 * Default constructor that forbids the class to be instantiated.
 	 *
 	 * @throws UnsupportedOperationException with {@link ConstantsCore#CLASS_CANT_BE_INSTANTIATED} message.

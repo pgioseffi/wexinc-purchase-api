@@ -5,7 +5,6 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,7 +39,7 @@ public record PurchaseResponseModel(
 	 * @see RoundingMode#HALF_EVEN
 	 */
 	public BigDecimal amount() {
-		return this.amount.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN);
+		return this.amount.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN);
 	}
 
 	/**

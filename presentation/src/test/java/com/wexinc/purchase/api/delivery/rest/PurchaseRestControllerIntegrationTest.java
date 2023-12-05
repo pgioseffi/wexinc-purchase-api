@@ -28,7 +28,6 @@ import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
 import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.util.PurchaseRequestModelFixture;
@@ -40,7 +39,7 @@ class PurchaseRestControllerIntegrationTest {
 
 	private static final PurchaseResponseModel RESPONSE_MODEL = new PurchaseResponseModel(Long.valueOf(1),
 			Constantes.VALID_PURCHASE_DESCRIPTION, Constantes.NOW_AS_LOCAL_DATE_TIME,
-			BigDecimal.TEN.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN));
+			BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN));
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -90,12 +89,14 @@ class PurchaseRestControllerIntegrationTest {
 				HttpMethod.PUT,
 				new HttpEntity<>(new PurchaseRequestModel(Constantes.VALID_PURCHASE_DESCRIPTION,
 						Constantes.NOW_AS_LOCAL_DATE_TIME,
-						BigDecimal.ONE.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN))),
+						BigDecimal.ONE.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN))),
 				PurchaseResponseModel.class, Long.valueOf(1));
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
-		Assertions.assertEquals(new PurchaseResponseModel(Long.valueOf(1), Constantes.VALID_PURCHASE_DESCRIPTION,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ONE.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN)),
+		Assertions.assertEquals(
+				new PurchaseResponseModel(Long.valueOf(1), Constantes.VALID_PURCHASE_DESCRIPTION,
+						Constantes.NOW_AS_LOCAL_DATE_TIME,
+						BigDecimal.ONE.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
 				response.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 
@@ -125,13 +126,19 @@ class PurchaseRestControllerIntegrationTest {
 		final var saveResponse = this.restTemplate.exchange(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE,
 				HttpMethod.POST, new HttpEntity<>(PurchaseRequestModelFixture.ACTUAL_VALID_PURCHASE_REQUEST_MODEL),
 				PurchaseResponseModel.class);
-		final var two = Long.valueOf(ConstantsCore.TWO);
+		final var two = Long.valueOf(ConstantsPresentation.TWO);
+		final var purchaseAmount = BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN);
+		final var exchangeRateArgentina = new BigDecimal("365.5");
+		final var exchangeRateBrazil = new BigDecimal("5.033");
+		final var exchangeRateMexico = new BigDecimal("17.471");
+		final var exchangeRateUruguay = new BigDecimal("38.45");
 
 		Assertions.assertEquals(HttpStatus.CREATED, saveResponse.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
-		Assertions.assertEquals(
-				new PurchaseResponseModel(two, Constantes.VALID_PURCHASE_DESCRIPTION, Constantes.NOW_AS_LOCAL_DATE_TIME,
-						BigDecimal.TEN.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN)),
-				saveResponse.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
+		Assertions
+				.assertEquals(
+						new PurchaseResponseModel(two, Constantes.VALID_PURCHASE_DESCRIPTION,
+								Constantes.NOW_AS_LOCAL_DATE_TIME, purchaseAmount),
+						saveResponse.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
 
 		final var response = this.restTemplate.exchange(
 				UriComponentsBuilder
@@ -146,15 +153,25 @@ class PurchaseRestControllerIntegrationTest {
 				HttpMethod.GET, null, EnhancedPurchaseResponseModel.class, two);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
-		Assertions.assertEquals(new EnhancedPurchaseResponseModel(two, Constantes.VALID_PURCHASE_DESCRIPTION,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.TEN.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN),
-				List.of(new ExchangeRateDataResponseModel(Country.ARGENTINA.getCapitalizedName(),
-						new BigDecimal("365.5")),
-						new ExchangeRateDataResponseModel(Country.BRAZIL.getCapitalizedName(), new BigDecimal("5.033")),
-						new ExchangeRateDataResponseModel(Country.MEXICO.getCapitalizedName(),
-								new BigDecimal("17.471")),
-						new ExchangeRateDataResponseModel(Country.URUGUAY.getCapitalizedName(),
-								new BigDecimal("38.45")))),
+		Assertions.assertEquals(
+				new EnhancedPurchaseResponseModel(two, Constantes.VALID_PURCHASE_DESCRIPTION,
+						Constantes.NOW_AS_LOCAL_DATE_TIME, purchaseAmount, List.of(
+								new ExchangeRateDataResponseModel(Country.ARGENTINA.getCapitalizedName(),
+										exchangeRateArgentina,
+										purchaseAmount.multiply(exchangeRateArgentina)
+												.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
+								new ExchangeRateDataResponseModel(
+										Country.BRAZIL.getCapitalizedName(), exchangeRateBrazil,
+										purchaseAmount.multiply(exchangeRateBrazil).setScale(ConstantsPresentation.TWO,
+												RoundingMode.HALF_EVEN)),
+								new ExchangeRateDataResponseModel(Country.MEXICO.getCapitalizedName(),
+										exchangeRateMexico,
+										purchaseAmount.multiply(exchangeRateMexico).setScale(ConstantsPresentation.TWO,
+												RoundingMode.HALF_EVEN)),
+								new ExchangeRateDataResponseModel(Country.URUGUAY.getCapitalizedName(),
+										exchangeRateUruguay,
+										purchaseAmount.multiply(exchangeRateUruguay).setScale(ConstantsPresentation.TWO,
+												RoundingMode.HALF_EVEN)))),
 				response.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }

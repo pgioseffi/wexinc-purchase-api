@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.constant.ConstantsCore;
+import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 
 class PurchaseResponseModelTest {
 
@@ -35,7 +35,7 @@ class PurchaseResponseModelTest {
 
 	@Test
 	void testAmount() {
-		Assertions.assertEquals(BigDecimal.ZERO.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN),
+		Assertions.assertEquals(BigDecimal.ZERO.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN),
 				PurchaseResponseModelTest.ACTUAL.amount(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }

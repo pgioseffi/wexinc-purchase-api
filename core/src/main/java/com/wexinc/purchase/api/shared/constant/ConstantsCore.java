@@ -1,7 +1,5 @@
 package com.wexinc.purchase.api.shared.constant;
 
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.regex.Pattern;
 
 /**
@@ -26,20 +24,6 @@ public final class ConstantsCore {
 	 * @since 1.0.0
 	 */
 	public static final String EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND = "No purchases found for identifier %d.";
-
-	/**
-	 * Constant holding the value {@value}.
-	 *
-	 * @since 1.0.0
-	 */
-	public static final int TWO = 2;
-
-	/**
-	 * A default {@link MathContext} object to be used to calculate a purchase exchange rate.
-	 *
-	 * @since 1.0.0
-	 */
-	public static final MathContext DEFAULT_MATH_CONTEXT = new MathContext(ConstantsCore.TWO, RoundingMode.HALF_EVEN);
 
 	/**
 	 * A {@link Pattern} to compile the underscore symbol.

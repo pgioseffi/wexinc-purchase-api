@@ -22,7 +22,6 @@ import com.wexinc.purchase.api.model.request.PurchaseRequestModel;
 import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
 import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.constant.Country;
 
@@ -88,7 +87,7 @@ class ApplicationExceptionHandlerIntegrationTest {
 		Assertions.assertEquals(
 				new PurchaseResponseModel(one, Constantes.VALID_PURCHASE_DESCRIPTION,
 						LocalDateTime.of(1500, Month.DECEMBER, 5, 5, 2, 0, 0),
-						BigDecimal.TEN.setScale(ConstantsCore.TWO, RoundingMode.HALF_EVEN)),
+						BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
 				saveResponse.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
 
 		final var response = this.restTemplate.exchange(
