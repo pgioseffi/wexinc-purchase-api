@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.0</version>
+		<version>3.1.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -81,20 +81,18 @@
 				</executions>
 				<configuration>
 					<show>private</show>
+					<includeDependencySources>true</includeDependencySources>
+					<dependencySourceIncludes>
+						<dependencySourceInclude>com.wexinc.purchase:*</dependencySourceInclude>
+					</dependencySourceIncludes>
 					<links>
-						<link>https://javadoc.io/doc/io.projectreactor/reactor-core/3.5.5</link>
-						<link>https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api</link>
-						<link>https://docs.spring.io/spring-data/r2dbc/docs/3.0.5/api/</link>
-						<link>https://docs.spring.io/spring-data/commons/docs/3.0.5/api/</link>
-						<link>https://javadoc.io/doc/io.projectreactor/reactor-core/3.5.5</link>
-						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
-						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
-						<link>https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/</link>
-						<link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/latest/</link>
-						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
-						<link>https://docs.spring.io/spring-boot/docs/3.1.0/api/</link>
-						<link>https://docs.spring.io/spring-framework/docs/6.0.8/javadoc-api/</link>
-						<link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/latest/</link>
+						<link>https://docs.spring.io/spring-framework/docs/6.0.14/javadoc-api/</link>
+						<link>https://docs.spring.io/spring-data/commons/docs/3.1.6/api/</link>
+						<link>https://docs.spring.io/spring-data/jpa/docs/current/api/</link>
+						<link>https://docs.spring.io/spring-boot/docs/3.1.6/api/</link>
+						<link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/2.2.19/</link>
+						<link>https://jakarta.ee/specifications/platform/9/apidocs/</link>
+						<link>https://javadoc.io/doc/org.apache.commons/commons-lang3/3.12.0/</link>
 					</links>
 				</configuration>
 			</plugin>
@@ -130,7 +128,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.8</minimum>
+											<minimum>1</minimum>
 										</limit>
 									</limits>
 								</rule>
