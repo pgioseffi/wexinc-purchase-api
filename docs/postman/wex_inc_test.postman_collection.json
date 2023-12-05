@@ -1,0 +1,756 @@
+{
+	"info": {
+		"_postman_id": "de0aed66-9fa9-44bd-9daa-8f618342fc10",
+		"name": "WEX Inc Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "381019"
+	},
+	"item": [
+		{
+			"name": "Find All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find By ID By Validation Negative Identifier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find By ID By Validation Zero Identifier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Enhanced By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/1?countries=BRAZIL&countries=ARGENTINA&countries=MEXICO&countries=URUGUAY&countries=ITALY",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"1"
+					],
+					"query": [
+						{
+							"key": "countries",
+							"value": "BRAZIL"
+						},
+						{
+							"key": "countries",
+							"value": "ARGENTINA"
+						},
+						{
+							"key": "countries",
+							"value": "MEXICO"
+						},
+						{
+							"key": "countries",
+							"value": "URUGUAY"
+						},
+						{
+							"key": "countries",
+							"value": "ITALY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find Enhanced By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/a?countries=BRAZIL&countries=ARGENTINA&countries=MEXICO&countries=URUGUAY&countries=ITALY",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"a"
+					],
+					"query": [
+						{
+							"key": "countries",
+							"value": "BRAZIL"
+						},
+						{
+							"key": "countries",
+							"value": "ARGENTINA"
+						},
+						{
+							"key": "countries",
+							"value": "MEXICO"
+						},
+						{
+							"key": "countries",
+							"value": "URUGUAY"
+						},
+						{
+							"key": "countries",
+							"value": "ITALY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find Enhanced By ID Negative Identifier",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/-1?countries=BRAZIL&countries=ARGENTINA&countries=MEXICO&countries=URUGUAY&countries=ITALY",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"-1"
+					],
+					"query": [
+						{
+							"key": "countries",
+							"value": "BRAZIL"
+						},
+						{
+							"key": "countries",
+							"value": "ARGENTINA"
+						},
+						{
+							"key": "countries",
+							"value": "MEXICO"
+						},
+						{
+							"key": "countries",
+							"value": "URUGUAY"
+						},
+						{
+							"key": "countries",
+							"value": "ITALY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find Enhanced By ID Zero Identifier",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/0?countries=BRAZIL&countries=ARGENTINA&countries=MEXICO&countries=URUGUAY&countries=ITALY",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"0"
+					],
+					"query": [
+						{
+							"key": "countries",
+							"value": "BRAZIL"
+						},
+						{
+							"key": "countries",
+							"value": "ARGENTINA"
+						},
+						{
+							"key": "countries",
+							"value": "MEXICO"
+						},
+						{
+							"key": "countries",
+							"value": "URUGUAY"
+						},
+						{
+							"key": "countries",
+							"value": "ITALY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find Enhanced By ID No Query Parameters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find Enhanced By Invalid Query Parameters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/1?countries=BRAZIL&countries=ARGENTINA&countries=MEXICO&countries=URUGUAY&countries=Teste",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"1"
+					],
+					"query": [
+						{
+							"key": "countries",
+							"value": "BRAZIL"
+						},
+						{
+							"key": "countries",
+							"value": "ARGENTINA"
+						},
+						{
+							"key": "countries",
+							"value": "MEXICO"
+						},
+						{
+							"key": "countries",
+							"value": "URUGUAY"
+						},
+						{
+							"key": "countries",
+							"value": "Teste"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Valid description\",\r\n    \"transactionDate\": \"2023-11-30T06:05:08.910Z\",\r\n    \"amount\": 6.145\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"      \",\r\n    \"transactionDate\": \"2025-11-30T06:05:08.910Z\",\r\n    \"amount\": 0\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7934\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Update Bean Validation",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"   \",\r\n    \"transactionDate\": \"2025-12-01T13:05:08.910Z\",\r\n    \"amount\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7934\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find By ID By Validation Negative Identifier",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7934\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Find By ID By Validation Zero Identifier",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7934\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Delete By Validation Negative Identifier",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Delete By Validation Zero Identifier",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
