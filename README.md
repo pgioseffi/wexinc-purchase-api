@@ -14,6 +14,8 @@ This project uses clean architecture and is divided into three Maven modules:
 - Core: This module contains all the business rules of the application;
 - Infrastructure: This module is responsible to persist purchases in the database and consume the Exchange Rate API webservice;
 - Presentation: This module is the entrypoint of the application and exposes our services.
+
+## Technical Flow
 ![Technical flow - Wex Inc Purchase API](docs/image/wexinc_purchase_api_test.drawio.png "Technical flow - Wex Inc Purchase API")
 
 ## Integrations
@@ -46,6 +48,9 @@ Please run Maven command `mvn test`
 
 ## Database
 This application was built using H2 Database. If you want to debug the database please access [http://localhost:8080/h2-console/](http://localhost:8080/h2-console/). To discover admin and password please access [http://localhost:8500/ui/dc1/kv/wexinc/purchase-api/](http://localhost:8500/ui/dc1/kv/wexinc/purchase-api/) and refer to `spring.datasource.username` and `spring.datasource.password` properties.
+
+## Testing
+- The `docs/postman` contains a Postman collection in order to test the application endpoints.
 
 ## Important notes
 - The whole project is documented. Plase refer to `<module>/target/apidocs` folder;
