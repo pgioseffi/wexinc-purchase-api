@@ -12,8 +12,7 @@ import com.wexinc.purchase.api.shared.constant.Constantes;
 class EnhancedPurchaseResponseModelTest {
 
 	private static final EnhancedPurchaseResponseModel ACTUAL = new EnhancedPurchaseResponseModel(
-			Constantes.LONG_MIN_VALUE, StringUtils.EMPTY, Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO,
-			List.of());
+			Constantes.LONG_MIN_VALUE, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO, List.of());
 
 	@Test
 	void testId() {
@@ -29,13 +28,13 @@ class EnhancedPurchaseResponseModelTest {
 
 	@Test
 	void testTransactionDate() {
-		Assertions.assertEquals(Constantes.NOW_AS_LOCAL_DATE_TIME,
+		Assertions.assertEquals(Constantes.FIXED_LOCAL_DATE_TIME,
 				EnhancedPurchaseResponseModelTest.ACTUAL.transactionDate(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 
 	@Test
 	void testAmount() {
-		Assertions.assertEquals(BigDecimal.ZERO, EnhancedPurchaseResponseModelTest.ACTUAL.amount(),
+		Assertions.assertEquals(Constantes.ZERO_WITH_SCALE_TWO, EnhancedPurchaseResponseModelTest.ACTUAL.amount(),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 

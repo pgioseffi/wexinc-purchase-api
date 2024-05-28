@@ -13,7 +13,7 @@ import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 class PurchaseResponseModelTest {
 
 	private static final PurchaseResponseModel ACTUAL = new PurchaseResponseModel(Constantes.LONG_MIN_VALUE,
-			StringUtils.EMPTY, Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
+			StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
 
 	@Test
 	void testId() {
@@ -29,7 +29,7 @@ class PurchaseResponseModelTest {
 
 	@Test
 	void testTransactionDate() {
-		Assertions.assertEquals(Constantes.NOW_AS_LOCAL_DATE_TIME, PurchaseResponseModelTest.ACTUAL.transactionDate(),
+		Assertions.assertEquals(Constantes.FIXED_LOCAL_DATE_TIME, PurchaseResponseModelTest.ACTUAL.transactionDate(),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 

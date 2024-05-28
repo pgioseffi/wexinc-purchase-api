@@ -10,7 +10,7 @@ import com.wexinc.purchase.api.shared.constant.Constantes;
 public final class PurchaseFixture {
 
 	public static final Purchase ACTUAL_PURCHASE = new Purchase(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY,
-			Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
+			Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
 
 	private PurchaseFixture() {
 		throw new UnsupportedOperationException(Constantes.THIS_IS_A_UTILITY_CLASS_AND_CANNOT_BE_INSTANTIATED);

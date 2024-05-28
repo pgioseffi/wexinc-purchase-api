@@ -4,15 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.id.enhanced.SequenceStyleGenerator;
-
 import com.wexinc.purchase.api.shared.constant.ConstantsInfrastructure;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -37,10 +35,8 @@ public class Purchase {
 	 * @since 1.0.0
 	 */
 	@Id
-	@GeneratedValue(generator = ConstantsInfrastructure.PURCHASE_IDENTIFICATION_SEQUENCE_GENERATOR)
-	@GenericGenerator(name = ConstantsInfrastructure.PURCHASE_IDENTIFICATION_SEQUENCE_GENERATOR, type = org.hibernate.id.enhanced.SequenceStyleGenerator.class, parameters = {
-			@Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM, value = ConstantsInfrastructure.PURCHASE_IDENTIFICATION_SEQUENCE),
-			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ConstantsInfrastructure.PURCHASE_IDENTIFICATION_SEQUENCE_GENERATOR)
+	@SequenceGenerator(name = ConstantsInfrastructure.PURCHASE_IDENTIFICATION_SEQUENCE_GENERATOR, sequenceName = ConstantsInfrastructure.PURCHASE_IDENTIFICATION_SEQUENCE, allocationSize = 1)
 	@Positive
 	private Long id;
 

@@ -69,7 +69,7 @@ class FindEnchancedPurchaseByIdInteractorTest {
 	void shouldFindEnhancedPurchase() {
 		final var countries = Set.of(Country.BRAZIL);
 		final var exchangeRateData = List
-				.of(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE));
+				.of(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE));
 
 		Mockito.when(this.findPurchaseByIdInputBoundary.apply(Constantes.LONG_MIN_VALUE))
 				.thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
@@ -93,10 +93,10 @@ class FindEnchancedPurchaseByIdInteractorTest {
 	void shouldFindEnhancedPurchaseWithMultipleItems() {
 		final var countries = Set.of(Country.BRAZIL, Country.ITALY);
 		final var data = new ArrayList<ExchangeRateDataDTO>(3);
-		data.add(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE));
+		data.add(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE));
 		data.add(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO,
-				Constantes.NOW_AS_LOCAL_DATE.minusMonths(3)));
-		data.add(new ExchangeRateDataDTO(Country.ITALY.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE));
+				Constantes.FIXED_LOCAL_DATE.minusMonths(3)));
+		data.add(new ExchangeRateDataDTO(Country.ITALY.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE));
 
 		Mockito.when(this.findPurchaseByIdInputBoundary.apply(Constantes.LONG_MIN_VALUE))
 				.thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
@@ -108,8 +108,8 @@ class FindEnchancedPurchaseByIdInteractorTest {
 				PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.description(),
 				PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.transactionDate(),
 				PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.amount(),
-				List.of(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE),
-						new ExchangeRateDataDTO(Country.ITALY.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE))),
+				List.of(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE),
+						new ExchangeRateDataDTO(Country.ITALY.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE))),
 				this.instance.apply(Constantes.LONG_MIN_VALUE, countries), Constantes.EXPECTED_THE_SAME_RESULT);
 
 		Mockito.verify(this.findPurchaseByIdInputBoundary, Mockito.times(1)).apply(Constantes.LONG_MIN_VALUE);

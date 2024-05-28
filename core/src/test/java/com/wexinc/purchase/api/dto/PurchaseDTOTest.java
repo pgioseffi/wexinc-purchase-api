@@ -25,7 +25,7 @@ class PurchaseDTOTest {
 
 	@Test
 	void testTransactionDate() {
-		Assertions.assertEquals(Constantes.NOW_AS_LOCAL_DATE_TIME,
+		Assertions.assertEquals(Constantes.FIXED_LOCAL_DATE_TIME,
 				PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.transactionDate(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 

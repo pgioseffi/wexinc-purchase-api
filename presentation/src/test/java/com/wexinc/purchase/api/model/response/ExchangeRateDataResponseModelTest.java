@@ -27,7 +27,7 @@ class ExchangeRateDataResponseModelTest {
 
 	@Test
 	void testConvertedAmount() {
-		Assertions.assertEquals(BigDecimal.ZERO, ExchangeRateDataResponseModelTest.ACTUAL.convertedAmount(),
-				Constantes.EXPECTED_THE_SAME_RESULT);
+		Assertions.assertEquals(Constantes.ZERO_WITH_SCALE_TWO,
+				ExchangeRateDataResponseModelTest.ACTUAL.convertedAmount(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }

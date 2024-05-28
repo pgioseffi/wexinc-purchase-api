@@ -13,10 +13,10 @@ class PurchaseTest {
 	@Test
 	void testEqualsAndHashCode() {
 		final var purchase01 = new Purchase(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
+				Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
 		final var purchase02 = new Purchase(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
-		final var purchase03 = new Purchase(Long.valueOf(0), StringUtils.EMPTY, Constantes.NOW_AS_LOCAL_DATE_TIME,
+				Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
+		final var purchase03 = new Purchase(Long.valueOf(0), StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME,
 				BigDecimal.ZERO);
 
 		Assertions.assertEquals(purchase01, purchase01, Constantes.EXPECTED_THE_SAME_RESULT);
@@ -33,8 +33,8 @@ class PurchaseTest {
 	void testToString() {
 		Assertions.assertEquals(
 				"Purchase [id=%d, description=%s, transactionDate=%s, amount=%.2f]".formatted(Constantes.LONG_MIN_VALUE,
-						StringUtils.EMPTY, Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO),
-				new Purchase(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY, Constantes.NOW_AS_LOCAL_DATE_TIME,
+						StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
+				new Purchase(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME,
 						BigDecimal.ZERO).toString(),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
@@ -42,12 +42,12 @@ class PurchaseTest {
 	@Test
 	void testModifiersMethods() {
 		final var purchase01 = new Purchase(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
+				Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
 
 		final var purchase02 = new Purchase();
 		purchase02.setId(Constantes.LONG_MIN_VALUE);
 		purchase02.setDescription(StringUtils.EMPTY);
-		purchase02.setTransactionDate(Constantes.NOW_AS_LOCAL_DATE_TIME);
+		purchase02.setTransactionDate(Constantes.FIXED_LOCAL_DATE_TIME);
 		purchase02.setAmount(BigDecimal.ZERO);
 
 		Assertions.assertEquals(purchase01, purchase02, Constantes.EXPECTED_THE_SAME_RESULT);

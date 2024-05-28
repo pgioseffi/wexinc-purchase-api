@@ -18,7 +18,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @see EnableDiscoveryClient
  */
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(proxyBeanMethods = false)
 public class Application implements Closeable {
 
 	/**

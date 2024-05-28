@@ -29,7 +29,7 @@ public record PurchaseResponseModel(
 		@Schema(description = ConstantsPresentation.OPENAPI_DOCUMENTATION_PURCHASE_AMOUNT) BigDecimal amount) {
 
 	/**
-	 * Return the purchase amount rounded with two decimal digits.
+	 * Returns the purchase amount rounded with two decimal digits.
 	 *
 	 * @return The {@link BigDecimal} object representing the purchase {@link #amount} rounded with two decimal digits.
 	 * @since 1.0.0
@@ -43,7 +43,7 @@ public record PurchaseResponseModel(
 	}
 
 	/**
-	 * Return the transaction date discarding milisseconds information.
+	 * Returns the transaction date discarding milisseconds information.
 	 *
 	 * @return The {@link LocalDateTime} object representing the purchase {@link #transactionDate} discarding
 	 *         milisseconds information.
