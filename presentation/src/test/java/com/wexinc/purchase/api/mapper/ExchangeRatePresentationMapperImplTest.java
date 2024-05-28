@@ -1,7 +1,6 @@
 package com.wexinc.purchase.api.mapper;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,7 +33,7 @@ class ExchangeRatePresentationMapperImplTest {
 	void shouldMapFromDTOToResponseModel() {
 		Assertions.assertEquals(
 				new ExchangeRateDataResponseModel(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO,
-						BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)),
+						BigDecimal.ZERO),
 				ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(BigDecimal.TEN,
 						new ExchangeRateDataDTO(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO,
 								Constantes.FIXED_LOCAL_DATE)),

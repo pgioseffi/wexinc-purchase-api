@@ -1,7 +1,6 @@
 package com.wexinc.purchase.api.mapper;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +15,6 @@ import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
 import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.util.PurchaseDTOFixture;
 import com.wexinc.purchase.api.shared.util.PurchaseRequestModelFixture;
@@ -80,7 +78,7 @@ class PurchasePresentationMapperImplTest {
 						new EnhancedPurchaseResponseModel(Constantes.LONG_MIN_VALUE, StringUtils.EMPTY,
 								Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO,
 								List.of(new ExchangeRateDataResponseModel(Country.BRAZIL.name(), BigDecimal.ZERO,
-										BigDecimal.ZERO.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)))),
+										BigDecimal.ZERO))),
 						PurchasePresentationMapper
 								.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(new EnhancedPurchaseDTO(
 										Constantes.LONG_MIN_VALUE, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME,
