@@ -63,8 +63,8 @@ public class FindEnchancedPurchaseByIdInteractor implements FindEnhancedPurchase
 	@Override
 	public EnhancedPurchaseDTO apply(final Long id, final Collection<Country> countries) {
 		final var purchaseDTO = this.findPurchaseByIdInputBoundary.apply(id);
-		final var exchangeRate = this.americanTreasuryRateExchangeAPIClient.apply(purchaseDTO, countries);
-		final var modifiableAndOrderedList = exchangeRate.data().stream()
+		final var modifiableAndOrderedList = this.americanTreasuryRateExchangeAPIClient.apply(purchaseDTO, countries)
+				.data().stream()
 				.sorted(Comparator.comparing(ExchangeRateDataDTO::country)
 						.thenComparing(ExchangeRateDataDTO::effectiveDate, Comparator.reverseOrder()))
 				.collect(Collectors.toList());
