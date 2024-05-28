@@ -40,7 +40,7 @@ Please run Maven command `mvn test`
 2. Unzip and place it in a directory listed in your environment variables;
 3. Execute Consul via prompt command by typing `consul agent -dev`. Make sure to navigate to the folder you downloaded Consul and that this directory is in your OS environment variables;
 4. Start another prompt command;
-5. In the prompt command, go to `docs\json` folder;
+5. In the prompt command, go to `docs\consul` folder;
 6. Run the command `consul kv import @import_consul_key_and_values_wexinc_test.json`
 7. Start a third prompt command;
 8. Navigate to the root of the project and then to `presentation` folder;
