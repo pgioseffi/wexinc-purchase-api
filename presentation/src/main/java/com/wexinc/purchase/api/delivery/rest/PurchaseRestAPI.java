@@ -136,6 +136,8 @@ public interface PurchaseRestAPI {
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_404, description = "Purchase not found.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_422, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_422, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))),
 			@ApiResponse(responseCode = ConstantsPresentation.RESPONSE_STATUS_CODE_500, description = ConstantsPresentation.RESPONSE_DESCRIPTION_STATUS_CODE_500, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorAttributes.class))) })
-	EnhancedPurchaseResponseModel findEnhancedPurchaseByID(Long id, Set<Country> countries);
+	EnhancedPurchaseResponseModel findEnhancedPurchaseByID(
+			@Positive(message = "You cannot pass a negative or zero ID for this search.") @NotNull(message = "You cannot pass a null id for this search.") @Parameter(description = "The numeric identifier of a purchase.", example = "98767367", name = "id", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, schema = @Schema(implementation = Long.class))) Long id,
+			@NotNull(message = "You cannot pass a null set of countries for this search.") @Parameter(description = "The set of countries to be searched for in the Treasury Reporting Rates of Exchange API.", example = "BRAZIL,ARGENTINA", name = "id", content = @Content(mediaType = MediaType.TEXT_PLAIN_VALUE, schema = @Schema(implementation = Set.class))) Set<Country> countries);
 
 }
