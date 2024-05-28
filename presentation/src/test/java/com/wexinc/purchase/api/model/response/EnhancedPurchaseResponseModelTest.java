@@ -34,7 +34,7 @@ class EnhancedPurchaseResponseModelTest {
 
 	@Test
 	void testAmount() {
-		Assertions.assertEquals(BigDecimal.ZERO, EnhancedPurchaseResponseModelTest.ACTUAL.amount(),
+		Assertions.assertEquals(Constantes.ZERO_WITH_SCALE_TWO, EnhancedPurchaseResponseModelTest.ACTUAL.amount(),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 

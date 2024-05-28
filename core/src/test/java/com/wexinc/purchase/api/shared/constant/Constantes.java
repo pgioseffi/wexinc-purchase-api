@@ -1,5 +1,7 @@
 package com.wexinc.purchase.api.shared.constant;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -23,6 +25,8 @@ public final class Constantes {
 	public static final LocalDate FIXED_LOCAL_DATE = Constantes.FIXED_LOCAL_DATE_TIME.toLocalDate();
 
 	public static final String VALID_PURCHASE_DESCRIPTION = "Description";
+
+	public static final BigDecimal ZERO_WITH_SCALE_TWO = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
 
 	private Constantes() {
 		throw new UnsupportedOperationException(Constantes.THIS_IS_A_UTILITY_CLASS_AND_CANNOT_BE_INSTANTIATED);
