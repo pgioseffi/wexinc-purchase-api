@@ -41,10 +41,10 @@ class ExchangeRateInfrastructureMapperImplTest {
 	void shouldMap() {
 		Assertions.assertEquals(
 				new ExchangeRateDTO(List.of(
-						new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE))),
+						new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE))),
 				this.MAPPER.fromResourceToDTO(
 						new ExchangeRateResource(List.of(new ExchangeRateDataResource(Country.BRAZIL.name(),
-								BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE)))),
+								BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)))),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }

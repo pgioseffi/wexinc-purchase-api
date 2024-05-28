@@ -18,8 +18,9 @@ public final class Constantes {
 
 	public static final Long LONG_MIN_VALUE = Long.valueOf(Long.MIN_VALUE);
 
-	public static final LocalDateTime NOW_AS_LOCAL_DATE_TIME = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-	public static final LocalDate NOW_AS_LOCAL_DATE = LocalDate.now();
+	public static final LocalDateTime FIXED_LOCAL_DATE_TIME = LocalDateTime.of(2023, 12, 5, 10, 10, 6, 123)
+			.truncatedTo(ChronoUnit.SECONDS);
+	public static final LocalDate FIXED_LOCAL_DATE = Constantes.FIXED_LOCAL_DATE_TIME.toLocalDate();
 
 	public static final String VALID_PURCHASE_DESCRIPTION = "Description";
 

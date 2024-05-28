@@ -47,14 +47,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 		final var currencyConversionLeniencyInMonths = Long.valueOf(6L);
 		Mockito.when(Long.valueOf(this.consulProperties.getCurrencyConversionLeniencyInMonths()))
 				.thenReturn(currencyConversionLeniencyInMonths);
-		Mockito.when(
-				this.restTemplate.getForObject(
-						currencyConversionURL.formatted(countries,
-								Constantes.NOW_AS_LOCAL_DATE.minusMonths(
-										currencyConversionLeniencyInMonths.longValue()),
-								Constantes.NOW_AS_LOCAL_DATE),
-						ExchangeRateResource.class))
-				.thenReturn(null);
+		Mockito.when(this.restTemplate.getForObject(currencyConversionURL.formatted(countries,
+				Constantes.FIXED_LOCAL_DATE.minusMonths(currencyConversionLeniencyInMonths.longValue()),
+				Constantes.FIXED_LOCAL_DATE), ExchangeRateResource.class)).thenReturn(null);
 
 		Assertions.assertThrows(NotFound.class,
 				() -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
@@ -64,9 +59,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 		Mockito.verify(this.consulProperties, Mockito.times(1)).getCurrencyConversionLeniencyInMonths();
 		Mockito.verify(this.restTemplate, Mockito.times(1))
 				.getForObject(this.consulProperties.getCurrencyConversionURL().formatted(countries,
-						Constantes.NOW_AS_LOCAL_DATE
+						Constantes.FIXED_LOCAL_DATE
 								.minusMonths(this.consulProperties.getCurrencyConversionLeniencyInMonths()),
-						Constantes.NOW_AS_LOCAL_DATE), ExchangeRateResource.class);
+						Constantes.FIXED_LOCAL_DATE), ExchangeRateResource.class);
 	}
 
 	@Test
@@ -77,13 +72,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 		final var currencyConversionLeniencyInMonths = Long.valueOf(6L);
 		Mockito.when(Long.valueOf(this.consulProperties.getCurrencyConversionLeniencyInMonths()))
 				.thenReturn(currencyConversionLeniencyInMonths);
-		Mockito.when(
-				this.restTemplate.getForObject(
-						currencyConversionURL.formatted(countries,
-								Constantes.NOW_AS_LOCAL_DATE.minusMonths(
-										currencyConversionLeniencyInMonths.longValue()),
-								Constantes.NOW_AS_LOCAL_DATE),
-						ExchangeRateResource.class))
+		Mockito.when(this.restTemplate.getForObject(currencyConversionURL.formatted(countries,
+				Constantes.FIXED_LOCAL_DATE.minusMonths(currencyConversionLeniencyInMonths.longValue()),
+				Constantes.FIXED_LOCAL_DATE), ExchangeRateResource.class))
 				.thenReturn(new ExchangeRateResource(List.of()));
 
 		Assertions.assertThrows(NotFound.class,
@@ -94,9 +85,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 		Mockito.verify(this.consulProperties, Mockito.times(1)).getCurrencyConversionLeniencyInMonths();
 		Mockito.verify(this.restTemplate, Mockito.times(1))
 				.getForObject(this.consulProperties.getCurrencyConversionURL().formatted(countries,
-						Constantes.NOW_AS_LOCAL_DATE
+						Constantes.FIXED_LOCAL_DATE
 								.minusMonths(this.consulProperties.getCurrencyConversionLeniencyInMonths()),
-						Constantes.NOW_AS_LOCAL_DATE), ExchangeRateResource.class);
+						Constantes.FIXED_LOCAL_DATE), ExchangeRateResource.class);
 	}
 
 	@Test
@@ -104,22 +95,17 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 		final var countries = Set.of(Country.BRAZIL);
 		final var currencyConversionURL = "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/od/rates_of_exchange?filter=effective_date:gte:2022-12-02,effective_date:lte:2023-12-02,country:in:(Brazil,Argentina,Mexico,Uruguay)&sort=country,-effective_date&page[number]=1&page[size]=10000&fields=country,exchange_rate,effective_date";
 		final var currencyConversionLeniencyInMonths = Long.valueOf(6L);
-		final var resourceResult = new ExchangeRateResource(List.of(
-				new ExchangeRateDataResource(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE)));
+		final var resourceResult = new ExchangeRateResource(List
+				.of(new ExchangeRateDataResource(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)));
 		final var methodResult = new ExchangeRateDTO(
-				List.of(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE)));
+				List.of(new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)));
 
 		Mockito.when(this.consulProperties.getCurrencyConversionURL()).thenReturn(currencyConversionURL);
 		Mockito.when(Long.valueOf(this.consulProperties.getCurrencyConversionLeniencyInMonths()))
 				.thenReturn(currencyConversionLeniencyInMonths);
-		Mockito.when(
-				this.restTemplate.getForObject(
-						currencyConversionURL.formatted(countries,
-								Constantes.NOW_AS_LOCAL_DATE.minusMonths(
-										currencyConversionLeniencyInMonths.longValue()),
-								Constantes.NOW_AS_LOCAL_DATE),
-						ExchangeRateResource.class))
-				.thenReturn(resourceResult);
+		Mockito.when(this.restTemplate.getForObject(currencyConversionURL.formatted(countries,
+				Constantes.FIXED_LOCAL_DATE.minusMonths(currencyConversionLeniencyInMonths.longValue()),
+				Constantes.FIXED_LOCAL_DATE), ExchangeRateResource.class)).thenReturn(resourceResult);
 		Mockito.when(this.exchangeRateInfrastructureMapper.fromResourceToDTO(resourceResult)).thenReturn(methodResult);
 
 		Assertions.assertEquals(methodResult, this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
@@ -129,9 +115,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 		Mockito.verify(this.consulProperties, Mockito.times(1)).getCurrencyConversionLeniencyInMonths();
 		Mockito.verify(this.restTemplate, Mockito.times(1))
 				.getForObject(this.consulProperties.getCurrencyConversionURL().formatted(countries,
-						Constantes.NOW_AS_LOCAL_DATE
+						Constantes.FIXED_LOCAL_DATE
 								.minusMonths(this.consulProperties.getCurrencyConversionLeniencyInMonths()),
-						Constantes.NOW_AS_LOCAL_DATE), ExchangeRateResource.class);
+						Constantes.FIXED_LOCAL_DATE), ExchangeRateResource.class);
 		Mockito.verify(this.exchangeRateInfrastructureMapper, Mockito.times(1)).fromResourceToDTO(resourceResult);
 	}
 }

@@ -47,10 +47,10 @@ class ExchangeRatePresentationMapperImplTest {
 	void shouldMapFromResourceToDTO() {
 		Assertions.assertEquals(
 				new ExchangeRateDTO(List.of(
-						new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE))),
+						new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE))),
 				ExchangeRatePresentationMapperImplTest.MAPPER.fromResourceToDTO(
 						new ExchangeRateResource(List.of(new ExchangeRateDataResource(Country.BRAZIL.name(),
-								BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE)))),
+								BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)))),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 
@@ -74,7 +74,7 @@ class ExchangeRatePresentationMapperImplTest {
 						BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN)),
 				ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(BigDecimal.TEN,
 						new ExchangeRateDataDTO(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO,
-								Constantes.NOW_AS_LOCAL_DATE)),
+								Constantes.FIXED_LOCAL_DATE)),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 
@@ -83,7 +83,7 @@ class ExchangeRatePresentationMapperImplTest {
 		Assertions.assertEquals(
 				new ExchangeRateDataResponseModel(Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, null),
 				ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null, new ExchangeRateDataDTO(
-						Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.NOW_AS_LOCAL_DATE)),
+						Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 }

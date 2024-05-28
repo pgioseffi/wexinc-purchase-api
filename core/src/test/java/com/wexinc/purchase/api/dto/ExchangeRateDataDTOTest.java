@@ -11,7 +11,7 @@ import com.wexinc.purchase.api.shared.constant.Country;
 class ExchangeRateDataDTOTest {
 
 	private static final ExchangeRateDataDTO ACTUAL = new ExchangeRateDataDTO(Country.BRAZIL.name(), BigDecimal.ZERO,
-			Constantes.NOW_AS_LOCAL_DATE);
+			Constantes.FIXED_LOCAL_DATE);
 
 	@Test
 	void testCountry() {
@@ -21,7 +21,7 @@ class ExchangeRateDataDTOTest {
 
 	@Test
 	void testDescription() {
-		Assertions.assertEquals(Constantes.NOW_AS_LOCAL_DATE, ExchangeRateDataDTOTest.ACTUAL.effectiveDate(),
+		Assertions.assertEquals(Constantes.FIXED_LOCAL_DATE, ExchangeRateDataDTOTest.ACTUAL.effectiveDate(),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 

@@ -38,7 +38,7 @@ import com.wexinc.purchase.api.shared.util.PurchaseRequestModelFixture;
 class PurchaseRestControllerIntegrationTest {
 
 	private static final PurchaseResponseModel RESPONSE_MODEL = new PurchaseResponseModel(Long.valueOf(1),
-			Constantes.VALID_PURCHASE_DESCRIPTION, Constantes.NOW_AS_LOCAL_DATE_TIME,
+			Constantes.VALID_PURCHASE_DESCRIPTION, Constantes.FIXED_LOCAL_DATE_TIME,
 			BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN));
 
 	@Autowired
@@ -88,14 +88,14 @@ class PurchaseRestControllerIntegrationTest {
 				ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + ConstantsPresentation.ID_REQUEST_PATH_VARIABLE,
 				HttpMethod.PUT,
 				new HttpEntity<>(new PurchaseRequestModel(Constantes.VALID_PURCHASE_DESCRIPTION,
-						Constantes.NOW_AS_LOCAL_DATE_TIME,
+						Constantes.FIXED_LOCAL_DATE_TIME,
 						BigDecimal.ONE.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN))),
 				PurchaseResponseModel.class, Long.valueOf(1));
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
 		Assertions.assertEquals(
 				new PurchaseResponseModel(Long.valueOf(1), Constantes.VALID_PURCHASE_DESCRIPTION,
-						Constantes.NOW_AS_LOCAL_DATE_TIME,
+						Constantes.FIXED_LOCAL_DATE_TIME,
 						BigDecimal.ONE.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
 				response.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
 	}
@@ -137,7 +137,7 @@ class PurchaseRestControllerIntegrationTest {
 		Assertions
 				.assertEquals(
 						new PurchaseResponseModel(two, Constantes.VALID_PURCHASE_DESCRIPTION,
-								Constantes.NOW_AS_LOCAL_DATE_TIME, purchaseAmount),
+								Constantes.FIXED_LOCAL_DATE_TIME, purchaseAmount),
 						saveResponse.getBody(), Constantes.EXPECTED_THE_SAME_RESULT);
 
 		final var response = this.restTemplate.exchange(
@@ -155,7 +155,7 @@ class PurchaseRestControllerIntegrationTest {
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
 		Assertions.assertEquals(
 				new EnhancedPurchaseResponseModel(two, Constantes.VALID_PURCHASE_DESCRIPTION,
-						Constantes.NOW_AS_LOCAL_DATE_TIME, purchaseAmount, List.of(
+						Constantes.FIXED_LOCAL_DATE_TIME, purchaseAmount, List.of(
 								new ExchangeRateDataResponseModel(Country.ARGENTINA.getCapitalizedName(),
 										exchangeRateArgentina,
 										purchaseAmount.multiply(exchangeRateArgentina)

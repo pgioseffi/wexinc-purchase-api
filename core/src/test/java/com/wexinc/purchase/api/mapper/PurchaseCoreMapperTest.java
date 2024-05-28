@@ -33,7 +33,7 @@ class PurchaseCoreMapperTest {
 	void testShouldNotMapId() {
 		Assertions.assertEquals(
 				PurchaseCoreMapperTest.MAPPER.fromIdAndDTOToDTO(null, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
-				new PurchaseDTO(null, StringUtils.EMPTY, Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO),
+				new PurchaseDTO(null, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
 				Constantes.EXPECTED_THE_SAME_RESULT);
 	}
 

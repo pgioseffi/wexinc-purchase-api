@@ -65,9 +65,9 @@ class PurchaseGatewayImplTest {
 	@Test
 	void shouldFindAllMultipleResults() {
 		final var purchaseDTO02 = new PurchaseDTO(Long.valueOf(Long.MAX_VALUE), StringUtils.EMPTY,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
+				Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
 		final var purchase02 = new Purchase(Long.valueOf(Long.MAX_VALUE), StringUtils.EMPTY,
-				Constantes.NOW_AS_LOCAL_DATE_TIME, BigDecimal.ZERO);
+				Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO);
 		final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, purchaseDTO02);
 		final var repositoryResult = List.of(PurchaseFixture.ACTUAL_PURCHASE, purchase02);
 
