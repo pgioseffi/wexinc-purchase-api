@@ -25,17 +25,6 @@ import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 public interface ExchangeRatePresentationMapper {
 
 	/**
-	 * Method responsible for mapping a {@link ExchangeRateResource} object into a {@link ExchangeRateDTO}.
-	 *
-	 * @param resource The resource object {@link ExchangeRateResource} containing exchange rates returned by the
-	 *                 american treasury exchange API.
-	 * @return The already mapped {@link ExchangeRateDTO} object containing exchange rates returned by the american
-	 *         treasury exchange API ready to transport its information through the different layers of the application.
-	 * @since 1.0.0
-	 */
-	ExchangeRateDTO fromResourceToDTO(ExchangeRateResource resource);
-
-	/**
 	 * Method responsible for mapping a {@link ExchangeRateDataDTO} object into a {@link ExchangeRateDataResponseModel}.
 	 *
 	 * @param purchaseAmount The original purchase amount retrieved from the database.
