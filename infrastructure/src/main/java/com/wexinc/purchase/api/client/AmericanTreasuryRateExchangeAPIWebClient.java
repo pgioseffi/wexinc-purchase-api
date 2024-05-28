@@ -71,9 +71,7 @@ public class AmericanTreasuryRateExchangeAPIWebClient implements AmericanTreasur
 	 * {@inheritDoc}
 	 *
 	 * @since 1.0.0
-	 * @throws com.wexinc.purchase.api.shared.exception.EntityNotFoundException If does not find the purchase.
-	 * @throws HttpClientErrorException.NotFound                                If does not find any exchange rate
-	 *                                                                          according to the given countries.
+	 * @throws HttpClientErrorException.NotFound If does not find any exchange rate according to the given countries.
 	 */
 	@Override
 	public ExchangeRateDTO apply(final PurchaseDTO purchaseDTO, final Collection<Country> countries) {
