@@ -61,6 +61,33 @@
 			"response": []
 		},
 		{
+			"name": "Find By ID Not Found",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Invalid Find By ID",
 			"request": {
 				"method": "GET",
@@ -149,6 +176,56 @@
 						"purchase",
 						"enhanced",
 						"1"
+					],
+					"query": [
+						{
+							"key": "countries",
+							"value": "BRAZIL"
+						},
+						{
+							"key": "countries",
+							"value": "ARGENTINA"
+						},
+						{
+							"key": "countries",
+							"value": "MEXICO"
+						},
+						{
+							"key": "countries",
+							"value": "URUGUAY"
+						},
+						{
+							"key": "countries",
+							"value": "ITALY"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Enhanced By ID Copy Not Found",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/enhanced/11?countries=BRAZIL&countries=ARGENTINA&countries=MEXICO&countries=URUGUAY&countries=ITALY",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"enhanced",
+						"11"
 					],
 					"query": [
 						{
@@ -486,7 +563,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7934\r\n}",
+					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7937\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -505,6 +582,42 @@
 						"api",
 						"purchase",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Not Found",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Updated valid description\",\r\n    \"transactionDate\": \"2023-12-01T13:05:08.910Z\",\r\n    \"amount\": 3.7934\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"11"
 					]
 				}
 			},
@@ -676,6 +789,33 @@
 						"api",
 						"purchase",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Not Found",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/api/purchase/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"api",
+						"purchase",
+						"11"
 					]
 				}
 			},
