@@ -58,6 +58,7 @@ public class FindEnchancedPurchaseByIdInteractor implements FindEnhancedPurchase
 	/**
 	 * {@inheritDoc}
 	 *
+	 * @throws com.wexinc.purchase.api.shared.exception.EntityNotFoundException If does not find the purchase.
 	 * @since 1.0.0
 	 */
 	@Override
