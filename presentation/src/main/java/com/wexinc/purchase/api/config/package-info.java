@@ -8,7 +8,7 @@
  * @see com.wexinc.purchase.api.config.BeanFactoryConfig BeanFactoryConfig
  * @see com.wexinc.purchase.api.config.LocaleConfig LocaleConfig
  * @see com.wexinc.purchase.api.config.OpenApiConfig OpenApiConfig
- * @see com.wexinc.purchase.api.config.RestTemplateConfiguration RestTemplateConfiguration
+ * @see com.wexinc.purchase.api.config.RestClientConfiguration RestClientConfiguration
  * @see com.wexinc.purchase.api.config.SwaggerConfiguration SwaggerConfiguration
  * @see com.wexinc.purchase.api.config.TimeZoneConfig TimeZoneConfig
  */

@@ -5,8 +5,9 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 import com.wexinc.purchase.api.boundary.output.AmericanTreasuryRateExchangeAPIClient;
 import com.wexinc.purchase.api.component.ConsulProperties;
@@ -32,7 +33,7 @@ public class AmericanTreasuryRateExchangeAPIWebClient implements AmericanTreasur
 	 *
 	 * @since 1.0.0
 	 */
-	private final RestTemplate restTemplate;
+	private final RestClient restClient;
 
 	/**
 	 * Field that holds dynamic application properties such as the treasury reporting rates exchange API URL.
@@ -51,18 +52,18 @@ public class AmericanTreasuryRateExchangeAPIWebClient implements AmericanTreasur
 	/**
 	 * Class complete constructor.
 	 *
-	 * @param restTemplateParam                     Parameter responsible to initialize the {@link #restTemplate} field
-	 *                                              of this class.
+	 * @param restClientParam                       Parameter responsible to initialize the {@link #restClient} field of
+	 *                                              this class.
 	 * @param consulPropertiesParam                 Parameter responsible to initialize the {@link #consulProperties}
 	 *                                              field of this
 	 * @param exchangeRateInfrastructureMapperParam Parameter responsible to initialize the
 	 *                                              {@link #exchangeRateInfrastructureMapper} field of this class.
 	 * @since 1.0.0
 	 */
-	public AmericanTreasuryRateExchangeAPIWebClient(final RestTemplate restTemplateParam,
+	public AmericanTreasuryRateExchangeAPIWebClient(final RestClient restClientParam,
 			final ConsulProperties consulPropertiesParam,
 			final ExchangeRateInfrastructureMapper exchangeRateInfrastructureMapperParam) {
-		this.restTemplate = restTemplateParam;
+		this.restClient = restClientParam;
 		this.consulProperties = consulPropertiesParam;
 		this.exchangeRateInfrastructureMapper = exchangeRateInfrastructureMapperParam;
 	}
@@ -76,14 +77,13 @@ public class AmericanTreasuryRateExchangeAPIWebClient implements AmericanTreasur
 	@Override
 	public ExchangeRateDTO apply(final PurchaseDTO purchaseDTO, final Collection<Country> countries) {
 		final var date = purchaseDTO.transactionDate();
-		final var exchangeRate = this.restTemplate
-				.getForObject(
-						this.consulProperties.getCurrencyConversionURL().formatted(
-								date.minusMonths(this.consulProperties.getCurrencyConversionLeniencyInMonths())
-										.toLocalDate(),
-								date.toLocalDate(),
-								countries.stream().map(Country::getCapitalizedName).collect(Collectors.joining(","))),
-						ExchangeRateResource.class);
+
+		final var exchangeRate = this.restClient.get()
+				.uri(this.consulProperties.getCurrencyConversionURL().formatted(
+						date.minusMonths(this.consulProperties.getCurrencyConversionLeniencyInMonths()).toLocalDate(),
+						date.toLocalDate(),
+						countries.stream().map(Country::getCapitalizedName).collect(Collectors.joining(","))))
+				.accept(MediaType.APPLICATION_JSON).retrieve().body(ExchangeRateResource.class);
 
 		if (exchangeRate == null || exchangeRate.data().isEmpty()) {
 			throw HttpClientErrorException
