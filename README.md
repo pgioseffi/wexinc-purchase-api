@@ -3,11 +3,13 @@ This is API has been developed to recruitment purposes in the Wex Inc company.
 
 ## Dependencies
 
-- [Java 17 (Programming language)](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
-- [Spring (Framework web)](https://docs.spring.io/spring-framework/docs/current/reference/html/)
+- [Java 21 (Programming language)](https://docs.oracle.com/en/java/javase/21/docs/api/index.html)
+- [Spring (Framework web)](https://docs.spring.io/spring-framework/reference/)
+- [Spring Boot](https://docs.spring.io/spring-boot/)
 - [Tomcat (Web server)](https://tomcat.apache.org/)
 - [Maven (Build tool)](https://maven.apache.org/guides/index.html)
 - [Consul](https://www.consul.io/)
+- [JaCoCo Java Code Coverage Library](https://www.eclemma.org/jacoco/)
 
 ## Architecture
 This project uses clean architecture and is divided into three Maven modules:
