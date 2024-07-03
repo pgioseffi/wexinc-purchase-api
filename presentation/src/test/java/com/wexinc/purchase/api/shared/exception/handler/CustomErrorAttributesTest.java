@@ -29,22 +29,27 @@ class CustomErrorAttributesTest {
 
 	@Test
 	void shouldReturnErrorAttibutes() {
+		final var exceptionMessage = "Test exception";
 		final var statusCode = Integer.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		final var exception = new RuntimeException(exceptionMessage);
 
 		// Mock the error and its attributes
-		final var exception = new RuntimeException("Test exception");
 		Mockito.when(this.request.getAttribute(DefaultErrorAttributes.class.getName() + ".ERROR",
 				RequestAttributes.SCOPE_REQUEST)).thenReturn(exception);
 		Mockito.when(this.request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE, RequestAttributes.SCOPE_REQUEST))
 				.thenReturn(statusCode);
 
 		// Call the method under test
-		final var result = this.instance.getErrorAttributes(this.request,
-				ErrorAttributeOptions.of(Include.BINDING_ERRORS, Include.MESSAGE));
+		final var result = this.instance.getErrorAttributes(this.request, ErrorAttributeOptions.of(Include.STATUS,
+				Include.MESSAGE, Include.ERROR, Include.EXCEPTION, Include.BINDING_ERRORS));
 
 		// Verify the expected attributes
 		Assertions.assertEquals(statusCode, result.get("status"), Constantes.EXPECTED_THE_SAME_RESULT);
+		Assertions.assertEquals(exceptionMessage, result.get("message"), Constantes.EXPECTED_THE_SAME_RESULT);
+		Assertions.assertEquals(RuntimeException.class.getName(), result.get("exception"),
+				Constantes.EXPECTED_THE_SAME_RESULT);
 		Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), result.get("error"),
 				Constantes.EXPECTED_THE_SAME_RESULT);
+		Assertions.assertNotNull(result.get("timestamp"), Constantes.SHOULD_NOT_HAVE_RETURNED_NULL);
 	}
 }
