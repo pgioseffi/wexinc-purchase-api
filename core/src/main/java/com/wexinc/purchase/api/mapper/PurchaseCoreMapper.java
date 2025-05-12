@@ -14,6 +14,7 @@ import org.mapstruct.Mapping;
  * @see PurchaseDTO
  */
 @Mapper
+@FunctionalInterface
 public interface PurchaseCoreMapper {
 
   /**

@@ -15,6 +15,7 @@ import org.mapstruct.Mapper;
  * @see ExchangeRateResource
  */
 @Mapper
+@FunctionalInterface
 public interface ExchangeRateInfrastructureMapper {
 
   /**
