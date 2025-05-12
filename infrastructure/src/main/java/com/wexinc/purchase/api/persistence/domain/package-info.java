@@ -1,5 +1,6 @@
 /**
- * Package responsible for holding the classes that represent the abstraction of a database entity for this application.
+ * Package responsible for holding the classes that represent the abstraction of a database entity
+ * for this application.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
  * @since 1.0.0

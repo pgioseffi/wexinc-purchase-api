@@ -18,27 +18,34 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class BeanFactoryConfig {
 
-	/**
-	 * Method responsible for injecting dependencies into the application.
-	 *
-	 * @param beanRegistry {@link ApplicationContext} - Abstraction that provides configuration for the application.
-	 * @return {@link BeanFactoryPostProcessor} - Factory that allows customization for application.
-	 * @since 1.0.0
-	 */
-	@Bean
-	static BeanFactoryPostProcessor beanFactoryPostProcessor(final ApplicationContext beanRegistry) {
-		return (final var beanFactory) -> {
-			final var beanDefinitionScanner = new ClassPathBeanDefinitionScanner(
-					(BeanDefinitionRegistry) ((AnnotationConfigServletWebServerApplicationContext) beanRegistry)
-							.getBeanFactory());
-			beanDefinitionScanner.addIncludeFilter((final var mr, final var mrf) -> {
-				final var className = mr.getClassMetadata().getClassName();
-				return !className.contains("model") && !className.contains("resource") && !className.contains("dto")
-						&& !className.contains("shared") && !className.contains("domain")
-						&& !className.contains("Test");
-			});
+  /**
+   * Method responsible for injecting dependencies into the application.
+   *
+   * @param beanRegistry {@link ApplicationContext} - Abstraction that provides configuration for
+   *     the application.
+   * @return {@link BeanFactoryPostProcessor} - Factory that allows customization for application.
+   * @since 1.0.0
+   */
+  @Bean
+  static BeanFactoryPostProcessor beanFactoryPostProcessor(final ApplicationContext beanRegistry) {
+    return (final var beanFactory) -> {
+      final var beanDefinitionScanner =
+          new ClassPathBeanDefinitionScanner(
+              (BeanDefinitionRegistry)
+                  ((AnnotationConfigServletWebServerApplicationContext) beanRegistry)
+                      .getBeanFactory());
+      beanDefinitionScanner.addIncludeFilter(
+          (final var mr, final var mrf) -> {
+            final var className = mr.getClassMetadata().getClassName();
+            return !className.contains("model")
+                && !className.contains("resource")
+                && !className.contains("dto")
+                && !className.contains("shared")
+                && !className.contains("domain")
+                && !className.contains("Test");
+          });
 
-			beanDefinitionScanner.scan("com.wexinc.purchase.api");
-		};
-	}
+      beanDefinitionScanner.scan("com.wexinc.purchase.api");
+    };
+  }
 }

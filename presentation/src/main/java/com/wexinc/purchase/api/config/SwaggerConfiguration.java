@@ -16,14 +16,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 class SwaggerConfiguration implements WebMvcConfigurer {
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @version 1.0.0
-	 * @since 1.0.0
-	 */
-	@Override
-	public void addViewControllers(final ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "/swagger-ui/index.html");
-	}
+  /**
+   * {@inheritDoc}
+   *
+   * @version 1.0.0
+   * @since 1.0.0
+   */
+  @Override
+  public void addViewControllers(final ViewControllerRegistry registry) {
+    registry.addRedirectViewController("/", "/swagger-ui/index.html");
+  }
 }
