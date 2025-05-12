@@ -2,7 +2,7 @@ package com.wexinc.purchase.api.usecase;
 
 import com.wexinc.purchase.api.gateway.PurchaseGateway;
 import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.util.PurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,10 +16,14 @@ class SavePurchaseInteractorTest {
 
   @InjectMocks private SavePurchaseInteractor instance;
 
-  @Mock private PurchaseGateway purchaseGateway;
+  private final PurchaseGateway purchaseGateway;
+
+  SavePurchaseInteractorTest(@Mock final PurchaseGateway purchaseGatewayParam) {
+    this.purchaseGateway = purchaseGatewayParam;
+  }
 
   @Test
-  void shouldThrowNullPointerException() {
+  void testShouldThrowNullPointerException() {
     Mockito.when(this.purchaseGateway.save(null)).thenThrow(NullPointerException.class);
 
     Assertions.assertThrows(
@@ -27,11 +31,11 @@ class SavePurchaseInteractorTest {
         () -> this.instance.apply(null),
         Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
 
-    Mockito.verify(this.purchaseGateway, Mockito.times(1)).save(null);
+    Mockito.verify(this.purchaseGateway).save(null);
   }
 
   @Test
-  void shouldSavePurchase() {
+  void testShouldSavePurchase() {
     Mockito.when(this.purchaseGateway.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
 
@@ -40,7 +44,6 @@ class SavePurchaseInteractorTest {
         this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
         Constantes.EXPECTED_THE_SAME_RESULT);
 
-    Mockito.verify(this.purchaseGateway, Mockito.times(1))
-        .save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+    Mockito.verify(this.purchaseGateway).save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
   }
 }

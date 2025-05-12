@@ -26,10 +26,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ApplicationExceptionHandlerIntegrationTest {
 
-  @Autowired private TestRestTemplate restTemplate;
+  private final TestRestTemplate restTemplate;
+
+  ApplicationExceptionHandlerIntegrationTest(@Autowired final TestRestTemplate restTemplateParam) {
+    this.restTemplate = restTemplateParam;
+  }
 
   @Test
-  void shouldHandleEntityNotFoundException() {
+  void testShouldHandleEntityNotFoundException() {
     final ResponseEntity<PurchaseResponseModel> response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE
@@ -44,7 +48,7 @@ class ApplicationExceptionHandlerIntegrationTest {
   }
 
   @Test
-  void shouldHandleConstraintViolationException() {
+  void testShouldHandleConstraintViolationException() {
     final ResponseEntity<PurchaseResponseModel> response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE
@@ -61,7 +65,7 @@ class ApplicationExceptionHandlerIntegrationTest {
   }
 
   @Test
-  void shouldHandleMethodArgumentNotValidExceptionMultipleErrors() {
+  void testShouldHandleMethodArgumentNotValidExceptionMultipleErrors() {
     final ResponseEntity<PurchaseResponseModel> response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE,
@@ -78,7 +82,7 @@ class ApplicationExceptionHandlerIntegrationTest {
   }
 
   @Test
-  void shouldHandleMethodArgumentNotValidExceptionOneError() {
+  void testShouldHandleMethodArgumentNotValidExceptionOneError() {
     final ResponseEntity<PurchaseResponseModel> response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE,
@@ -97,7 +101,7 @@ class ApplicationExceptionHandlerIntegrationTest {
   }
 
   @Test
-  void shouldNotFindEnhancedPurchaseById() {
+  void testShouldNotFindEnhancedPurchaseById() {
     final var saveResponse =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE,
