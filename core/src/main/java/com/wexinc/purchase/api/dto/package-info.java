@@ -1,5 +1,6 @@
 /**
- * Package responsible for holding data transfer classes that will navigate across the application layers.
+ * Package responsible for holding data transfer classes that will navigate across the application
+ * layers.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
  * @since 1.0.0

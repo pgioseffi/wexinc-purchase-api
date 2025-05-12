@@ -11,34 +11,36 @@ import java.util.regex.Pattern;
  */
 public final class ConstantsCore {
 
-	/**
-	 * Constant holding the value {@value}.
-	 *
-	 * @since 1.0.0
-	 */
-	public static final String CLASS_CANT_BE_INSTANTIATED = "This is a utility class and cannot be instantiated.";
+  /**
+   * Constant holding the value {@value}.
+   *
+   * @since 1.0.0
+   */
+  public static final String CLASS_CANT_BE_INSTANTIATED =
+      "This is a utility class and cannot be instantiated.";
 
-	/**
-	 * Constant holding the value {@value}.
-	 *
-	 * @since 1.0.0
-	 */
-	public static final String EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND = "No purchases found for identifier %d.";
+  /**
+   * Constant holding the value {@value}.
+   *
+   * @since 1.0.0
+   */
+  public static final String EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND =
+      "No purchases found for identifier %d.";
 
-	/**
-	 * A {@link Pattern} to compile the underscore symbol.
-	 *
-	 * @since 1.0.0
-	 */
-	public static final Pattern PATTERN_UNDERSCORE = Pattern.compile("_");
+  /**
+   * A {@link Pattern} to compile the underscore symbol.
+   *
+   * @since 1.0.0
+   */
+  public static final Pattern PATTERN_UNDERSCORE = Pattern.compile("_");
 
-	/**
-	 * Default constructor that forbids the class to be instantiated.
-	 *
-	 * @throws UnsupportedOperationException with {@link #CLASS_CANT_BE_INSTANTIATED} message.
-	 * @since 1.0.0
-	 */
-	private ConstantsCore() {
-		throw new UnsupportedOperationException(ConstantsCore.CLASS_CANT_BE_INSTANTIATED);
-	}
+  /**
+   * Default constructor that forbids the class to be instantiated.
+   *
+   * @throws UnsupportedOperationException with {@link #CLASS_CANT_BE_INSTANTIATED} message.
+   * @since 1.0.0
+   */
+  private ConstantsCore() {
+    throw new UnsupportedOperationException(ConstantsCore.CLASS_CANT_BE_INSTANTIATED);
+  }
 }

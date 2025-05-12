@@ -1,5 +1,6 @@
 /**
- * Package responsible to hold the classes and its interfaces that will serve as application components.
+ * Package responsible to hold the classes and its interfaces that will serve as application
+ * components.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
  * @version 1.0.0
