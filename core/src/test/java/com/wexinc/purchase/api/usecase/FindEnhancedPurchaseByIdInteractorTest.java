@@ -8,7 +8,7 @@ import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.shared.constant.Constantes;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
-import com.wexinc.purchase.api.shared.util.PurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,30 +23,38 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
 
 @ExtendWith(MockitoExtension.class)
-class FindEnchancedPurchaseByIdInteractorTest {
+class FindEnhancedPurchaseByIdInteractorTest {
 
-  @InjectMocks private FindEnchancedPurchaseByIdInteractor instance;
+  @InjectMocks private FindEnhancedPurchaseByIdInteractor instance;
 
-  @Mock private FindPurchaseByIdInputBoundary findPurchaseByIdInputBoundary;
+  private final FindPurchaseByIdInputBoundary findPurchaseByIdInputBoundary;
+  private final AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClient;
 
-  @Mock private AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClient;
+  FindEnhancedPurchaseByIdInteractorTest(
+      @Mock final FindPurchaseByIdInputBoundary findPurchaseByIdInputBoundaryParam,
+      @Mock
+          final AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClientParam) {
+    this.findPurchaseByIdInputBoundary = findPurchaseByIdInputBoundaryParam;
+    this.americanTreasuryRateExchangeAPIClient = americanTreasuryRateExchangeAPIClientParam;
+  }
 
   @Test
-  void shouldNotFindPurchaseBecauseOfInvalidID() {
+  void testShouldNotFindPurchaseBecauseOfInvalidID() {
+    final var countries = Set.of(Country.BRAZIL);
+
     Mockito.when(this.findPurchaseByIdInputBoundary.apply(Constantes.LONG_MIN_VALUE))
         .thenThrow(EntityNotFoundException.class);
 
     Assertions.assertThrows(
         EntityNotFoundException.class,
-        () -> this.instance.apply(Constantes.LONG_MIN_VALUE, Set.of(Country.BRAZIL)),
+        () -> this.instance.apply(Constantes.LONG_MIN_VALUE, countries),
         Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
 
-    Mockito.verify(this.findPurchaseByIdInputBoundary, Mockito.times(1))
-        .apply(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.findPurchaseByIdInputBoundary).apply(Constantes.LONG_MIN_VALUE);
   }
 
   @Test
-  void shouldNotFindPurchaseBecauseOfAmericanTreasuryAPIReturnedNothing() {
+  void testShouldNotFindPurchaseBecauseOfAmericanTreasuryAPIReturnedNothing() {
     final var countries = Set.of(Country.BRAZIL);
     Mockito.when(this.findPurchaseByIdInputBoundary.apply(Constantes.LONG_MIN_VALUE))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
@@ -60,14 +68,13 @@ class FindEnchancedPurchaseByIdInteractorTest {
         () -> this.instance.apply(Constantes.LONG_MIN_VALUE, countries),
         Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
 
-    Mockito.verify(this.findPurchaseByIdInputBoundary, Mockito.times(1))
-        .apply(Constantes.LONG_MIN_VALUE);
-    Mockito.verify(this.americanTreasuryRateExchangeAPIClient, Mockito.times(1))
+    Mockito.verify(this.findPurchaseByIdInputBoundary).apply(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.americanTreasuryRateExchangeAPIClient)
         .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries);
   }
 
   @Test
-  void shouldFindEnhancedPurchase() {
+  void testShouldFindEnhancedPurchase() {
     final var countries = Set.of(Country.BRAZIL);
     final var exchangeRateData =
         List.of(
@@ -91,14 +98,13 @@ class FindEnchancedPurchaseByIdInteractorTest {
         this.instance.apply(Constantes.LONG_MIN_VALUE, countries),
         Constantes.EXPECTED_THE_SAME_RESULT);
 
-    Mockito.verify(this.findPurchaseByIdInputBoundary, Mockito.times(1))
-        .apply(Constantes.LONG_MIN_VALUE);
-    Mockito.verify(this.americanTreasuryRateExchangeAPIClient, Mockito.times(1))
+    Mockito.verify(this.findPurchaseByIdInputBoundary).apply(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.americanTreasuryRateExchangeAPIClient)
         .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries);
   }
 
   @Test
-  void shouldFindEnhancedPurchaseWithMultipleItems() {
+  void testShouldFindEnhancedPurchaseWithMultipleItems() {
     final var countries = Set.of(Country.BRAZIL, Country.ITALY);
     final var data = new ArrayList<ExchangeRateDataDTO>(3);
     data.add(
@@ -132,9 +138,8 @@ class FindEnchancedPurchaseByIdInteractorTest {
         this.instance.apply(Constantes.LONG_MIN_VALUE, countries),
         Constantes.EXPECTED_THE_SAME_RESULT);
 
-    Mockito.verify(this.findPurchaseByIdInputBoundary, Mockito.times(1))
-        .apply(Constantes.LONG_MIN_VALUE);
-    Mockito.verify(this.americanTreasuryRateExchangeAPIClient, Mockito.times(1))
+    Mockito.verify(this.findPurchaseByIdInputBoundary).apply(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.americanTreasuryRateExchangeAPIClient)
         .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries);
   }
 }

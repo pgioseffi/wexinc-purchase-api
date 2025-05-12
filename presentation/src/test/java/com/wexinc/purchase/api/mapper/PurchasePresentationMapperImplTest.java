@@ -8,7 +8,7 @@ import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
 import com.wexinc.purchase.api.shared.constant.Constantes;
 import com.wexinc.purchase.api.shared.constant.Country;
-import com.wexinc.purchase.api.shared.util.PurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import com.wexinc.purchase.api.shared.util.PurchaseRequestModelFixture;
 import java.math.BigDecimal;
 import java.util.List;

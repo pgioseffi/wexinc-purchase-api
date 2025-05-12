@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  * @version 1.0.0
  */
-public class FindEnchancedPurchaseByIdInteractor implements FindEnhancedPurchaseByIdInputBoundary {
+public class FindEnhancedPurchaseByIdInteractor implements FindEnhancedPurchaseByIdInputBoundary {
 
   /**
    * Field responsible to hold the implementation of the interactor that finds a purchase by its
@@ -46,7 +46,7 @@ public class FindEnchancedPurchaseByIdInteractor implements FindEnhancedPurchase
    *     class.
    * @since 1.0.0
    */
-  public FindEnchancedPurchaseByIdInteractor(
+  public FindEnhancedPurchaseByIdInteractor(
       final FindPurchaseByIdInputBoundary findPurchaseByIdInputBoundaryParam,
       final AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClientParam) {
     super();

@@ -51,7 +51,7 @@ class ApplicationExceptionHandlerTest {
   @Mock private HttpServletRequest httpRequest;
 
   @Test
-  void shouldAnyExceptionWithNoMessage() {
+  void testShouldHandleAnyExceptionWithNoMessage() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -66,7 +66,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldAnyExceptionWithMessage() {
+  void testShouldHandleAnyExceptionWithMessage() {
     final var errorMessage = "Error";
 
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
@@ -87,7 +87,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleMethodArgumentNotValid() {
+  void testShouldHandleMethodArgumentNotValid() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -115,7 +115,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleSingleConstraintViolation() {
+  void testShouldHandleSingleConstraintViolation() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -145,7 +145,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleSingleConstraintViolationWithNullValue() {
+  void testShouldHandleSingleConstraintViolationWithNullValue() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -172,7 +172,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleMultipleConstraintViolations() {
+  void testShouldHandleMultipleConstraintViolations() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -216,7 +216,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleDataIntegrityViolationException() {
+  void testShouldHandleDataIntegrityViolationException() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -231,7 +231,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleRestClientException() {
+  void testShouldHandleRestClientException() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -245,7 +245,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleRestClientResponseExceptionWithHTMLHeaders() {
+  void testShouldHandleRestClientResponseExceptionWithHTMLHeaders() {
     Assertions.assertEquals(
         HttpStatus.SERVICE_UNAVAILABLE,
         this.instance
@@ -274,7 +274,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleRestClientResponseExceptionWithNoContentType() {
+  void testShouldHandleRestClientResponseExceptionWithNoContentType() {
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
@@ -297,7 +297,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleRestClientResponseExceptionWithHTMLHeadersTypeAndSubType() {
+  void testShouldHandleRestClientResponseExceptionWithHTMLHeadersTypeAndSubType() {
     Assertions.assertEquals(
         HttpStatus.SERVICE_UNAVAILABLE,
         this.instance
@@ -328,7 +328,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleRestClientResponseExceptionWithJSONResponse()
+  void testShouldHandleRestClientResponseExceptionWithJSONResponse()
       throws JsonMappingException, JsonProcessingException {
     final var mapper = new ObjectMapper();
     final var mappedJSON =
@@ -362,7 +362,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleRestClientResponseExceptionWithTextResponse() {
+  void testShouldHandleRestClientResponseExceptionWithTextResponse() {
     final var errorMessage = "Error";
 
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
@@ -387,7 +387,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleUnknownContentTypeExceptionWithNullHeaders() {
+  void testShouldHandleUnknownContentTypeExceptionWithNullHeaders() {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "Invalid status code";
 
@@ -412,7 +412,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleUnknownContentTypeExceptionWithJsonResponse()
+  void testShouldHandleUnknownContentTypeExceptionWithJsonResponse()
       throws JsonMappingException, JsonProcessingException {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "{\"error\":\"Invalid status code\"}";
@@ -449,7 +449,7 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleUnknownContentTypeExceptionWithInvalidJsonResponse()
+  void testShouldHandleUnknownContentTypeExceptionWithInvalidJsonResponse()
       throws JsonMappingException, JsonProcessingException {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "{\"error\":\"Invalid status code\"}";
@@ -481,11 +481,10 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void shouldHandleUnknownContentTypeExceptionWithHTMLHeaders() {
+  void testShouldHandleUnknownContentTypeExceptionWithHTMLHeaders() {
     final var invalidStatusCode = 999;
     // Yes, I do know that this would come as 503 status code. This is just for testing purposes, it
-    // could be any
-    // valid HTML response, for example or no HTML at all.
+    // could be any valid HTML response, for example or no HTML at all.
     final var invalidStatusCodeMessage =
         """
 				<html>

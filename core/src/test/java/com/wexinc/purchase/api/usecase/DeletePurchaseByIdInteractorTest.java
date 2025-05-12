@@ -17,10 +17,14 @@ class DeletePurchaseByIdInteractorTest {
 
   @InjectMocks private DeletePurchaseByIdInteractor instance;
 
-  @Mock private PurchaseGateway purchaseGateway;
+  private final PurchaseGateway purchaseGateway;
+
+  DeletePurchaseByIdInteractorTest(@Mock final PurchaseGateway purchaseGatewayParam) {
+    this.purchaseGateway = purchaseGatewayParam;
+  }
 
   @Test
-  void shouldNotDeleteNonexistentPurchase() {
+  void testShouldNotDeleteNonexistentPurchase() {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(Constantes.LONG_MIN_VALUE)))
         .thenReturn(Boolean.FALSE);
 
@@ -29,12 +33,12 @@ class DeletePurchaseByIdInteractorTest {
         () -> this.instance.accept(Long.MIN_VALUE),
         Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
 
-    Mockito.verify(this.purchaseGateway, Mockito.times(1)).existsById(Constantes.LONG_MIN_VALUE);
-    Mockito.verify(this.purchaseGateway, Mockito.times(0)).deleteById(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.purchaseGateway).existsById(Constantes.LONG_MIN_VALUE);
+    Mockito.verifyNoMoreInteractions(this.purchaseGateway);
   }
 
   @Test
-  void shouldDeletePurchase() {
+  void testShouldDeletePurchase() {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(Constantes.LONG_MIN_VALUE)))
         .thenReturn(Boolean.TRUE);
     final ArgumentCaptor<Long> valueCapture = ArgumentCaptor.forClass(Long.class);
@@ -45,7 +49,7 @@ class DeletePurchaseByIdInteractorTest {
     Assertions.assertEquals(
         Long.MIN_VALUE, valueCapture.getValue(), Constantes.EXPECTED_THE_SAME_RESULT);
 
-    Mockito.verify(this.purchaseGateway, Mockito.times(1)).existsById(Constantes.LONG_MIN_VALUE);
-    Mockito.verify(this.purchaseGateway, Mockito.times(1)).deleteById(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.purchaseGateway).existsById(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.purchaseGateway).deleteById(Constantes.LONG_MIN_VALUE);
   }
 }

@@ -46,10 +46,10 @@ public record PurchaseResponseModel(
   }
 
   /**
-   * Returns the transaction date discarding milisseconds information.
+   * Returns the transaction date discarding milliseconds information.
    *
    * @return The {@link LocalDateTime} object representing the purchase {@link #transactionDate}
-   *     discarding milisseconds information.
+   *     discarding milliseconds information.
    * @since 1.0.0
    * @see LocalDateTime
    * @see LocalDateTime#truncatedTo(java.time.temporal.TemporalUnit)

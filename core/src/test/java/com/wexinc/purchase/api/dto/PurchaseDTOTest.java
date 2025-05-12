@@ -1,7 +1,7 @@
 package com.wexinc.purchase.api.dto;
 
 import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.util.PurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import java.math.BigDecimal;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
