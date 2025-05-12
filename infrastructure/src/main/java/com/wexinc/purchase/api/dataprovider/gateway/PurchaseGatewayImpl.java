@@ -31,7 +31,7 @@ public class PurchaseGatewayImpl implements PurchaseGateway {
   /**
    * Field responsible for holding the mapper that will transform a {@link
    * com.wexinc.purchase.api.persistence.domain.Purchase Purchase} database object into a {@link
-   * PurchaseDTO PurchaseDTO} and vice-versa.
+   * PurchaseDTO PurchaseDTO} and vice versa.
    *
    * @since 1.0.0
    */

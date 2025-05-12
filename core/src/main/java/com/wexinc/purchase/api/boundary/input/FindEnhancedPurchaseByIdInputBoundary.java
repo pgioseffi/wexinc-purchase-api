@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.function.BiFunction;
 
 /**
- * Interface responsible for holding the signature of the method that conains the business rules to
+ * Interface responsible for holding the signature of the method that contains the business rules to
  * search for a purchase and enhance its information with its exchange rate according to the
  * countries given.
  *
