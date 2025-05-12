@@ -19,7 +19,7 @@ class PurchaseCoreMapperTest {
   @ParameterizedTest
   @MethodSource("generateArgumentsForTestShouldMapFromIdAndDTOToDTO")
   void testShouldMapFromIdAndDTOToDTO(
-      final PurchaseDTO expected, Long newId, PurchaseDTO purchaseDTO) {
+      final PurchaseDTO expected, final Long newId, final PurchaseDTO purchaseDTO) {
     Assertions.assertEquals(
         expected,
         PurchaseCoreMapperTest.MAPPER.fromIdAndDTOToDTO(newId, purchaseDTO),
