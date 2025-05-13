@@ -37,7 +37,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
    *
    * @since 1.0.0
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationExceptionHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CustomErrorAttributes.class);
 
   /**
    * {@inheritDoc}

@@ -185,7 +185,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.when(requestBodySpec.accept(MediaType.APPLICATION_JSON)).thenReturn(requestBodySpec);
     Mockito.when(requestBodySpec.retrieve()).thenReturn(responseSpec);
     Mockito.when(responseSpec.body(ExchangeRateResource.class)).thenReturn(resourceResult);
-    Mockito.when(this.exchangeRateInfrastructureMapper.fromResourceToDTO(resourceResult))
+    Mockito.when(this.exchangeRateInfrastructureMapper.apply(resourceResult))
         .thenReturn(methodResult);
 
     Assertions.assertEquals(
@@ -206,6 +206,6 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.verify(requestBodySpec).accept(MediaType.APPLICATION_JSON);
     Mockito.verify(requestBodySpec).retrieve();
     Mockito.verify(responseSpec).body(ExchangeRateResource.class);
-    Mockito.verify(this.exchangeRateInfrastructureMapper).fromResourceToDTO(resourceResult);
+    Mockito.verify(this.exchangeRateInfrastructureMapper).apply(resourceResult);
   }
 }

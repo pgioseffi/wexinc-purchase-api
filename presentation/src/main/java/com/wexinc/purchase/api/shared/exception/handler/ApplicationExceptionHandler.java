@@ -258,9 +258,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
   private JsonNode retornarRespostaAsJSON(final String json) {
     try {
       return this.objectMapper.readTree(json);
-    } catch (
-        @SuppressWarnings("unused")
-        final JacksonException e) {
+    } catch (final JacksonException _) {
       return null;
     }
   }

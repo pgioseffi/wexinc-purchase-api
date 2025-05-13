@@ -1,5 +1,7 @@
 package com.wexinc.purchase.api.shared.exception;
 
+import java.io.Serial;
+
 /**
  * Exception used when a database search does not return results.
  *
@@ -10,7 +12,7 @@ package com.wexinc.purchase.api.shared.exception;
 public class EntityNotFoundException extends RuntimeException {
 
   /** Field used when serialization is required. */
-  @java.io.Serial private static final long serialVersionUID = 5298699825420247040L;
+  @Serial private static final long serialVersionUID = 5298699825420247040L;
 
   /**
    * Constructs a new runtime exception with {@code null} as its detail message. The cause is not

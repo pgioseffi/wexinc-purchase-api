@@ -15,26 +15,26 @@ class ExchangeRatePresentationMapperImplTest {
       Mappers.getMapper(ExchangeRatePresentationMapper.class);
 
   @Test
-  void shouldNotMapFromDTOToResponseModel() {
+  void testShouldNotMapApply() {
     Assertions.assertNull(
-        ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null, null),
+        ExchangeRatePresentationMapperImplTest.MAPPER.apply(null, null),
         Constantes.SHOULD_HAVE_RETURNED_NULL);
   }
 
   @Test
-  void shouldMapJustAmount() {
+  void testShouldMapJustAmount() {
     Assertions.assertEquals(
         new ExchangeRateDataResponseModel(null, null, null),
-        ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(BigDecimal.TEN, null),
+        ExchangeRatePresentationMapperImplTest.MAPPER.apply(BigDecimal.TEN, null),
         Constantes.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
-  void shouldMapFromDTOToResponseModel() {
+  void testShouldMapApply() {
     Assertions.assertEquals(
         new ExchangeRateDataResponseModel(
             Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, BigDecimal.ZERO),
-        ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(
+        ExchangeRatePresentationMapperImplTest.MAPPER.apply(
             BigDecimal.TEN,
             new ExchangeRateDataDTO(
                 Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)),
@@ -42,11 +42,11 @@ class ExchangeRatePresentationMapperImplTest {
   }
 
   @Test
-  void shouldMapFromDTOToResponseModels() {
+  void testShouldMapFromDTOToResponseModels() {
     Assertions.assertEquals(
         new ExchangeRateDataResponseModel(
             Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, null),
-        ExchangeRatePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(
+        ExchangeRatePresentationMapperImplTest.MAPPER.apply(
             null,
             new ExchangeRateDataDTO(
                 Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)),

@@ -5,6 +5,7 @@ import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
 import java.math.BigDecimal;
+import java.util.function.BiFunction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -20,7 +21,8 @@ import org.mapstruct.Mapping;
  */
 @Mapper
 @FunctionalInterface
-public interface ExchangeRatePresentationMapper {
+public interface ExchangeRatePresentationMapper
+    extends BiFunction<BigDecimal, ExchangeRateDataDTO, ExchangeRateDataResponseModel> {
 
   /**
    * Method responsible for mapping a {@link ExchangeRateDataDTO} object into a {@link
@@ -35,10 +37,10 @@ public interface ExchangeRatePresentationMapper {
    *     response.
    * @since 1.0.0
    */
+  @Override
   @Mapping(
       target = "convertedAmount",
       expression =
           "java(dto == null || purchaseAmount == null ? null : dto.exchangeRate().multiply(purchaseAmount))")
-  ExchangeRateDataResponseModel fromDTOToResponseModel(
-      BigDecimal purchaseAmount, ExchangeRateDataDTO dto);
+  ExchangeRateDataResponseModel apply(BigDecimal purchaseAmount, ExchangeRateDataDTO dto);
 }

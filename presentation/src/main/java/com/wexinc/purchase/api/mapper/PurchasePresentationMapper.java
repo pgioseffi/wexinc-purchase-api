@@ -86,8 +86,8 @@ public abstract class PurchasePresentationMapper {
             : exchangeRateData.stream()
                 .map(
                     item ->
-                        PurchasePresentationMapper.EXCHANGE_RATE_PRESENTATION_MAPPER
-                            .fromDTOToResponseModel(dto.amount(), item))
+                        PurchasePresentationMapper.EXCHANGE_RATE_PRESENTATION_MAPPER.apply(
+                            dto.amount(), item))
                 .toList());
   }
 }

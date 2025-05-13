@@ -28,14 +28,14 @@ class BeanFactoryConfig {
    */
   @Bean
   static BeanFactoryPostProcessor beanFactoryPostProcessor(final ApplicationContext beanRegistry) {
-    return (final var beanFactory) -> {
+    return (final var _) -> {
       final var beanDefinitionScanner =
           new ClassPathBeanDefinitionScanner(
               (BeanDefinitionRegistry)
                   ((AnnotationConfigServletWebServerApplicationContext) beanRegistry)
                       .getBeanFactory());
       beanDefinitionScanner.addIncludeFilter(
-          (final var mr, final var mrf) -> {
+          (final var mr, final var _) -> {
             final var className = mr.getClassMetadata().getClassName();
             return !className.contains("model")
                 && !className.contains("resource")
