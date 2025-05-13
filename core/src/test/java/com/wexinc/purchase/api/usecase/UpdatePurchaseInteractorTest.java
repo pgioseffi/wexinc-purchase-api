@@ -48,7 +48,7 @@ class UpdatePurchaseInteractorTest {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(Constantes.LONG_MIN_VALUE)))
         .thenReturn(Boolean.TRUE);
     Mockito.when(
-            this.purchaseCoreMapper.fromIdAndDTOToDTO(
+            this.purchaseCoreMapper.apply(
                 Constantes.LONG_MIN_VALUE, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
     Mockito.when(this.purchaseGateway.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO))

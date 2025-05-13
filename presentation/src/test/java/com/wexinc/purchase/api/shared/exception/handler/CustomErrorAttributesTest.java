@@ -21,10 +21,14 @@ class CustomErrorAttributesTest {
 
   @InjectMocks private CustomErrorAttributes instance;
 
-  @Mock private WebRequest request;
+  private final WebRequest request;
+
+  CustomErrorAttributesTest(@Mock final WebRequest requestParam) {
+    this.request = requestParam;
+  }
 
   @Test
-  void shouldReturnErrorAttibutes() {
+  void testShouldReturnErrorAttributes() {
     final var exceptionMessage = "Test exception";
     final var statusCode = Integer.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
     final var exception = new RuntimeException(exceptionMessage);

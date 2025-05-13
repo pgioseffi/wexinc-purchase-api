@@ -1,6 +1,7 @@
 package com.wexinc.purchase.api.mapper;
 
 import com.wexinc.purchase.api.dto.PurchaseDTO;
+import java.util.function.BiFunction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -14,7 +15,8 @@ import org.mapstruct.Mapping;
  * @see PurchaseDTO
  */
 @Mapper
-public interface PurchaseCoreMapper {
+@FunctionalInterface
+public interface PurchaseCoreMapper extends BiFunction<Long, PurchaseDTO, PurchaseDTO> {
 
   /**
    * Method responsible for mapping a {@link PurchaseDTO} without a positive numeric identifier to
@@ -27,6 +29,7 @@ public interface PurchaseCoreMapper {
    * @see PurchaseDTO
    * @since 1.0.0
    */
+  @Override
   @Mapping(target = "id", source = "newId")
-  PurchaseDTO fromIdAndDTOToDTO(Long newId, PurchaseDTO purchaseDTO);
+  PurchaseDTO apply(Long newId, PurchaseDTO purchaseDTO);
 }

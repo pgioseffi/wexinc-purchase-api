@@ -2,6 +2,7 @@ package com.wexinc.purchase.api.mapper;
 
 import com.wexinc.purchase.api.dto.ExchangeRateDTO;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
+import java.util.function.Function;
 import org.mapstruct.Mapper;
 
 /**
@@ -15,7 +16,9 @@ import org.mapstruct.Mapper;
  * @see ExchangeRateResource
  */
 @Mapper
-public interface ExchangeRateInfrastructureMapper {
+@FunctionalInterface
+public interface ExchangeRateInfrastructureMapper
+    extends Function<ExchangeRateResource, ExchangeRateDTO> {
 
   /**
    * Method responsible for mapping a {@link ExchangeRateResource} object into a {@link
@@ -28,5 +31,6 @@ public interface ExchangeRateInfrastructureMapper {
    *     layers of the application.
    * @since 1.0.0
    */
-  ExchangeRateDTO fromResourceToDTO(ExchangeRateResource resource);
+  @Override
+  ExchangeRateDTO apply(ExchangeRateResource resource);
 }

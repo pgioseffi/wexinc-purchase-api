@@ -329,7 +329,7 @@ class ApplicationExceptionHandlerTest {
 
   @Test
   void testShouldHandleRestClientResponseExceptionWithJSONResponse()
-      throws JsonMappingException, JsonProcessingException {
+      throws JsonProcessingException {
     final var mapper = new ObjectMapper();
     final var mappedJSON =
         mapper
@@ -413,7 +413,7 @@ class ApplicationExceptionHandlerTest {
 
   @Test
   void testShouldHandleUnknownContentTypeExceptionWithJsonResponse()
-      throws JsonMappingException, JsonProcessingException {
+      throws JsonProcessingException {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "{\"error\":\"Invalid status code\"}";
     final var mapper = new ObjectMapper();
@@ -450,7 +450,7 @@ class ApplicationExceptionHandlerTest {
 
   @Test
   void testShouldHandleUnknownContentTypeExceptionWithInvalidJsonResponse()
-      throws JsonMappingException, JsonProcessingException {
+      throws JsonProcessingException {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "{\"error\":\"Invalid status code\"}";
 

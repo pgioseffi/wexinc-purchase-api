@@ -17,16 +17,16 @@ class PurchaseCoreMapperTest {
   private static final PurchaseCoreMapper MAPPER = Mappers.getMapper(PurchaseCoreMapper.class);
 
   @ParameterizedTest
-  @MethodSource("generateArgumentsForTestShouldMapFromIdAndDTOToDTO")
-  void testShouldMapFromIdAndDTOToDTO(
-      final PurchaseDTO expected, Long newId, PurchaseDTO purchaseDTO) {
+  @MethodSource("generateArgumentsForTestShouldMapApply")
+  void testShouldMapApply(
+      final PurchaseDTO expected, final Long newId, final PurchaseDTO purchaseDTO) {
     Assertions.assertEquals(
         expected,
-        PurchaseCoreMapperTest.MAPPER.fromIdAndDTOToDTO(newId, purchaseDTO),
+        PurchaseCoreMapperTest.MAPPER.apply(newId, purchaseDTO),
         Constantes.EXPECTED_THE_SAME_RESULT);
   }
 
-  private static Stream<Arguments> generateArgumentsForTestShouldMapFromIdAndDTOToDTO() {
+  private static Stream<Arguments> generateArgumentsForTestShouldMapApply() {
     return Stream.of(
         Arguments.of(
             PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,

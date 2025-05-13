@@ -109,6 +109,6 @@ public class AmericanTreasuryRateExchangeAPIWebClient
           StandardCharsets.UTF_8);
     }
 
-    return this.exchangeRateInfrastructureMapper.fromResourceToDTO(exchangeRate);
+    return this.exchangeRateInfrastructureMapper.apply(exchangeRate);
   }
 }
