@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  */
 @Configuration
-public class TimeZoneConfig {
+class TimeZoneConfig {
 
   /**
    * Method responsible to set the application default timezone to Los Angeles, which is the Wex Inc
