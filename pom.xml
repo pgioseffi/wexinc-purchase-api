@@ -90,7 +90,7 @@
                         <link>https://docs.spring.io/spring-data/commons/docs/3.1.6/api/</link>
                         <link>https://docs.spring.io/spring-data/jpa/docs/current/api/</link>
                         <link>https://docs.spring.io/spring-boot/docs/3.1.6/api/</link>
-                        <link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/2.2.19/</link>
+                        <link>https://javadoc.io/doc/io.swagger.core.v3/swagger-models/latest/</link>
                         <link>https://jakarta.ee/specifications/platform/9/apidocs/</link>
                         <link>https://javadoc.io/doc/org.apache.commons/commons-lang3/3.12.0/</link>
                     </links>
