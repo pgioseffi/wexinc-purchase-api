@@ -1,7 +1,8 @@
 package com.wexinc.purchase.api.dto;
 
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
-import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.EnhancedPurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.ExchangeRateDataDTOFixture;
 import java.math.BigDecimal;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +15,7 @@ class EnhancedPurchaseDTOTest {
   void testId() {
     Assertions.assertEquals(
         CoreTestConstants.LONG_MIN_VALUE,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.id(),
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.id(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -22,7 +23,7 @@ class EnhancedPurchaseDTOTest {
   void testDescription() {
     Assertions.assertEquals(
         StringUtils.EMPTY,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.description(),
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.description(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -30,7 +31,7 @@ class EnhancedPurchaseDTOTest {
   void testTransactionDate() {
     Assertions.assertEquals(
         CoreTestConstants.FIXED_LOCAL_DATE_TIME,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.transactionDate(),
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.transactionDate(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -38,15 +39,15 @@ class EnhancedPurchaseDTOTest {
   void testAmount() {
     Assertions.assertEquals(
         BigDecimal.ZERO,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.amount(),
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.amount(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testExchangeRate() {
-    Assertions.assertEquals(
-        List.of(),
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.exchangeRateData(),
+    Assertions.assertIterableEquals(
+        List.of(ExchangeRateDataDTOFixture.EXCHANGE_RATE_DATA_DTO_FIXTURE),
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.exchangeRateData(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }
