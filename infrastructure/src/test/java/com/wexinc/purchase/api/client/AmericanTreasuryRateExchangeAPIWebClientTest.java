@@ -77,7 +77,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 
     Assertions.assertThrows(
         NotFound.class,
-        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
+        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
 
     Mockito.verify(this.consulProperties).getCurrencyConversionURL();
@@ -128,7 +128,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 
     Assertions.assertThrows(
         NotFound.class,
-        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
+        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
 
     Mockito.verify(this.consulProperties).getCurrencyConversionURL();
@@ -190,7 +190,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 
     Assertions.assertEquals(
         methodResult,
-        this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
+        this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     Mockito.verify(this.consulProperties).getCurrencyConversionURL();

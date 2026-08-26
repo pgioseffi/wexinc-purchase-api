@@ -36,14 +36,14 @@ class SavePurchaseInteractorTest {
 
   @Test
   void testShouldSavePurchase() {
-    Mockito.when(this.purchaseGateway.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+    Mockito.when(this.purchaseGateway.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE))
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
-        this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
+        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+        this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
-    Mockito.verify(this.purchaseGateway).save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+    Mockito.verify(this.purchaseGateway).save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
   }
 }

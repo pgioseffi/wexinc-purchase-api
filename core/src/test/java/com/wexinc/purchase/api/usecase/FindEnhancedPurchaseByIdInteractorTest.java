@@ -57,10 +57,10 @@ class FindEnhancedPurchaseByIdInteractorTest {
   void testShouldNotFindPurchaseBecauseOfAmericanTreasuryAPIReturnedNothing() {
     final var countries = Set.of(Country.BRAZIL);
     Mockito.when(this.findPurchaseByIdInputBoundary.apply(CoreTestConstants.LONG_MIN_VALUE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
     Mockito.when(
             this.americanTreasuryRateExchangeAPIClient.apply(
-                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries))
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries))
         .thenThrow(NotFound.class);
 
     Assertions.assertThrows(
@@ -70,7 +70,7 @@ class FindEnhancedPurchaseByIdInteractorTest {
 
     Mockito.verify(this.findPurchaseByIdInputBoundary).apply(CoreTestConstants.LONG_MIN_VALUE);
     Mockito.verify(this.americanTreasuryRateExchangeAPIClient)
-        .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries);
+        .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries);
   }
 
   @Test
@@ -82,25 +82,25 @@ class FindEnhancedPurchaseByIdInteractorTest {
                 Country.BRAZIL.name(), BigDecimal.ZERO, CoreTestConstants.FIXED_LOCAL_DATE));
 
     Mockito.when(this.findPurchaseByIdInputBoundary.apply(CoreTestConstants.LONG_MIN_VALUE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
     Mockito.when(
             this.americanTreasuryRateExchangeAPIClient.apply(
-                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries))
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries))
         .thenReturn(new ExchangeRateDTO(exchangeRateData));
 
     Assertions.assertEquals(
         new EnhancedPurchaseDTO(
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.id(),
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.description(),
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.transactionDate(),
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.amount(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.id(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.description(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.transactionDate(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.amount(),
             exchangeRateData),
         this.instance.apply(CoreTestConstants.LONG_MIN_VALUE, countries),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     Mockito.verify(this.findPurchaseByIdInputBoundary).apply(CoreTestConstants.LONG_MIN_VALUE);
     Mockito.verify(this.americanTreasuryRateExchangeAPIClient)
-        .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries);
+        .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries);
   }
 
   @Test
@@ -120,18 +120,18 @@ class FindEnhancedPurchaseByIdInteractorTest {
             Country.ITALY.name(), BigDecimal.ZERO, CoreTestConstants.FIXED_LOCAL_DATE));
 
     Mockito.when(this.findPurchaseByIdInputBoundary.apply(CoreTestConstants.LONG_MIN_VALUE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
     Mockito.when(
             this.americanTreasuryRateExchangeAPIClient.apply(
-                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries))
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries))
         .thenReturn(new ExchangeRateDTO(data));
 
     Assertions.assertEquals(
         new EnhancedPurchaseDTO(
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.id(),
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.description(),
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.transactionDate(),
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO.amount(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.id(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.description(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.transactionDate(),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE.amount(),
             List.of(
                 new ExchangeRateDataDTO(
                     Country.BRAZIL.name(), BigDecimal.ZERO, CoreTestConstants.FIXED_LOCAL_DATE),
@@ -142,6 +142,6 @@ class FindEnhancedPurchaseByIdInteractorTest {
 
     Mockito.verify(this.findPurchaseByIdInputBoundary).apply(CoreTestConstants.LONG_MIN_VALUE);
     Mockito.verify(this.americanTreasuryRateExchangeAPIClient)
-        .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries);
+        .apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries);
   }
 }

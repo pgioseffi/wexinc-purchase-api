@@ -49,12 +49,12 @@ class PurchaseGatewayImplTest {
 
   @Test
   void testShouldFindAll() {
-    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Mockito.when(this.purchaseRepository.findAll())
         .thenReturn(List.of(PurchaseFixture.ACTUAL_PURCHASE));
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Assertions.assertEquals(
         result, this.instance.findAll(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
@@ -78,13 +78,13 @@ class PurchaseGatewayImplTest {
             StringUtils.EMPTY,
             CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO);
-    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, purchaseDTO02);
+    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, purchaseDTO02);
     final var repositoryResult = List.of(PurchaseFixture.ACTUAL_PURCHASE, purchase02);
 
     Mockito.when(this.purchaseRepository.findAll()).thenReturn(repositoryResult);
 
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(purchase02))
         .thenReturn(purchaseDTO02);
 
@@ -109,10 +109,10 @@ class PurchaseGatewayImplTest {
     Mockito.when(this.purchaseRepository.findById(CoreTestConstants.LONG_MIN_VALUE))
         .thenReturn(Optional.of(PurchaseFixture.ACTUAL_PURCHASE));
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
+        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
         this.instance.findById(CoreTestConstants.LONG_MIN_VALUE),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
@@ -192,16 +192,16 @@ class PurchaseGatewayImplTest {
   void testShouldSave() {
     Mockito.when(
             this.purchaseInfrastructureMapper.fromDTOToEntity(
-                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO))
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE))
         .thenReturn(PurchaseFixture.ACTUAL_PURCHASE);
     Mockito.when(this.purchaseRepository.save(PurchaseFixture.ACTUAL_PURCHASE))
         .thenReturn(PurchaseFixture.ACTUAL_PURCHASE);
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
-        this.instance.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
+        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+        this.instance.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     Mockito.verify(this.purchaseRepository).save(PurchaseFixture.ACTUAL_PURCHASE);

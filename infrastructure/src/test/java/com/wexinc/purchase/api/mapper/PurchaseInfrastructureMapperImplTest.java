@@ -17,7 +17,7 @@ class PurchaseInfrastructureMapperImplTest {
   @Test
   void shouldMapEntityToDTO() {
     Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
+        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
         PurchaseInfrastructureMapperImplTest.MAPPER.fromEntityToDTO(
             new Purchase(
                 CoreTestConstants.LONG_MIN_VALUE,
@@ -43,7 +43,7 @@ class PurchaseInfrastructureMapperImplTest {
             CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO),
         PurchaseInfrastructureMapperImplTest.MAPPER.fromDTOToEntity(
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 

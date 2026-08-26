@@ -14,7 +14,7 @@ class EnhancedPurchaseDTOTest {
   void testId() {
     Assertions.assertEquals(
         CoreTestConstants.LONG_MIN_VALUE,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.id(),
+        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.id(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -22,7 +22,7 @@ class EnhancedPurchaseDTOTest {
   void testDescription() {
     Assertions.assertEquals(
         StringUtils.EMPTY,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.description(),
+        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.description(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -30,7 +30,7 @@ class EnhancedPurchaseDTOTest {
   void testTransactionDate() {
     Assertions.assertEquals(
         CoreTestConstants.FIXED_LOCAL_DATE_TIME,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.transactionDate(),
+        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.transactionDate(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -38,7 +38,7 @@ class EnhancedPurchaseDTOTest {
   void testAmount() {
     Assertions.assertEquals(
         BigDecimal.ZERO,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.amount(),
+        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.amount(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
@@ -46,7 +46,7 @@ class EnhancedPurchaseDTOTest {
   void testExchangeRate() {
     Assertions.assertEquals(
         List.of(),
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.exchangeRateData(),
+        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.exchangeRateData(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

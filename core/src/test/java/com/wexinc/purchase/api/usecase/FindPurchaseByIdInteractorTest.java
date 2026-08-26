@@ -39,10 +39,10 @@ class FindPurchaseByIdInteractorTest {
   @Test
   void testShouldUpdatePurchase() {
     Mockito.when(this.purchaseGateway.findById(CoreTestConstants.LONG_MIN_VALUE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
+        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
         this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 

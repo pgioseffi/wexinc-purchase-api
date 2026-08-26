@@ -25,7 +25,7 @@ class FindAllPurchasesInteractorTest {
 
   @Test
   void testShouldFindAllPurchases() {
-    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
     Mockito.when(this.purchaseGateway.findAll()).thenReturn(result);
 
     Assertions.assertEquals(

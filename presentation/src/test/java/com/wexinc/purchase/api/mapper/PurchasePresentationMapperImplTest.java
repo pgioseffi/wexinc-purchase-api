@@ -31,7 +31,7 @@ class PurchasePresentationMapperImplTest {
             CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO),
         PurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 

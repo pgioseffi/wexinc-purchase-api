@@ -29,9 +29,9 @@ class PurchaseCoreMapperTest {
   private static Stream<Arguments> generateArgumentsForTestShouldMapApply() {
     return Stream.of(
         Arguments.of(
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
             CoreTestConstants.LONG_MIN_VALUE,
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         Arguments.of(
             new PurchaseDTO(CoreTestConstants.LONG_MIN_VALUE, null, null, null),
             CoreTestConstants.LONG_MIN_VALUE,
@@ -40,7 +40,7 @@ class PurchaseCoreMapperTest {
             new PurchaseDTO(
                 null, StringUtils.EMPTY, CoreTestConstants.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
             null,
-            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         Arguments.of(null, null, null));
   }
 }
