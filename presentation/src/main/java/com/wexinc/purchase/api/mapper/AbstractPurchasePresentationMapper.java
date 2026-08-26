@@ -34,7 +34,7 @@ import org.mapstruct.factory.Mappers;
             @see PurchaseDTO
             @see PurchaseRequestModel
             @see PurchaseResponseModel""")
-public abstract class PurchasePresentationMapper {
+public abstract class AbstractPurchasePresentationMapper {
 
   private static final ExchangeRatePresentationMapper EXCHANGE_RATE_PRESENTATION_MAPPER =
       Mappers.getMapper(ExchangeRatePresentationMapper.class);
@@ -98,7 +98,7 @@ public abstract class PurchasePresentationMapper {
             : exchangeRateData.stream()
                 .map(
                     item ->
-                        PurchasePresentationMapper.EXCHANGE_RATE_PRESENTATION_MAPPER.apply(
+                        AbstractPurchasePresentationMapper.EXCHANGE_RATE_PRESENTATION_MAPPER.apply(
                             dto.amount(), item))
                 .toList());
   }

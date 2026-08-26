@@ -16,7 +16,7 @@ import org.mapstruct.Mapper;
  * @see ExchangeRateDTO
  * @see ExchangeRateResource
  */
-@Mapper
+@Mapper(uses = ExchangeRateDataInfrastructureMapper.class)
 @FunctionalInterface
 @Javadoc(
     """

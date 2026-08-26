@@ -6,7 +6,7 @@ import com.wexinc.purchase.api.boundary.input.FindEnhancedPurchaseByIdInputBound
 import com.wexinc.purchase.api.boundary.input.FindPurchaseByIdInputBoundary;
 import com.wexinc.purchase.api.boundary.input.SavePurchaseInputBoundary;
 import com.wexinc.purchase.api.boundary.input.UpdatePurchaseInputBoundary;
-import com.wexinc.purchase.api.mapper.PurchasePresentationMapper;
+import com.wexinc.purchase.api.mapper.AbstractPurchasePresentationMapper;
 import com.wexinc.purchase.api.model.request.PurchaseRequestModel;
 import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @see PurchaseRestAPI
  * @see PurchaseRequestModel
  * @see PurchaseResponseModel
- * @see PurchasePresentationMapper
+ * @see AbstractPurchasePresentationMapper
  * @see RestController
  */
 @RestController
@@ -113,9 +113,9 @@ public class PurchaseRestController implements PurchaseRestAPI {
    * PurchaseResponseModel response object} for whoever calls this service.
    *
    * @since 1.0.0
-   * @see PurchasePresentationMapper
+   * @see AbstractPurchasePresentationMapper
    */
-  private final PurchasePresentationMapper purchasePresentationMapper;
+  private final AbstractPurchasePresentationMapper purchasePresentationMapper;
 
   /**
    * Complete constructor responsible for initializing the fields of this class.
@@ -148,7 +148,7 @@ public class PurchaseRestController implements PurchaseRestAPI {
       final SavePurchaseInputBoundary savePurchaseInputBoundaryParam,
       final UpdatePurchaseInputBoundary updatePurchaseInputBoundaryParam,
       final DeletePurchaseByIdInputBoundary deletePurchaseByIdInputBoundaryParam,
-      final PurchasePresentationMapper purchasePresentationMapperParam,
+      final AbstractPurchasePresentationMapper purchasePresentationMapperParam,
       final FindEnhancedPurchaseByIdInputBoundary findEnhancedPurchaseByIdInputBoundaryParam) {
     super();
     this.findAllPurchasesInputBoundary = findAllPurchasesInputBoundaryParam;
@@ -198,7 +198,9 @@ public class PurchaseRestController implements PurchaseRestAPI {
   public EnhancedPurchaseResponseModel findEnhancedPurchaseByID(
       @PathVariable final Long id, @RequestParam final Set<Country> countries) {
     return this.findEnhancedPurchaseByIdInputBoundary
-        .andThen(PurchasePresentationMapper::fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel)
+        .andThen(
+            AbstractPurchasePresentationMapper
+                ::fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel)
         .apply(id, countries);
   }
 

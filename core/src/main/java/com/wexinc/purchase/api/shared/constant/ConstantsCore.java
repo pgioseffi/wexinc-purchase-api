@@ -12,12 +12,13 @@ import java.util.regex.Pattern;
 public final class ConstantsCore {
 
   /**
-   * Constant holding the value {@value}.
+   * Constant holding the value of an {@link UnsupportedOperationException} with the message "This
+   * is a utility class and cannot be instantiated.".
    *
    * @since 1.0.0
    */
-  public static final String CLASS_CANT_BE_INSTANTIATED =
-      "This is a utility class and cannot be instantiated.";
+  public static final UnsupportedOperationException UTILITY_CLASS_EXCEPTION =
+      new UnsupportedOperationException("This is a utility class and cannot be instantiated.");
 
   /**
    * Constant holding the value {@value}.
@@ -26,6 +27,20 @@ public final class ConstantsCore {
    */
   public static final String EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND =
       "No purchases found for identifier %d.";
+
+  /**
+   * Constant holding the value {@value}.
+   *
+   * @since 1.0.0
+   */
+  public static final String UNCHECKED = "unchecked";
+
+  /**
+   * Constant holding the value {@value}.
+   *
+   * @since 1.0.0
+   */
+  public static final int ZERO = 0;
 
   /**
    * A {@link Pattern} to compile the underscore symbol.
@@ -37,10 +52,10 @@ public final class ConstantsCore {
   /**
    * Default constructor that forbids the class to be instantiated.
    *
-   * @throws UnsupportedOperationException with {@link #CLASS_CANT_BE_INSTANTIATED} message.
+   * @throws UnsupportedOperationException with {@link #UTILITY_CLASS_EXCEPTION} constant.
    * @since 1.0.0
    */
   private ConstantsCore() {
-    throw new UnsupportedOperationException(ConstantsCore.CLASS_CANT_BE_INSTANTIATED);
+    throw ConstantsCore.UTILITY_CLASS_EXCEPTION;
   }
 }
