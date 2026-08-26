@@ -7,7 +7,7 @@ import com.wexinc.purchase.api.persistence.repository.PurchaseRepository;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
-import com.wexinc.purchase.api.shared.util.PurchaseFixture;
+import com.wexinc.purchase.api.shared.fixture.PurchaseFixture;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;

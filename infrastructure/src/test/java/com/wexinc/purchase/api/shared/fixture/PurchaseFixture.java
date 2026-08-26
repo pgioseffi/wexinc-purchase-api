@@ -1,4 +1,4 @@
-package com.wexinc.purchase.api.shared.util;
+package com.wexinc.purchase.api.shared.fixture;
 
 import com.wexinc.purchase.api.persistence.domain.Purchase;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
