@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * Class responsible for transporting information retrieved by the american treasury exchange rate
+ * Class responsible for transporting information retrieved by the American treasury exchange rate
  * microservice through the different layers of the application.
  *
  * @param country The {@link Country} object that is associated with a given exchange rate.

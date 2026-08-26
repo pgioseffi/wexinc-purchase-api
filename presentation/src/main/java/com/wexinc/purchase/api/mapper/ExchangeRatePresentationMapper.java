@@ -30,10 +30,10 @@ public interface ExchangeRatePresentationMapper
    *
    * @param purchaseAmount The original purchase amount retrieved from the database.
    * @param dto The {@link ExchangeRateDTO} object containing exchange rates returned by the
-   *     american treasury exchange API ready to transport its information through the different
+   *     American treasury exchange API ready to transport its information through the different
    *     layers of the application.
    * @return The already mapped {@link ExchangeRateDataResponseModel} object containing exchange
-   *     rates returned by the american treasury exchange API ready to served as the application
+   *     rates returned by the American treasury exchange API ready to served as the application
    *     response.
    * @since 1.0.0
    */

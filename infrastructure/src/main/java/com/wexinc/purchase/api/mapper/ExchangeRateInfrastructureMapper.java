@@ -25,9 +25,9 @@ public interface ExchangeRateInfrastructureMapper
    * ExchangeRateDTO}.
    *
    * @param resource The resource object {@link ExchangeRateResource} containing exchange rates
-   *     returned by the american treasury exchange API.
+   *     returned by the American treasury exchange API.
    * @return The already mapped {@link ExchangeRateDTO} object containing exchange rates returned by
-   *     the american treasury exchange API ready to transport its information through the different
+   *     the American treasury exchange API ready to transport its information through the different
    *     layers of the application.
    * @since 1.0.0
    */
