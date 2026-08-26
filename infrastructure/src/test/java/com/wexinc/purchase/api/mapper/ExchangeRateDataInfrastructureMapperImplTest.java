@@ -2,7 +2,7 @@ package com.wexinc.purchase.api.mapper;
 
 import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.resource.ExchangeRateDataResource;
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.fixture.ExchangeRateDataDTOFixture;
 import com.wexinc.purchase.api.shared.fixture.ExchangeRateDataResourceFixture;
 import java.util.Collection;
@@ -26,7 +26,7 @@ class ExchangeRateDataInfrastructureMapperImplTest {
     Assertions.assertEquals(
         expected,
         ExchangeRateDataInfrastructureMapperImplTest.MAPPER.fromResourceToDTO(resource),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @ParameterizedTest
@@ -38,7 +38,7 @@ class ExchangeRateDataInfrastructureMapperImplTest {
         expected,
         ExchangeRateDataInfrastructureMapperImplTest.MAPPER.fromCollectionResourceToCollectionDTO(
             resources),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   private static Stream<Arguments> testFromResourceToDTOArgumentsProvider() {

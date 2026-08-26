@@ -1,7 +1,7 @@
 package com.wexinc.purchase.api.usecase;
 
 import com.wexinc.purchase.api.gateway.PurchaseGateway;
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import org.junit.jupiter.api.Assertions;
@@ -25,27 +25,27 @@ class FindPurchaseByIdInteractorTest {
 
   @Test
   void testShouldNotFindPurchase() {
-    Mockito.when(this.purchaseGateway.findById(Constantes.LONG_MIN_VALUE))
+    Mockito.when(this.purchaseGateway.findById(CoreTestConstants.LONG_MIN_VALUE))
         .thenThrow(EntityNotFoundException.class);
 
     Assertions.assertThrows(
         EntityNotFoundException.class,
-        () -> this.instance.apply(Constantes.LONG_MIN_VALUE),
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
 
-    Mockito.verify(this.purchaseGateway).findById(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.purchaseGateway).findById(CoreTestConstants.LONG_MIN_VALUE);
   }
 
   @Test
   void testShouldUpdatePurchase() {
-    Mockito.when(this.purchaseGateway.findById(Constantes.LONG_MIN_VALUE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO);
+    Mockito.when(this.purchaseGateway.findById(CoreTestConstants.LONG_MIN_VALUE))
+        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
-        this.instance.apply(Constantes.LONG_MIN_VALUE),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+        this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
-    Mockito.verify(this.purchaseGateway).findById(Constantes.LONG_MIN_VALUE);
+    Mockito.verify(this.purchaseGateway).findById(CoreTestConstants.LONG_MIN_VALUE);
   }
 }

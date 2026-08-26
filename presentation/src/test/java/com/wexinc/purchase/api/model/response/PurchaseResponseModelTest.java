@@ -1,7 +1,7 @@
 package com.wexinc.purchase.api.model.response;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import org.apache.commons.lang3.StringUtils;
@@ -12,17 +12,17 @@ class PurchaseResponseModelTest {
 
   private static final PurchaseResponseModel ACTUAL =
       new PurchaseResponseModel(
-          Constantes.LONG_MIN_VALUE,
+          CoreTestConstants.LONG_MIN_VALUE,
           StringUtils.EMPTY,
-          Constantes.FIXED_LOCAL_DATE_TIME,
+          CoreTestConstants.FIXED_LOCAL_DATE_TIME,
           BigDecimal.ZERO);
 
   @Test
   void testId() {
     Assertions.assertEquals(
-        Constantes.LONG_MIN_VALUE,
+        CoreTestConstants.LONG_MIN_VALUE,
         PurchaseResponseModelTest.ACTUAL.id(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -30,15 +30,15 @@ class PurchaseResponseModelTest {
     Assertions.assertEquals(
         StringUtils.EMPTY,
         PurchaseResponseModelTest.ACTUAL.description(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testTransactionDate() {
     Assertions.assertEquals(
-        Constantes.FIXED_LOCAL_DATE_TIME,
+        CoreTestConstants.FIXED_LOCAL_DATE_TIME,
         PurchaseResponseModelTest.ACTUAL.transactionDate(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -46,6 +46,6 @@ class PurchaseResponseModelTest {
     Assertions.assertEquals(
         BigDecimal.ZERO.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN),
         PurchaseResponseModelTest.ACTUAL.amount(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

@@ -6,8 +6,8 @@ import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.mapper.ExchangeRateInfrastructureMapper;
 import com.wexinc.purchase.api.resource.ExchangeRateDataResource;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
-import com.wexinc.purchase.api.shared.constant.Constantes;
 import com.wexinc.purchase.api.shared.constant.ConstantsCore;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import java.math.BigDecimal;
@@ -67,9 +67,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.when(
             mockRestClientGet.uri(
                 currencyConversionURL.formatted(
-                    Constantes.FIXED_LOCAL_DATE.minusMonths(
+                    CoreTestConstants.FIXED_LOCAL_DATE.minusMonths(
                         currencyConversionLeniencyInMonths.longValue()),
-                    Constantes.FIXED_LOCAL_DATE,
+                    CoreTestConstants.FIXED_LOCAL_DATE,
                     formattedCountries)))
         .thenReturn(requestBodySpec);
     Mockito.when(requestBodySpec.accept(MediaType.APPLICATION_JSON)).thenReturn(requestBodySpec);
@@ -78,8 +78,8 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 
     Assertions.assertThrows(
         NotFound.class,
-        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
 
     Mockito.verify(this.consulProperties).getCurrencyConversionURL();
     Mockito.verify(this.consulProperties).getCurrencyConversionLeniencyInMonths();
@@ -87,9 +87,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.verify(mockRestClientGet)
         .uri(
             currencyConversionURL.formatted(
-                Constantes.FIXED_LOCAL_DATE.minusMonths(
+                CoreTestConstants.FIXED_LOCAL_DATE.minusMonths(
                     currencyConversionLeniencyInMonths.longValue()),
-                Constantes.FIXED_LOCAL_DATE,
+                CoreTestConstants.FIXED_LOCAL_DATE,
                 formattedCountries));
     Mockito.verify(requestBodySpec).accept(MediaType.APPLICATION_JSON);
     Mockito.verify(requestBodySpec).retrieve();
@@ -117,9 +117,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.when(
             mockRestClientGet.uri(
                 currencyConversionURL.formatted(
-                    Constantes.FIXED_LOCAL_DATE.minusMonths(
+                    CoreTestConstants.FIXED_LOCAL_DATE.minusMonths(
                         currencyConversionLeniencyInMonths.longValue()),
-                    Constantes.FIXED_LOCAL_DATE,
+                    CoreTestConstants.FIXED_LOCAL_DATE,
                     formattedCountries)))
         .thenReturn(requestBodySpec);
     Mockito.when(requestBodySpec.accept(MediaType.APPLICATION_JSON)).thenReturn(requestBodySpec);
@@ -129,8 +129,8 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 
     Assertions.assertThrows(
         NotFound.class,
-        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
 
     Mockito.verify(this.consulProperties).getCurrencyConversionURL();
     Mockito.verify(this.consulProperties).getCurrencyConversionLeniencyInMonths();
@@ -138,9 +138,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.verify(mockRestClientGet)
         .uri(
             currencyConversionURL.formatted(
-                Constantes.FIXED_LOCAL_DATE.minusMonths(
+                CoreTestConstants.FIXED_LOCAL_DATE.minusMonths(
                     currencyConversionLeniencyInMonths.longValue()),
-                Constantes.FIXED_LOCAL_DATE,
+                CoreTestConstants.FIXED_LOCAL_DATE,
                 formattedCountries));
     Mockito.verify(requestBodySpec).accept(MediaType.APPLICATION_JSON);
     Mockito.verify(requestBodySpec).retrieve();
@@ -160,12 +160,12 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
         new ExchangeRateResource(
             List.of(
                 new ExchangeRateDataResource(
-                    Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)));
+                    Country.BRAZIL.name(), BigDecimal.ZERO, CoreTestConstants.FIXED_LOCAL_DATE)));
     final var methodResult =
         new ExchangeRateDTO(
             List.of(
                 new ExchangeRateDataDTO(
-                    Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)));
+                    Country.BRAZIL.name(), BigDecimal.ZERO, CoreTestConstants.FIXED_LOCAL_DATE)));
     final var mockRestClientGet = Mockito.mock(RequestHeadersUriSpec.class);
     final var requestBodySpec = Mockito.mock(RequestBodySpec.class);
     final var responseSpec = Mockito.mock(ResponseSpec.class);
@@ -178,9 +178,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.when(
             mockRestClientGet.uri(
                 currencyConversionURL.formatted(
-                    Constantes.FIXED_LOCAL_DATE.minusMonths(
+                    CoreTestConstants.FIXED_LOCAL_DATE.minusMonths(
                         currencyConversionLeniencyInMonths.longValue()),
-                    Constantes.FIXED_LOCAL_DATE,
+                    CoreTestConstants.FIXED_LOCAL_DATE,
                     formattedCountries)))
         .thenReturn(requestBodySpec);
     Mockito.when(requestBodySpec.accept(MediaType.APPLICATION_JSON)).thenReturn(requestBodySpec);
@@ -191,8 +191,8 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
 
     Assertions.assertEquals(
         methodResult,
-        this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO, countries),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     Mockito.verify(this.consulProperties).getCurrencyConversionURL();
     Mockito.verify(this.consulProperties).getCurrencyConversionLeniencyInMonths();
@@ -200,9 +200,9 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.verify(mockRestClientGet)
         .uri(
             currencyConversionURL.formatted(
-                Constantes.FIXED_LOCAL_DATE.minusMonths(
+                CoreTestConstants.FIXED_LOCAL_DATE.minusMonths(
                     currencyConversionLeniencyInMonths.longValue()),
-                Constantes.FIXED_LOCAL_DATE,
+                CoreTestConstants.FIXED_LOCAL_DATE,
                 formattedCountries));
     Mockito.verify(requestBodySpec).accept(MediaType.APPLICATION_JSON);
     Mockito.verify(requestBodySpec).retrieve();

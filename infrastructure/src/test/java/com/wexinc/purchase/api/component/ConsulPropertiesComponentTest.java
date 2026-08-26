@@ -1,6 +1,6 @@
 package com.wexinc.purchase.api.component;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,14 @@ class ConsulPropertiesComponentTest {
   @Test
   void testGetCurrencyConversionURL() {
     Assertions.assertNotNull(
-        this.consulProperties.getCurrencyConversionURL(), Constantes.SHOULD_NOT_HAVE_RETURNED_NULL);
+        this.consulProperties.getCurrencyConversionURL(),
+        CoreTestConstants.SHOULD_NOT_HAVE_RETURNED_NULL);
   }
 
   @Test
   void testGetCurrencyConversionLeniencyInMonths() {
     Assertions.assertNotNull(
         this.consulProperties.getCurrencyConversionLeniencyInMonths(),
-        Constantes.SHOULD_NOT_HAVE_RETURNED_NULL);
+        CoreTestConstants.SHOULD_NOT_HAVE_RETURNED_NULL);
   }
 }

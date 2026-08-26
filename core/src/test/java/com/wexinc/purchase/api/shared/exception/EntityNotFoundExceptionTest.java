@@ -1,6 +1,6 @@
 package com.wexinc.purchase.api.shared.exception;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class EntityNotFoundExceptionTest {
           throw new EntityNotFoundException(
               StringUtils.EMPTY, EntityNotFoundExceptionTest.CAUSE, false, false);
         },
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
   }
 
   @Test
@@ -27,7 +27,7 @@ class EntityNotFoundExceptionTest {
         () -> {
           throw new EntityNotFoundException(EntityNotFoundExceptionTest.CAUSE);
         },
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
   }
 
   @Test
@@ -37,7 +37,7 @@ class EntityNotFoundExceptionTest {
         () -> {
           throw new EntityNotFoundException(StringUtils.EMPTY, EntityNotFoundExceptionTest.CAUSE);
         },
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
   }
 
   @Test
@@ -47,7 +47,7 @@ class EntityNotFoundExceptionTest {
         () -> {
           throw new EntityNotFoundException();
         },
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
   }
 
   @Test
@@ -57,6 +57,6 @@ class EntityNotFoundExceptionTest {
         () -> {
           throw new EntityNotFoundException(StringUtils.EMPTY);
         },
-        Constantes.THE_EXCEPTION_WAS_NOT_THROWN);
+        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
   }
 }

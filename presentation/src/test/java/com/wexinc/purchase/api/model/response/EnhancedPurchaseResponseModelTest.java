@@ -1,6 +1,6 @@
 package com.wexinc.purchase.api.model.response;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import java.math.BigDecimal;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -11,18 +11,18 @@ class EnhancedPurchaseResponseModelTest {
 
   private static final EnhancedPurchaseResponseModel ACTUAL =
       new EnhancedPurchaseResponseModel(
-          Constantes.LONG_MIN_VALUE,
+          CoreTestConstants.LONG_MIN_VALUE,
           StringUtils.EMPTY,
-          Constantes.FIXED_LOCAL_DATE_TIME,
+          CoreTestConstants.FIXED_LOCAL_DATE_TIME,
           BigDecimal.ZERO,
           List.of());
 
   @Test
   void testId() {
     Assertions.assertEquals(
-        Constantes.LONG_MIN_VALUE,
+        CoreTestConstants.LONG_MIN_VALUE,
         EnhancedPurchaseResponseModelTest.ACTUAL.id(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -30,23 +30,23 @@ class EnhancedPurchaseResponseModelTest {
     Assertions.assertEquals(
         StringUtils.EMPTY,
         EnhancedPurchaseResponseModelTest.ACTUAL.description(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testTransactionDate() {
     Assertions.assertEquals(
-        Constantes.FIXED_LOCAL_DATE_TIME,
+        CoreTestConstants.FIXED_LOCAL_DATE_TIME,
         EnhancedPurchaseResponseModelTest.ACTUAL.transactionDate(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testAmount() {
     Assertions.assertEquals(
-        Constantes.ZERO_WITH_SCALE_TWO,
+        CoreTestConstants.ZERO_WITH_SCALE_TWO,
         EnhancedPurchaseResponseModelTest.ACTUAL.amount(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -54,6 +54,6 @@ class EnhancedPurchaseResponseModelTest {
     Assertions.assertEquals(
         List.of(),
         EnhancedPurchaseResponseModelTest.ACTUAL.exchangeRateData(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

@@ -4,8 +4,8 @@ import com.wexinc.purchase.api.model.request.PurchaseRequestModel;
 import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
-import com.wexinc.purchase.api.shared.constant.Constantes;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.util.PurchaseRequestModelFixture;
 import java.math.BigDecimal;
@@ -38,8 +38,8 @@ class PurchaseRestControllerIntegrationTest {
   private static final PurchaseResponseModel RESPONSE_MODEL =
       new PurchaseResponseModel(
           Long.valueOf(1),
-          Constantes.VALID_PURCHASE_DESCRIPTION,
-          Constantes.FIXED_LOCAL_DATE_TIME,
+          CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
+          CoreTestConstants.FIXED_LOCAL_DATE_TIME,
           BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN));
 
   @Autowired private TestRestTemplate restTemplate;
@@ -55,11 +55,11 @@ class PurchaseRestControllerIntegrationTest {
             PurchaseResponseModel.class);
 
     Assertions.assertEquals(
-        HttpStatus.CREATED, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.CREATED, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         PurchaseRestControllerIntegrationTest.RESPONSE_MODEL,
         response.getBody(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -75,11 +75,11 @@ class PurchaseRestControllerIntegrationTest {
             Long.valueOf(1L));
 
     Assertions.assertEquals(
-        HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.OK, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         PurchaseRestControllerIntegrationTest.RESPONSE_MODEL,
         response.getBody(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -94,12 +94,13 @@ class PurchaseRestControllerIntegrationTest {
                 TypeUtils.parameterize(List.class, PurchaseResponseModel.class)));
 
     Assertions.assertEquals(
-        HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
-    Assertions.assertEquals(1, response.getBody().size(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.OK, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
+    Assertions.assertEquals(
+        1, response.getBody().size(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         PurchaseRestControllerIntegrationTest.RESPONSE_MODEL,
         response.getBody().get(0),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -112,22 +113,22 @@ class PurchaseRestControllerIntegrationTest {
             HttpMethod.PUT,
             new HttpEntity<>(
                 new PurchaseRequestModel(
-                    Constantes.VALID_PURCHASE_DESCRIPTION,
-                    Constantes.FIXED_LOCAL_DATE_TIME,
+                    CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
+                    CoreTestConstants.FIXED_LOCAL_DATE_TIME,
                     BigDecimal.ONE.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN))),
             PurchaseResponseModel.class,
             Long.valueOf(1));
 
     Assertions.assertEquals(
-        HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.OK, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         new PurchaseResponseModel(
             Long.valueOf(1),
-            Constantes.VALID_PURCHASE_DESCRIPTION,
-            Constantes.FIXED_LOCAL_DATE_TIME,
+            CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
+            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ONE.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
         response.getBody(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -143,7 +144,9 @@ class PurchaseRestControllerIntegrationTest {
             Long.valueOf(1));
 
     Assertions.assertEquals(
-        HttpStatus.NO_CONTENT, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.NO_CONTENT,
+        response.getStatusCode(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -157,7 +160,7 @@ class PurchaseRestControllerIntegrationTest {
             Long.valueOf(1L));
 
     Assertions.assertEquals(
-        HttpStatus.NOT_FOUND, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.NOT_FOUND, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -178,15 +181,17 @@ class PurchaseRestControllerIntegrationTest {
     final var exchangeRateUruguay = new BigDecimal("38.45");
 
     Assertions.assertEquals(
-        HttpStatus.CREATED, saveResponse.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.CREATED,
+        saveResponse.getStatusCode(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         new PurchaseResponseModel(
             two,
-            Constantes.VALID_PURCHASE_DESCRIPTION,
-            Constantes.FIXED_LOCAL_DATE_TIME,
+            CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
+            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             purchaseAmount),
         saveResponse.getBody(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     final var response =
         this.restTemplate.exchange(
@@ -211,12 +216,12 @@ class PurchaseRestControllerIntegrationTest {
             two);
 
     Assertions.assertEquals(
-        HttpStatus.OK, response.getStatusCode(), Constantes.EXPECTED_THE_SAME_RESULT);
+        HttpStatus.OK, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         new EnhancedPurchaseResponseModel(
             two,
-            Constantes.VALID_PURCHASE_DESCRIPTION,
-            Constantes.FIXED_LOCAL_DATE_TIME,
+            CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
+            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             purchaseAmount,
             List.of(
                 new ExchangeRateDataResponseModel(
@@ -244,6 +249,6 @@ class PurchaseRestControllerIntegrationTest {
                         .multiply(exchangeRateUruguay)
                         .setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)))),
         response.getBody(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

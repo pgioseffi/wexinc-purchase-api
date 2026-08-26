@@ -1,7 +1,8 @@
 package com.wexinc.purchase.api.dto;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
-import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
+import com.wexinc.purchase.api.shared.fixture.EnhancedPurchaseDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.ExchangeRateDataDTOFixture;
 import java.math.BigDecimal;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -13,40 +14,40 @@ class EnhancedPurchaseDTOTest {
   @Test
   void testId() {
     Assertions.assertEquals(
-        Constantes.LONG_MIN_VALUE,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.id(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.LONG_MIN_VALUE,
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.id(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testDescription() {
     Assertions.assertEquals(
         StringUtils.EMPTY,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.description(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.description(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testTransactionDate() {
     Assertions.assertEquals(
-        Constantes.FIXED_LOCAL_DATE_TIME,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.transactionDate(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.FIXED_LOCAL_DATE_TIME,
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.transactionDate(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testAmount() {
     Assertions.assertEquals(
         BigDecimal.ZERO,
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.amount(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.amount(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testExchangeRate() {
-    Assertions.assertEquals(
-        List.of(),
-        PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.exchangeRateData(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+    Assertions.assertIterableEquals(
+        List.of(ExchangeRateDataDTOFixture.EXCHANGE_RATE_DATA_DTO_FIXTURE),
+        EnhancedPurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO_FIXTURE.exchangeRateData(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

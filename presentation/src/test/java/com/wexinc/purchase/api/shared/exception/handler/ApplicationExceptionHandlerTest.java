@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wexinc.purchase.api.shared.constant.Constantes;
 import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -63,7 +63,7 @@ class ApplicationExceptionHandlerTest {
             .handleExceptionInternal(
                 new RuntimeException(), null, null, HttpStatus.UNPROCESSABLE_ENTITY, this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -84,7 +84,7 @@ class ApplicationExceptionHandlerTest {
                 HttpStatus.UNPROCESSABLE_ENTITY,
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -104,7 +104,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         HttpStatus.UNPROCESSABLE_ENTITY,
         response.getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
@@ -112,7 +112,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         "Error in object 'test': codes []; arguments []; default message [testMessage]",
         body.get(ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGE),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -134,7 +134,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         HttpStatus.UNPROCESSABLE_ENTITY,
         response.getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
@@ -142,7 +142,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         "propertyPath: message",
         body.get(ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGE),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -161,7 +161,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         HttpStatus.UNPROCESSABLE_ENTITY,
         response.getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
@@ -169,7 +169,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         "null",
         body.get(ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGE),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -196,7 +196,7 @@ class ApplicationExceptionHandlerTest {
     Assertions.assertEquals(
         HttpStatus.UNPROCESSABLE_ENTITY,
         response.getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
@@ -210,7 +210,7 @@ class ApplicationExceptionHandlerTest {
             .sorted()
             .toList(),
         messages.stream().sorted().toList(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
     org.assertj.core.api.Assertions.assertThat(messages)
         .containsExactlyInAnyOrder("propertyPath01: message01", "propertyPath02: message02");
@@ -228,7 +228,7 @@ class ApplicationExceptionHandlerTest {
             .handleDataIntegrityViolationException(
                 new DataIntegrityViolationException("Error"), this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -242,7 +242,7 @@ class ApplicationExceptionHandlerTest {
         this.instance
             .handleRestClientException(new RestClientException("Error"), this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -271,7 +271,7 @@ class ApplicationExceptionHandlerTest {
                     StandardCharsets.UTF_8),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -294,7 +294,7 @@ class ApplicationExceptionHandlerTest {
                     StandardCharsets.UTF_8),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -325,7 +325,7 @@ class ApplicationExceptionHandlerTest {
                     StandardCharsets.UTF_8),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -359,7 +359,7 @@ class ApplicationExceptionHandlerTest {
                     StandardCharsets.UTF_8),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -384,7 +384,7 @@ class ApplicationExceptionHandlerTest {
                     StandardCharsets.UTF_8),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -409,7 +409,7 @@ class ApplicationExceptionHandlerTest {
                     invalidStatusCodeMessage.getBytes(StandardCharsets.UTF_8)),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -446,7 +446,7 @@ class ApplicationExceptionHandlerTest {
                     invalidStatusCodeMessage.getBytes(StandardCharsets.UTF_8)),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -478,7 +478,7 @@ class ApplicationExceptionHandlerTest {
                     invalidStatusCodeMessage.getBytes(StandardCharsets.UTF_8)),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -517,6 +517,6 @@ class ApplicationExceptionHandlerTest {
                     invalidStatusCodeMessage.getBytes(StandardCharsets.UTF_8)),
                 this.request)
             .getStatusCode(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }
