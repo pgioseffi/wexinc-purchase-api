@@ -6,7 +6,7 @@ import com.wexinc.purchase.api.dto.PurchaseDTO;
 import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import com.wexinc.purchase.api.shared.util.PurchaseRequestModelFixture;
@@ -26,84 +26,87 @@ class PurchasePresentationMapperImplTest {
   void shouldMapDataTransferObjectToResponseModel() {
     Assertions.assertEquals(
         new PurchaseResponseModel(
-            Constantes.LONG_MIN_VALUE,
+            CoreTestConstants.LONG_MIN_VALUE,
             StringUtils.EMPTY,
-            Constantes.FIXED_LOCAL_DATE_TIME,
+            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO),
         PurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(
             PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void shouldMapDataTransferObjectToToNull() {
     Assertions.assertNull(
         PurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null),
-        Constantes.SHOULD_HAVE_RETURNED_NULL);
+        CoreTestConstants.SHOULD_HAVE_RETURNED_NULL);
   }
 
   @Test
   void shouldMapResponseModelToDataTransferObject() {
     Assertions.assertEquals(
-        new PurchaseDTO(null, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
+        new PurchaseDTO(
+            null, StringUtils.EMPTY, CoreTestConstants.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
         PurchasePresentationMapperImplTest.MAPPER.fromRequestModelToDTO(
             PurchaseRequestModelFixture.ACTUAL_PURCHASE_REQUEST_MODEL),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void shouldMapResponseModelToNull() {
     Assertions.assertNull(
         PurchasePresentationMapperImplTest.MAPPER.fromRequestModelToDTO(null),
-        Constantes.SHOULD_HAVE_RETURNED_NULL);
+        CoreTestConstants.SHOULD_HAVE_RETURNED_NULL);
   }
 
   @Test
   void shouldNotMapToEnhancedPurchase() {
     Assertions.assertNull(
         PurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(null),
-        Constantes.SHOULD_HAVE_RETURNED_NULL);
+        CoreTestConstants.SHOULD_HAVE_RETURNED_NULL);
   }
 
   @Test
   void shouldNotMapToEnhancedItem() {
     Assertions.assertEquals(
         new EnhancedPurchaseResponseModel(
-            Constantes.LONG_MIN_VALUE,
+            CoreTestConstants.LONG_MIN_VALUE,
             StringUtils.EMPTY,
-            Constantes.FIXED_LOCAL_DATE_TIME,
+            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO,
             null),
         PurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
             new EnhancedPurchaseDTO(
-                Constantes.LONG_MIN_VALUE,
+                CoreTestConstants.LONG_MIN_VALUE,
                 StringUtils.EMPTY,
-                Constantes.FIXED_LOCAL_DATE_TIME,
+                CoreTestConstants.FIXED_LOCAL_DATE_TIME,
                 BigDecimal.ZERO,
                 null)),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void shouldMapToEnhancedPurchase() {
     Assertions.assertEquals(
         new EnhancedPurchaseResponseModel(
-            Constantes.LONG_MIN_VALUE,
+            CoreTestConstants.LONG_MIN_VALUE,
             StringUtils.EMPTY,
-            Constantes.FIXED_LOCAL_DATE_TIME,
+            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO,
             List.of(
                 new ExchangeRateDataResponseModel(
                     Country.BRAZIL.name(), BigDecimal.ZERO, BigDecimal.ZERO))),
         PurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
             new EnhancedPurchaseDTO(
-                Constantes.LONG_MIN_VALUE,
+                CoreTestConstants.LONG_MIN_VALUE,
                 StringUtils.EMPTY,
-                Constantes.FIXED_LOCAL_DATE_TIME,
+                CoreTestConstants.FIXED_LOCAL_DATE_TIME,
                 BigDecimal.ZERO,
                 List.of(
                     new ExchangeRateDataDTO(
-                        Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)))),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+                        Country.BRAZIL.name(),
+                        BigDecimal.ZERO,
+                        CoreTestConstants.FIXED_LOCAL_DATE)))),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

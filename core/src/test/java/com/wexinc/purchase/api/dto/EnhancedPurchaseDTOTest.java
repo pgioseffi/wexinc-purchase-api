@@ -1,6 +1,6 @@
 package com.wexinc.purchase.api.dto;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,9 +13,9 @@ class EnhancedPurchaseDTOTest {
   @Test
   void testId() {
     Assertions.assertEquals(
-        Constantes.LONG_MIN_VALUE,
+        CoreTestConstants.LONG_MIN_VALUE,
         PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.id(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -23,15 +23,15 @@ class EnhancedPurchaseDTOTest {
     Assertions.assertEquals(
         StringUtils.EMPTY,
         PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.description(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testTransactionDate() {
     Assertions.assertEquals(
-        Constantes.FIXED_LOCAL_DATE_TIME,
+        CoreTestConstants.FIXED_LOCAL_DATE_TIME,
         PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.transactionDate(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -39,7 +39,7 @@ class EnhancedPurchaseDTOTest {
     Assertions.assertEquals(
         BigDecimal.ZERO,
         PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.amount(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -47,6 +47,6 @@ class EnhancedPurchaseDTOTest {
     Assertions.assertEquals(
         List.of(),
         PurchaseDTOFixture.ACTUAL_ENHANCED_PURCHASE_DTO.exchangeRateData(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

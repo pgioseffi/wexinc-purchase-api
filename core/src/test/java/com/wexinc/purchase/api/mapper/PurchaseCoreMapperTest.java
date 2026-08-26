@@ -1,7 +1,7 @@
 package com.wexinc.purchase.api.mapper;
 
 import com.wexinc.purchase.api.dto.PurchaseDTO;
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import java.math.BigDecimal;
 import java.util.stream.Stream;
@@ -23,22 +23,22 @@ class PurchaseCoreMapperTest {
     Assertions.assertEquals(
         expected,
         PurchaseCoreMapperTest.MAPPER.apply(newId, purchaseDTO),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   private static Stream<Arguments> generateArgumentsForTestShouldMapApply() {
     return Stream.of(
         Arguments.of(
             PurchaseDTOFixture.ACTUAL_PURCHASE_DTO,
-            Constantes.LONG_MIN_VALUE,
+            CoreTestConstants.LONG_MIN_VALUE,
             PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
         Arguments.of(
-            new PurchaseDTO(Constantes.LONG_MIN_VALUE, null, null, null),
-            Constantes.LONG_MIN_VALUE,
+            new PurchaseDTO(CoreTestConstants.LONG_MIN_VALUE, null, null, null),
+            CoreTestConstants.LONG_MIN_VALUE,
             null),
         Arguments.of(
             new PurchaseDTO(
-                null, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
+                null, StringUtils.EMPTY, CoreTestConstants.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
             null,
             PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
         Arguments.of(null, null, null));

@@ -1,6 +1,6 @@
 package com.wexinc.purchase.api.shared.exception.handler;
 
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import jakarta.servlet.RequestDispatcher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -55,17 +55,19 @@ class CustomErrorAttributesTest {
                 Include.BINDING_ERRORS));
 
     // Verify the expected attributes
-    Assertions.assertEquals(statusCode, result.get("status"), Constantes.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
-        exceptionMessage, result.get("message"), Constantes.EXPECTED_THE_SAME_RESULT);
+        statusCode, result.get("status"), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
+    Assertions.assertEquals(
+        exceptionMessage, result.get("message"), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         RuntimeException.class.getName(),
         result.get("exception"),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
     Assertions.assertEquals(
         HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
         result.get("error"),
-        Constantes.EXPECTED_THE_SAME_RESULT);
-    Assertions.assertNotNull(result.get("timestamp"), Constantes.SHOULD_NOT_HAVE_RETURNED_NULL);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
+    Assertions.assertNotNull(
+        result.get("timestamp"), CoreTestConstants.SHOULD_NOT_HAVE_RETURNED_NULL);
   }
 }

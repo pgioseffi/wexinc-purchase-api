@@ -2,7 +2,7 @@ package com.wexinc.purchase.api.mapper;
 
 import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.model.response.ExchangeRateDataResponseModel;
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.constant.Country;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +18,7 @@ class ExchangeRatePresentationMapperImplTest {
   void testShouldNotMapApply() {
     Assertions.assertNull(
         ExchangeRatePresentationMapperImplTest.MAPPER.apply(null, null),
-        Constantes.SHOULD_HAVE_RETURNED_NULL);
+        CoreTestConstants.SHOULD_HAVE_RETURNED_NULL);
   }
 
   @Test
@@ -26,7 +26,7 @@ class ExchangeRatePresentationMapperImplTest {
     Assertions.assertEquals(
         new ExchangeRateDataResponseModel(null, null, null),
         ExchangeRatePresentationMapperImplTest.MAPPER.apply(BigDecimal.TEN, null),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -37,8 +37,10 @@ class ExchangeRatePresentationMapperImplTest {
         ExchangeRatePresentationMapperImplTest.MAPPER.apply(
             BigDecimal.TEN,
             new ExchangeRateDataDTO(
-                Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+                Country.BRAZIL.getCapitalizedName(),
+                BigDecimal.ZERO,
+                CoreTestConstants.FIXED_LOCAL_DATE)),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -49,7 +51,9 @@ class ExchangeRatePresentationMapperImplTest {
         ExchangeRatePresentationMapperImplTest.MAPPER.apply(
             null,
             new ExchangeRateDataDTO(
-                Country.BRAZIL.getCapitalizedName(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+                Country.BRAZIL.getCapitalizedName(),
+                BigDecimal.ZERO,
+                CoreTestConstants.FIXED_LOCAL_DATE)),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

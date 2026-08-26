@@ -10,7 +10,7 @@ class CountryTest {
   @Test
   void testName() {
     Assertions.assertEquals(
-        "BRAZIL", CountryTest.ACTUAL.name(), Constantes.EXPECTED_THE_SAME_RESULT);
+        "BRAZIL", CountryTest.ACTUAL.name(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -18,13 +18,15 @@ class CountryTest {
     Assertions.assertEquals(
         Country.BRAZIL.ordinal(),
         CountryTest.ACTUAL.ordinal(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testCapitalizedName() {
     Assertions.assertEquals(
-        "Brazil", CountryTest.ACTUAL.getCapitalizedName(), Constantes.EXPECTED_THE_SAME_RESULT);
+        "Brazil",
+        CountryTest.ACTUAL.getCapitalizedName(),
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
@@ -32,6 +34,6 @@ class CountryTest {
     Assertions.assertEquals(
         "Antigua And Barbuda",
         Country.ANTIGUA_AND_BARBUDA.getCapitalizedName(),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 }

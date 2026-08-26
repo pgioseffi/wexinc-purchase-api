@@ -4,7 +4,7 @@ import com.wexinc.purchase.api.dto.ExchangeRateDTO;
 import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.resource.ExchangeRateDataResource;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
-import com.wexinc.purchase.api.shared.constant.Constantes;
+import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.constant.Country;
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -27,7 +27,7 @@ class ExchangeRateInfrastructureMapperImplTest {
     Assertions.assertEquals(
         expected,
         ExchangeRateInfrastructureMapperImplTest.MAPPER.apply(resource),
-        Constantes.EXPECTED_THE_SAME_RESULT);
+        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   private static Stream<Arguments> generateArgumentsForTestShouldApply() {
@@ -40,11 +40,15 @@ class ExchangeRateInfrastructureMapperImplTest {
             new ExchangeRateDTO(
                 List.of(
                     new ExchangeRateDataDTO(
-                        Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE))),
+                        Country.BRAZIL.name(),
+                        BigDecimal.ZERO,
+                        CoreTestConstants.FIXED_LOCAL_DATE))),
             new ExchangeRateResource(
                 List.of(
                     new ExchangeRateDataResource(
-                        Country.BRAZIL.name(), BigDecimal.ZERO, Constantes.FIXED_LOCAL_DATE)))),
+                        Country.BRAZIL.name(),
+                        BigDecimal.ZERO,
+                        CoreTestConstants.FIXED_LOCAL_DATE)))),
         Arguments.of(null, null));
   }
 }

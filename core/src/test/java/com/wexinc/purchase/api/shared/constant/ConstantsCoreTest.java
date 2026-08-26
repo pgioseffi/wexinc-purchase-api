@@ -12,12 +12,13 @@ class ConstantsCoreTest {
     final var constructor = ConstantsCore.class.getDeclaredConstructor();
 
     Assertions.assertTrue(
-        Modifier.isPrivate(constructor.getModifiers()), Constantes.CONSTRUCTOR_IS_NOT_PRIVATE);
+        Modifier.isPrivate(constructor.getModifiers()),
+        CoreTestConstants.CONSTRUCTOR_IS_NOT_PRIVATE);
 
     constructor.setAccessible(true);
     Assertions.assertThrows(
         InvocationTargetException.class,
         constructor::newInstance,
-        Constantes.CONSTRUCTOR_CAN_BE_INITIALIZED);
+        CoreTestConstants.CONSTRUCTOR_CAN_BE_INITIALIZED);
   }
 }
