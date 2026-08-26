@@ -6,6 +6,7 @@ import com.wexinc.purchase.api.model.request.PurchaseRequestModel;
 import com.wexinc.purchase.api.model.response.EnhancedPurchaseResponseModel;
 import com.wexinc.purchase.api.model.response.PurchaseResponseModel;
 import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Javadoc;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -22,6 +23,17 @@ import org.mapstruct.factory.Mappers;
  * @see PurchaseResponseModel
  */
 @Mapper
+@Javadoc(
+    """
+            Concrete implementation type responsible for mapping a {@link PurchaseRequestModel} into a {@link PurchaseDTO} and a
+            {@link PurchaseDTO} into a {@link PurchaseResponseModel}.
+
+            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+            @since 1.0.0
+            @version 1.0.0
+            @see PurchaseDTO
+            @see PurchaseRequestModel
+            @see PurchaseResponseModel""")
 public abstract class PurchasePresentationMapper {
 
   private static final ExchangeRatePresentationMapper EXCHANGE_RATE_PRESENTATION_MAPPER =

@@ -3,6 +3,7 @@ package com.wexinc.purchase.api.mapper;
 import com.wexinc.purchase.api.dto.ExchangeRateDTO;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
 import java.util.function.Function;
+import org.mapstruct.Javadoc;
 import org.mapstruct.Mapper;
 
 /**
@@ -17,6 +18,15 @@ import org.mapstruct.Mapper;
  */
 @Mapper
 @FunctionalInterface
+@Javadoc(
+    """
+            Concrete implementation type responsible for mapping a {@link ExchangeRateResource} object into a {@link ExchangeRateDTO}.
+
+            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+            @since 1.0.0
+            @version 1.0.0
+            @see ExchangeRateDTO
+            @see ExchangeRateResource""")
 public interface ExchangeRateInfrastructureMapper
     extends Function<ExchangeRateResource, ExchangeRateDTO> {
 
