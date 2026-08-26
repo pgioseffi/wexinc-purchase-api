@@ -3,11 +3,12 @@ package com.wexinc.purchase.api.mapper;
 import com.wexinc.purchase.api.dto.PurchaseDTO;
 import com.wexinc.purchase.api.persistence.domain.Purchase;
 import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Javadoc;
 import org.mapstruct.Mapper;
 
 /**
- * Interface responsible for mapping a {@link Purchase} object into a {@link PurchaseDTO} and
- * vice-versa.
+ * Interface responsible for mapping a {@link Purchase} object into a {@link PurchaseDTO} and vice
+ * versa.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
  * @since 1.0.0
@@ -16,6 +17,15 @@ import org.mapstruct.Mapper;
  * @see PurchaseDTO
  */
 @Mapper
+@Javadoc(
+    """
+            Concrete implementation type responsible for mapping a Purchase object into a PurchaseDTO and vice versa.
+
+            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+            @since 1.0.0
+            @version 1.0.0
+            @see Purchase
+            @see PurchaseDTO""")
 public interface PurchaseInfrastructureMapper {
 
   /**

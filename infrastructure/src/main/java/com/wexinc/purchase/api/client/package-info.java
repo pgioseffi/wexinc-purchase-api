@@ -1,5 +1,5 @@
 /**
- * Package responsible to hold the concrete class that will consume the american treasury exchange
+ * Package responsible to hold the concrete class that will consume the American treasury exchange
  * rate API.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>

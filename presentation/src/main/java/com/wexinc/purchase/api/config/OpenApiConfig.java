@@ -23,17 +23,13 @@ class OpenApiConfig {
    * @since 1.0.0
    */
   @Bean
-  OpenAPI create() {
+  static OpenAPI create() {
     return new OpenAPI()
         .info(
             new Info()
                 .title("WEX Inc API - Presentation Module - Recruitment Test")
                 .description(
-                    """
-								<p>
-									<h3>Introduction</h3>
-									Wex Inc Purchase API - Presentation module containing API entry endpoints - Recruitment Test.
-								</p>""")
+                    "<p><h3>Introduction</h3>Wex Inc Purchase API - Presentation module containing API entry endpoints - Recruitment Test.</p>")
                 .version("1.0.0")
                 .contact(new Contact().name("Philippe Gioseffi").email("pgioseffi@gmail.com")));
   }
