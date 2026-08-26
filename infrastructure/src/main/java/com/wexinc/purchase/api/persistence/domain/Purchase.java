@@ -190,7 +190,7 @@ public class Purchase {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(Long.valueOf(this.id));
+    return Objects.hashCode(this.id);
   }
 
   /**
@@ -200,7 +200,7 @@ public class Purchase {
    */
   @Override
   public boolean equals(final Object obj) {
-    return this == obj || obj instanceof final Purchase other && this.id == other.id;
+    return this == obj || obj instanceof final Purchase other && Objects.equals(this.id, other.id);
   }
 
   /**
@@ -211,6 +211,6 @@ public class Purchase {
   @Override
   public String toString() {
     return "Purchase [id=%d, description=%s, transactionDate=%s, amount=%.2f]"
-        .formatted(Long.valueOf(this.id), this.description, this.transactionDate, this.amount);
+        .formatted(this.id, this.description, this.transactionDate, this.amount);
   }
 }

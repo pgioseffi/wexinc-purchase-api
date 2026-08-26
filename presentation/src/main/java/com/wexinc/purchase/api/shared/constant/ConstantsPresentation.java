@@ -186,11 +186,11 @@ public final class ConstantsPresentation {
   /**
    * Default constructor that forbids the class to be instantiated.
    *
-   * @throws UnsupportedOperationException with {@link ConstantsCore#CLASS_CANT_BE_INSTANTIATED}
-   *     message.
+   * @throws UnsupportedOperationException with {@link ConstantsCore#UTILITY_CLASS_EXCEPTION}
+   *     constant.
    * @since 1.0.0
    */
   private ConstantsPresentation() {
-    throw new UnsupportedOperationException(ConstantsCore.CLASS_CANT_BE_INSTANTIATED);
+    throw ConstantsCore.UTILITY_CLASS_EXCEPTION;
   }
 }

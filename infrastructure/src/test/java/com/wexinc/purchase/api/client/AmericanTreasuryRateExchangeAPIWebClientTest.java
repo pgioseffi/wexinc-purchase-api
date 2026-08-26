@@ -6,6 +6,7 @@ import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
 import com.wexinc.purchase.api.mapper.ExchangeRateInfrastructureMapper;
 import com.wexinc.purchase.api.resource.ExchangeRateDataResource;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.constant.Country;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
@@ -45,7 +46,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     this.exchangeRateInfrastructureMapper = exchangeRateInfrastructureMapperParam;
   }
 
-  @SuppressWarnings(CoreTestConstants.UNCHECKED)
+  @SuppressWarnings(ConstantsCore.UNCHECKED)
   @Test
   void testShouldThrowExceptionBecauseOfNullReturnFromAPI() {
     final var countries = Set.of(Country.BRAZIL);
@@ -95,7 +96,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.verify(responseSpec).body(ExchangeRateResource.class);
   }
 
-  @SuppressWarnings(CoreTestConstants.UNCHECKED)
+  @SuppressWarnings(ConstantsCore.UNCHECKED)
   @Test
   void testShouldThrowExceptionBecauseOfEmptyReturnFromAPI() {
     final var countries = Set.of(Country.BRAZIL);
@@ -146,7 +147,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.verify(responseSpec).body(ExchangeRateResource.class);
   }
 
-  @SuppressWarnings(CoreTestConstants.UNCHECKED)
+  @SuppressWarnings(ConstantsCore.UNCHECKED)
   @Test
   void testShouldReturn() {
     final var countries = Set.of(Country.BRAZIL);

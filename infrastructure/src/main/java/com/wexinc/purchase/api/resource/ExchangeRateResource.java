@@ -7,7 +7,7 @@ import com.wexinc.purchase.api.shared.constant.Country;
 import java.util.Collection;
 
 /**
- * Class responsible for holding information retrieved by the american treasury exchange rate
+ * Class responsible for holding information retrieved by the American treasury exchange rate
  * microservice.
  *
  * @param data The {@link Country} object that is associated with a given exchange rate.

@@ -18,7 +18,6 @@ public final class CoreTestConstants {
   public static final String CONSTRUCTOR_CAN_BE_INITIALIZED = "Constructor can be initialized";
   public static final String SHOULD_NOT_HAVE_RETURNED_NULL = "Should not have returned null.";
   public static final String SHOULD_HAVE_RETURNED_NULL = "Should have returned null.";
-  public static final String UNCHECKED = "unchecked";
 
   public static final Long LONG_MIN_VALUE = Long.valueOf(Long.MIN_VALUE);
 

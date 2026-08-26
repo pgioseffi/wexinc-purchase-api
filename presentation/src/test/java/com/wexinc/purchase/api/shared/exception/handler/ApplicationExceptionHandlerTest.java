@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import jakarta.servlet.http.HttpServletRequest;
@@ -105,7 +106,7 @@ class ApplicationExceptionHandlerTest {
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
 
     Assertions.assertEquals(
@@ -135,7 +136,7 @@ class ApplicationExceptionHandlerTest {
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
 
     Assertions.assertEquals(
@@ -162,7 +163,7 @@ class ApplicationExceptionHandlerTest {
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
 
     Assertions.assertEquals(
@@ -197,10 +198,10 @@ class ApplicationExceptionHandlerTest {
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var body = (Map<String, Object>) response.getBody();
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings(ConstantsCore.UNCHECKED)
     final var messages =
         (List<String>) body.get(ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGES);
 
