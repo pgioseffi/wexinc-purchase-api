@@ -17,10 +17,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class PurchasePresentationMapperImplTest {
+class AbstractPurchasePresentationMapperImplTest {
 
-  private static final PurchasePresentationMapper MAPPER =
-      Mappers.getMapper(PurchasePresentationMapper.class);
+  private static final AbstractPurchasePresentationMapper MAPPER =
+      Mappers.getMapper(AbstractPurchasePresentationMapper.class);
 
   @Test
   void shouldMapDataTransferObjectToResponseModel() {
@@ -30,7 +30,7 @@ class PurchasePresentationMapperImplTest {
             StringUtils.EMPTY,
             Constantes.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO),
-        PurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(
+        AbstractPurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(
             PurchaseDTOFixture.ACTUAL_PURCHASE_DTO),
         Constantes.EXPECTED_THE_SAME_RESULT);
   }
@@ -38,7 +38,7 @@ class PurchasePresentationMapperImplTest {
   @Test
   void shouldMapDataTransferObjectToToNull() {
     Assertions.assertNull(
-        PurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null),
+        AbstractPurchasePresentationMapperImplTest.MAPPER.fromDTOToResponseModel(null),
         Constantes.SHOULD_HAVE_RETURNED_NULL);
   }
 
@@ -46,7 +46,7 @@ class PurchasePresentationMapperImplTest {
   void shouldMapResponseModelToDataTransferObject() {
     Assertions.assertEquals(
         new PurchaseDTO(null, StringUtils.EMPTY, Constantes.FIXED_LOCAL_DATE_TIME, BigDecimal.ZERO),
-        PurchasePresentationMapperImplTest.MAPPER.fromRequestModelToDTO(
+        AbstractPurchasePresentationMapperImplTest.MAPPER.fromRequestModelToDTO(
             PurchaseRequestModelFixture.ACTUAL_PURCHASE_REQUEST_MODEL),
         Constantes.EXPECTED_THE_SAME_RESULT);
   }
@@ -54,14 +54,15 @@ class PurchasePresentationMapperImplTest {
   @Test
   void shouldMapResponseModelToNull() {
     Assertions.assertNull(
-        PurchasePresentationMapperImplTest.MAPPER.fromRequestModelToDTO(null),
+        AbstractPurchasePresentationMapperImplTest.MAPPER.fromRequestModelToDTO(null),
         Constantes.SHOULD_HAVE_RETURNED_NULL);
   }
 
   @Test
   void shouldNotMapToEnhancedPurchase() {
     Assertions.assertNull(
-        PurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(null),
+        AbstractPurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
+            null),
         Constantes.SHOULD_HAVE_RETURNED_NULL);
   }
 
@@ -74,7 +75,7 @@ class PurchasePresentationMapperImplTest {
             Constantes.FIXED_LOCAL_DATE_TIME,
             BigDecimal.ZERO,
             null),
-        PurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
+        AbstractPurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
             new EnhancedPurchaseDTO(
                 Constantes.LONG_MIN_VALUE,
                 StringUtils.EMPTY,
@@ -95,7 +96,7 @@ class PurchasePresentationMapperImplTest {
             List.of(
                 new ExchangeRateDataResponseModel(
                     Country.BRAZIL.name(), BigDecimal.ZERO, BigDecimal.ZERO))),
-        PurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
+        AbstractPurchasePresentationMapper.fromEnhancedPurchaseDTOToEnhancedPurchaseResponseModel(
             new EnhancedPurchaseDTO(
                 Constantes.LONG_MIN_VALUE,
                 StringUtils.EMPTY,
