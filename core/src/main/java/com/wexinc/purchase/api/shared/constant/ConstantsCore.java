@@ -28,6 +28,13 @@ public final class ConstantsCore {
       "No purchases found for identifier %d.";
 
   /**
+   * Constant holding the value {@value}.
+   *
+   * @since 1.0.0
+   */
+  public static final String UNCHECKED = "unchecked";
+
+  /**
    * A {@link Pattern} to compile the underscore symbol.
    *
    * @since 1.0.0
