@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
@@ -268,7 +269,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
    *
    * @since 1.0.0
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings(ConstantsCore.UNCHECKED)
   @Override
   protected ResponseEntity<Object> handleExceptionInternal(
       final Exception e,

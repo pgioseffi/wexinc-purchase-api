@@ -47,8 +47,7 @@ public class LocaleConfig implements WebMvcConfigurer {
    */
   @Override
   // TODO: Seems to me a bad idea to allow user to change the locale, since we have to perform a
-  // dollar based exchange
-  // conversion. Must check it later.
+  // dollar based exchange conversion. Must check it later.
   public void addInterceptors(final InterceptorRegistry registry) {
     final var localeChangeInterceptor = new LocaleChangeInterceptor();
     localeChangeInterceptor.setParamName("lang");
