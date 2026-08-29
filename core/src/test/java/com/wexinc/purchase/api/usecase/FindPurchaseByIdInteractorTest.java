@@ -1,9 +1,11 @@
 package com.wexinc.purchase.api.usecase;
 
 import com.wexinc.purchase.api.gateway.PurchaseGateway;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,26 +28,35 @@ class FindPurchaseByIdInteractorTest {
   @Test
   void testShouldNotFindPurchase() {
     Mockito.when(this.purchaseGateway.findById(CoreTestConstants.LONG_MIN_VALUE))
-        .thenThrow(EntityNotFoundException.class);
+        .thenReturn(Optional.empty());
 
-    Assertions.assertThrows(
-        EntityNotFoundException.class,
-        () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseGateway).findById(CoreTestConstants.LONG_MIN_VALUE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(
+                    CoreTestConstants.LONG_MIN_VALUE),
+                Assertions.assertThrowsExactly(
+                        EntityNotFoundException.class,
+                        () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
+                        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN)
+                    .getMessage(),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseGateway).findById(CoreTestConstants.LONG_MIN_VALUE));
   }
 
   @Test
-  void testShouldUpdatePurchase() {
+  void testShouldFindPurchase() {
     Mockito.when(this.purchaseGateway.findById(CoreTestConstants.LONG_MIN_VALUE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
+        .thenReturn(Optional.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE));
 
-    Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
-        this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseGateway).findById(CoreTestConstants.LONG_MIN_VALUE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+                this.instance.apply(CoreTestConstants.LONG_MIN_VALUE),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseGateway).findById(CoreTestConstants.LONG_MIN_VALUE));
   }
 }

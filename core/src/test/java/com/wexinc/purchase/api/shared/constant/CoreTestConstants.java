@@ -13,11 +13,15 @@ public final class CoreTestConstants {
 
   public static final String EXPECTED_THE_SAME_RESULT = "Expected the same result.";
   public static final String EXPECTED_DIFFERENT_RESULT = "Expected different results.";
+  public static final String THE_RESULT_SHOULD_HAVE_BEEN_TRUE = "The result should have been true.";
+  public static final String THE_RESULT_SHOULD_HAVE_BEEN_FALSE =
+      "The result should have been false.";
   public static final String THE_EXCEPTION_WAS_NOT_THROWN = "The exception was not thrown.";
   public static final String CONSTRUCTOR_IS_NOT_PRIVATE = "Constructor is not private.";
   public static final String CONSTRUCTOR_CAN_BE_INITIALIZED = "Constructor can be initialized";
   public static final String SHOULD_NOT_HAVE_RETURNED_NULL = "Should not have returned null.";
   public static final String SHOULD_HAVE_RETURNED_NULL = "Should have returned null.";
+  public static final String ONE_OR_MORE_TESTS_HAVE_FAILED = "One or more tests have failed.";
 
   public static final Long LONG_MIN_VALUE = Long.valueOf(Long.MIN_VALUE);
 

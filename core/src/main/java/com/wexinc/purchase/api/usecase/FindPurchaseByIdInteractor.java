@@ -3,6 +3,8 @@ package com.wexinc.purchase.api.usecase;
 import com.wexinc.purchase.api.boundary.input.FindPurchaseByIdInputBoundary;
 import com.wexinc.purchase.api.dto.PurchaseDTO;
 import com.wexinc.purchase.api.gateway.PurchaseGateway;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
+import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 
 /**
  * Concrete class containing the business rules to search for a purchase through the gateway.
@@ -41,6 +43,11 @@ public class FindPurchaseByIdInteractor implements FindPurchaseByIdInputBoundary
    */
   @Override
   public PurchaseDTO apply(final Long id) {
-    return this.purchaseGateway.findById(id);
+    return this.purchaseGateway
+        .findById(id)
+        .orElseThrow(
+            () ->
+                new EntityNotFoundException(
+                    ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(id)));
   }
 }
