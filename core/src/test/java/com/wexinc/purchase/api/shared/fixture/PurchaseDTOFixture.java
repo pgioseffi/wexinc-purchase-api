@@ -1,6 +1,7 @@
 package com.wexinc.purchase.api.shared.fixture;
 
 import com.wexinc.purchase.api.dto.PurchaseDTO;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import java.math.BigDecimal;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,6 @@ public final class PurchaseDTOFixture {
           BigDecimal.ZERO);
 
   private PurchaseDTOFixture() {
-    throw new UnsupportedOperationException(
-        CoreTestConstants.THIS_IS_A_UTILITY_CLASS_AND_CANNOT_BE_INSTANTIATED);
+    throw ConstantsCore.UTILITY_CLASS_EXCEPTION;
   }
 }

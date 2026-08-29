@@ -3,6 +3,7 @@ package com.wexinc.purchase.api.gateway;
 import com.wexinc.purchase.api.dto.PurchaseDTO;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class responsible for calling the repository layer to consult, read, update or delete a purchase
@@ -33,7 +34,7 @@ public interface PurchaseGateway {
    * @since 1.0.0
    * @throws EntityNotFoundException if not found.
    */
-  PurchaseDTO findById(Long id);
+  Optional<PurchaseDTO> findById(Long id);
 
   /**
    * Method responsible for calling the repository layer to delete a purchase from the database.

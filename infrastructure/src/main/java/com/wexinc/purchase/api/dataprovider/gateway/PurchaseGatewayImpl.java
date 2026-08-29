@@ -4,9 +4,8 @@ import com.wexinc.purchase.api.dto.PurchaseDTO;
 import com.wexinc.purchase.api.gateway.PurchaseGateway;
 import com.wexinc.purchase.api.mapper.PurchaseInfrastructureMapper;
 import com.wexinc.purchase.api.persistence.repository.PurchaseRepository;
-import com.wexinc.purchase.api.shared.constant.ConstantsCore;
-import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -76,14 +75,10 @@ public class PurchaseGatewayImpl implements PurchaseGateway {
    * @since 1.0.0
    */
   @Override
-  public PurchaseDTO findById(final Long id) {
-    return this.purchaseInfrastructureMapper.fromEntityToDTO(
-        this.purchaseRepository
-            .findById(id)
-            .orElseThrow(
-                () ->
-                    new EntityNotFoundException(
-                        ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(id))));
+  public Optional<PurchaseDTO> findById(final Long id) {
+    return this.purchaseRepository
+        .findById(id)
+        .map(this.purchaseInfrastructureMapper::fromEntityToDTO);
   }
 
   /**
