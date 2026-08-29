@@ -54,8 +54,9 @@ public class FindEnhancedPurchaseByIdInteractor implements FindEnhancedPurchaseB
   /**
    * Class complete constructor.
    *
-   * @param findPurchaseByIdInputBoundaryParam Parameter responsible for holding the gateway that
-   *     will initialize the {@link #findPurchaseByIdInputBoundary} field of this class.
+   * @param findPurchaseByIdInputBoundaryParam Parameter responsible for holding the interactor
+   *     instance that will initialize the {@link #findPurchaseByIdInputBoundary} field of this
+   *     class.
    * @param americanTreasuryRateExchangeAPIClientParam Parameter responsible for holding the gateway
    *     that will initialize the {@link #americanTreasuryRateExchangeAPIClient} field of this
    *     class.

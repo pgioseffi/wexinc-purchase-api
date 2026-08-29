@@ -33,7 +33,7 @@ public interface PurchaseCoreMapper extends BiFunction<Long, PurchaseDTO, Purcha
    *
    * @param newId The new positive numeric identifier.
    * @param purchaseDTO The {@link PurchaseDTO} object with all the information to be copied.
-   * @return A new {@link PurchaseDTO} object with all the information to copied plus the positive
+   * @return A new {@link PurchaseDTO} object with all the information copied plus the positive
    *     numeric identifier.
    * @see PurchaseDTO
    * @since 1.0.0
