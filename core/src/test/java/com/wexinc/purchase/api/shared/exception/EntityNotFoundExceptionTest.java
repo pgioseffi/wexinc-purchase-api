@@ -11,7 +11,7 @@ class EntityNotFoundExceptionTest {
 
   @Test
   void testThrowExceptionWithAllParams() {
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         EntityNotFoundException.class,
         () -> {
           throw new EntityNotFoundException(
@@ -22,7 +22,7 @@ class EntityNotFoundExceptionTest {
 
   @Test
   void testThrowExceptionWithThrowable() {
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         EntityNotFoundException.class,
         () -> {
           throw new EntityNotFoundException(EntityNotFoundExceptionTest.CAUSE);
@@ -32,7 +32,7 @@ class EntityNotFoundExceptionTest {
 
   @Test
   void testThrowExceptionWithMessageThrowableCase() {
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         EntityNotFoundException.class,
         () -> {
           throw new EntityNotFoundException(StringUtils.EMPTY, EntityNotFoundExceptionTest.CAUSE);
@@ -42,7 +42,7 @@ class EntityNotFoundExceptionTest {
 
   @Test
   void testThrowExceptionWithoutParams() {
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         EntityNotFoundException.class,
         () -> {
           throw new EntityNotFoundException();
@@ -52,7 +52,7 @@ class EntityNotFoundExceptionTest {
 
   @Test
   void testThrowExceptionWithMessage() {
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         EntityNotFoundException.class,
         () -> {
           throw new EntityNotFoundException(StringUtils.EMPTY);
