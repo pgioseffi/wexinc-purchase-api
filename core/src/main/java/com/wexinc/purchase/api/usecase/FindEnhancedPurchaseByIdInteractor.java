@@ -5,6 +5,8 @@ import com.wexinc.purchase.api.boundary.input.FindPurchaseByIdInputBoundary;
 import com.wexinc.purchase.api.boundary.output.AmericanTreasuryRateExchangeAPIClient;
 import com.wexinc.purchase.api.dto.EnhancedPurchaseDTO;
 import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
+import com.wexinc.purchase.api.dto.PurchaseDTO;
+import com.wexinc.purchase.api.mapper.EnhancedPurchaseMapper;
 import com.wexinc.purchase.api.shared.constant.Country;
 import java.util.Collection;
 import java.util.Comparator;
@@ -37,6 +39,19 @@ public class FindEnhancedPurchaseByIdInteractor implements FindEnhancedPurchaseB
   private final AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClient;
 
   /**
+   * Field that will perform a mapping action from a {@link PurchaseDTO}, plus a {@link Collection
+   * collection} of {@link ExchangeRateDataDTO} into a {@link EnhancedPurchaseDTO}.
+   *
+   * @since 1.0.0
+   * @see EnhancedPurchaseMapper
+   * @see EnhancedPurchaseMapper#apply(PurchaseDTO, Collection)
+   * @see Collection
+   * @see PurchaseDTO
+   * @see EnhancedPurchaseDTO
+   */
+  private final EnhancedPurchaseMapper enhancedPurchaseMapper;
+
+  /**
    * Class complete constructor.
    *
    * @param findPurchaseByIdInputBoundaryParam Parameter responsible for holding the gateway that
@@ -44,14 +59,18 @@ public class FindEnhancedPurchaseByIdInteractor implements FindEnhancedPurchaseB
    * @param americanTreasuryRateExchangeAPIClientParam Parameter responsible for holding the gateway
    *     that will initialize the {@link #americanTreasuryRateExchangeAPIClient} field of this
    *     class.
+   * @param enhancedPurchaseMapperParam Parameter responsible for holding the mapper that will
+   *     initialize the {@link #americanTreasuryRateExchangeAPIClient} field of this class.
    * @since 1.0.0
    */
   public FindEnhancedPurchaseByIdInteractor(
       final FindPurchaseByIdInputBoundary findPurchaseByIdInputBoundaryParam,
-      final AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClientParam) {
+      final AmericanTreasuryRateExchangeAPIClient americanTreasuryRateExchangeAPIClientParam,
+      final EnhancedPurchaseMapper enhancedPurchaseMapperParam) {
     super();
     this.findPurchaseByIdInputBoundary = findPurchaseByIdInputBoundaryParam;
     this.americanTreasuryRateExchangeAPIClient = americanTreasuryRateExchangeAPIClientParam;
+    this.enhancedPurchaseMapper = enhancedPurchaseMapperParam;
   }
 
   /**
@@ -81,11 +100,6 @@ public class FindEnhancedPurchaseByIdInteractor implements FindEnhancedPurchaseB
       }
     }
 
-    return new EnhancedPurchaseDTO(
-        purchaseDTO.id(),
-        purchaseDTO.description(),
-        purchaseDTO.transactionDate(),
-        purchaseDTO.amount(),
-        modifiableAndOrderedList);
+    return this.enhancedPurchaseMapper.apply(purchaseDTO, modifiableAndOrderedList);
   }
 }
