@@ -8,9 +8,6 @@ import java.time.temporal.ChronoUnit;
 
 public final class CoreTestConstants {
 
-  public static final String THIS_IS_A_UTILITY_CLASS_AND_CANNOT_BE_INSTANTIATED =
-      "This is a utility class and cannot be instantiated.";
-
   public static final String EXPECTED_THE_SAME_RESULT = "Expected the same result.";
   public static final String EXPECTED_DIFFERENT_RESULT = "Expected different results.";
   public static final String THE_RESULT_SHOULD_HAVE_BEEN_TRUE = "The result should have been true.";
@@ -36,7 +33,6 @@ public final class CoreTestConstants {
       BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
 
   private CoreTestConstants() {
-    throw new UnsupportedOperationException(
-        CoreTestConstants.THIS_IS_A_UTILITY_CLASS_AND_CANNOT_BE_INSTANTIATED);
+    throw ConstantsCore.UTILITY_CLASS_EXCEPTION;
   }
 }

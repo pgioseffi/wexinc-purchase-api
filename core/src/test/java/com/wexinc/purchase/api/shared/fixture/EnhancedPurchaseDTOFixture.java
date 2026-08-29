@@ -1,6 +1,7 @@
 package com.wexinc.purchase.api.shared.fixture;
 
 import com.wexinc.purchase.api.dto.EnhancedPurchaseDTO;
+import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,7 +18,6 @@ public final class EnhancedPurchaseDTOFixture {
           List.of(ExchangeRateDataDTOFixture.EXCHANGE_RATE_DATA_DTO_FIXTURE));
 
   private EnhancedPurchaseDTOFixture() {
-    throw new UnsupportedOperationException(
-        CoreTestConstants.THIS_IS_A_UTILITY_CLASS_AND_CANNOT_BE_INSTANTIATED);
+    throw ConstantsCore.UTILITY_CLASS_EXCEPTION;
   }
 }
