@@ -1,14 +1,11 @@
 package com.wexinc.purchase.api.mapper;
 
 import com.wexinc.purchase.api.dto.ExchangeRateDTO;
-import com.wexinc.purchase.api.dto.ExchangeRateDataDTO;
-import com.wexinc.purchase.api.resource.ExchangeRateDataResource;
 import com.wexinc.purchase.api.resource.ExchangeRateResource;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
-import com.wexinc.purchase.api.shared.constant.Country;
-import java.math.BigDecimal;
+import com.wexinc.purchase.api.shared.fixture.ExchangeRateDTOFixture;
+import com.wexinc.purchase.api.shared.fixture.ExchangeRateResourceFixture;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,18 +34,8 @@ class ExchangeRateInfrastructureMapperImplTest {
             new ExchangeRateDTO(Collections.singletonList(null)),
             new ExchangeRateResource(Collections.singletonList(null))),
         Arguments.of(
-            new ExchangeRateDTO(
-                List.of(
-                    new ExchangeRateDataDTO(
-                        Country.BRAZIL.name(),
-                        BigDecimal.ZERO,
-                        CoreTestConstants.FIXED_LOCAL_DATE))),
-            new ExchangeRateResource(
-                List.of(
-                    new ExchangeRateDataResource(
-                        Country.BRAZIL.name(),
-                        BigDecimal.ZERO,
-                        CoreTestConstants.FIXED_LOCAL_DATE)))),
+            ExchangeRateDTOFixture.EXCHANGE_RATE_DTO_FIXTURE,
+            ExchangeRateResourceFixture.EXCHANGE_RATE_RESOURCE_FIXTURE),
         Arguments.of(null, null));
   }
 }
