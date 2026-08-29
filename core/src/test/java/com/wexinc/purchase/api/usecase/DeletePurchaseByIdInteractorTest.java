@@ -25,31 +25,37 @@ class DeletePurchaseByIdInteractorTest {
 
   @Test
   void testShouldNotDeleteNonexistentPurchase() {
-    Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
+    Mockito.when(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE))
         .thenReturn(Boolean.FALSE);
 
-    Assertions.assertThrows(
-        EntityNotFoundException.class,
-        () -> this.instance.accept(Long.MIN_VALUE),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verifyNoMoreInteractions(this.purchaseGateway);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                EntityNotFoundException.class,
+                () -> this.instance.accept(Long.MIN_VALUE),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verifyNoMoreInteractions(this.purchaseGateway));
   }
 
   @Test
   void testShouldDeletePurchase() {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
         .thenReturn(Boolean.TRUE);
-    final ArgumentCaptor<Long> valueCapture = ArgumentCaptor.forClass(Long.class);
+    final var valueCapture = ArgumentCaptor.forClass(Long.class);
     Mockito.doNothing().when(this.purchaseGateway).deleteById(valueCapture.capture());
 
     this.instance.accept(Long.MIN_VALUE);
 
-    Assertions.assertEquals(
-        Long.MIN_VALUE, valueCapture.getValue(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verify(this.purchaseGateway).deleteById(CoreTestConstants.LONG_MIN_VALUE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                Long.MIN_VALUE,
+                valueCapture.getValue(),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verify(this.purchaseGateway).deleteById(CoreTestConstants.LONG_MIN_VALUE));
   }
 }
