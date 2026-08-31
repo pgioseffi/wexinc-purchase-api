@@ -44,8 +44,8 @@ public class UpdatePurchaseInteractor implements UpdatePurchaseInputBoundary {
    * @since 1.0.0
    */
   public UpdatePurchaseInteractor(
-          final PurchaseGateway purchaseGatewayParam,
-          final PurchaseCoreMapper purchaseCoreMapperParam) {
+      final PurchaseGateway purchaseGatewayParam,
+      final PurchaseCoreMapper purchaseCoreMapperParam) {
     super();
     this.purchaseGateway = purchaseGatewayParam;
     this.purchaseCoreMapper = purchaseCoreMapperParam;
@@ -61,6 +61,6 @@ public class UpdatePurchaseInteractor implements UpdatePurchaseInputBoundary {
     }
 
     throw new EntityNotFoundException(
-            ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(id));
+        ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(id));
   }
 }
