@@ -33,15 +33,18 @@ class UpdatePurchaseInteractorTest {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
         .thenReturn(Boolean.FALSE);
 
-    Assertions.assertThrows(
-        EntityNotFoundException.class,
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
         () ->
-            this.instance.apply(
-                CoreTestConstants.LONG_MIN_VALUE, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verifyNoMoreInteractions(this.purchaseGateway);
+            Assertions.assertThrowsExactly(
+                EntityNotFoundException.class,
+                () ->
+                    this.instance.apply(
+                        CoreTestConstants.LONG_MIN_VALUE,
+                        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verifyNoMoreInteractions(this.purchaseGateway));
   }
 
   @Test
@@ -55,40 +58,50 @@ class UpdatePurchaseInteractorTest {
     Mockito.when(this.purchaseGateway.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
-    Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
-        this.instance.apply(
-            CoreTestConstants.LONG_MIN_VALUE, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verify(this.purchaseGateway).save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+                this.instance.apply(
+                    CoreTestConstants.LONG_MIN_VALUE,
+                    PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE),
+        () ->
+            Mockito.verify(this.purchaseCoreMapper)
+                .apply(
+                    CoreTestConstants.LONG_MIN_VALUE,
+                    PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+        () ->
+            Mockito.verify(this.purchaseGateway)
+                .save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE));
   }
 
   @Test
   void testShouldThrowNullPointerExceptionInExistsById() {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(null)))
-        .thenThrow(NullPointerException.class);
+        .thenThrow(IllegalArgumentException.class);
 
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> this.instance.apply(null, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseGateway).existsById(null);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> this.instance.apply(null, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseGateway).existsById(null));
   }
 
   @Test
   void testShouldThrowNullPointerExceptionWhenSaving() {
-    Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
-        .thenReturn(Boolean.TRUE);
-
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE, null),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verifyNoMoreInteractions(this.purchaseGateway);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                NullPointerException.class,
+                () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE, null),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verifyNoInteractions(this.purchaseGateway, this.purchaseCoreMapper));
   }
 }

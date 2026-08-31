@@ -44,8 +44,8 @@ public class UpdatePurchaseInteractor implements UpdatePurchaseInputBoundary {
    * @since 1.0.0
    */
   public UpdatePurchaseInteractor(
-      final PurchaseGateway purchaseGatewayParam,
-      final PurchaseCoreMapper purchaseCoreMapperParam) {
+          final PurchaseGateway purchaseGatewayParam,
+          final PurchaseCoreMapper purchaseCoreMapperParam) {
     super();
     this.purchaseGateway = purchaseGatewayParam;
     this.purchaseCoreMapper = purchaseCoreMapperParam;
@@ -54,13 +54,13 @@ public class UpdatePurchaseInteractor implements UpdatePurchaseInputBoundary {
   /** {@inheritDoc} */
   @Override
   public PurchaseDTO apply(final Long id, final PurchaseDTO purchaseDTO) {
-    if (this.purchaseGateway.existsById(id)) {
-      Objects.requireNonNull(purchaseDTO, "Parameter purchaseDTO cannot be null.");
+    Objects.requireNonNull(purchaseDTO, "Parameter purchaseDTO cannot be null.");
 
+    if (this.purchaseGateway.existsById(id)) {
       return this.purchaseGateway.save(this.purchaseCoreMapper.apply(id, purchaseDTO));
     }
 
     throw new EntityNotFoundException(
-        ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(id));
+            ConstantsCore.EXCEPTION_MESSAGE_PURCHASE_NOT_FOUND.formatted(id));
   }
 }
