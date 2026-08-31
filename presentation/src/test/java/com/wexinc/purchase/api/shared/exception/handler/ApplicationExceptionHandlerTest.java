@@ -1,12 +1,9 @@
 package com.wexinc.purchase.api.shared.exception.handler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
+import com.wexinc.purchase.api.shared.constant.PresentationTestConstantes;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -17,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.hibernate.validator.internal.engine.path.PathImpl;
+import org.hibernate.validator.internal.engine.path.MutablePath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +34,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.UnknownContentTypeException;
 import org.springframework.web.context.request.ServletWebRequest;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 @ExtendWith(MockitoExtension.class)
 class ApplicationExceptionHandlerTest {
@@ -45,11 +45,18 @@ class ApplicationExceptionHandlerTest {
 
   @InjectMocks private ApplicationExceptionHandler instance;
 
-  @Mock private ObjectMapper objectMapper;
+  private final JsonMapper jsonMapper;
+  private final ServletWebRequest request;
+  private final HttpServletRequest httpRequest;
 
-  @Mock private ServletWebRequest request;
-
-  @Mock private HttpServletRequest httpRequest;
+  ApplicationExceptionHandlerTest(
+      @Mock final JsonMapper jsonMapperParam,
+      @Mock final ServletWebRequest requestParam,
+      @Mock final HttpServletRequest httpRequestParam) {
+    this.jsonMapper = jsonMapperParam;
+    this.request = requestParam;
+    this.httpRequest = httpRequestParam;
+  }
 
   @Test
   void testShouldHandleAnyExceptionWithNoMessage() {
@@ -58,10 +65,10 @@ class ApplicationExceptionHandlerTest {
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         this.instance
             .handleExceptionInternal(
-                new RuntimeException(), null, null, HttpStatus.UNPROCESSABLE_ENTITY, this.request)
+                new RuntimeException(), null, null, HttpStatus.UNPROCESSABLE_CONTENT, this.request)
             .getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
@@ -75,13 +82,13 @@ class ApplicationExceptionHandlerTest {
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         this.instance
             .handleExceptionInternal(
                 new RuntimeException(errorMessage),
                 errorMessage.getBytes(StandardCharsets.UTF_8),
                 null,
-                HttpStatus.UNPROCESSABLE_ENTITY,
+                HttpStatus.UNPROCESSABLE_CONTENT,
                 this.request)
             .getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
@@ -99,10 +106,10 @@ class ApplicationExceptionHandlerTest {
 
     final var response =
         this.instance.handleMethodArgumentNotValid(
-            exception, null, HttpStatus.UNPROCESSABLE_ENTITY, this.request);
+            exception, null, HttpStatus.UNPROCESSABLE_CONTENT, this.request);
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
@@ -126,13 +133,13 @@ class ApplicationExceptionHandlerTest {
     final Set<ConstraintViolation<?>> violations = Set.of(violation);
     Mockito.when(exception.getConstraintViolations()).thenReturn(violations);
     Mockito.when(violation.getPropertyPath())
-        .thenReturn(PathImpl.createPathFromString("propertyPath"));
+        .thenReturn(MutablePath.createPathFromString("propertyPath"));
     Mockito.when(violation.getMessage()).thenReturn("message");
 
     final var response = this.instance.handleConstraintViolationException(exception, this.request);
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
@@ -159,7 +166,7 @@ class ApplicationExceptionHandlerTest {
     final var response = this.instance.handleConstraintViolationException(exception, this.request);
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
@@ -185,16 +192,16 @@ class ApplicationExceptionHandlerTest {
 
     Mockito.when(exception.getConstraintViolations()).thenReturn(violations);
     Mockito.when(violation01.getPropertyPath())
-        .thenReturn(PathImpl.createPathFromString("propertyPath01"));
+        .thenReturn(MutablePath.createPathFromString("propertyPath01"));
     Mockito.when(violation01.getMessage()).thenReturn("message01");
     Mockito.when(violation02.getPropertyPath())
-        .thenReturn(PathImpl.createPathFromString("propertyPath02"));
+        .thenReturn(MutablePath.createPathFromString("propertyPath02"));
     Mockito.when(violation02.getMessage()).thenReturn("message02");
 
     final var response = this.instance.handleConstraintViolationException(exception, this.request);
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
 
@@ -223,7 +230,7 @@ class ApplicationExceptionHandlerTest {
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         this.instance
             .handleDataIntegrityViolationException(
                 new DataIntegrityViolationException("Error"), this.request)
@@ -265,8 +272,7 @@ class ApplicationExceptionHandlerTest {
 															<body>
 																<h1>Status 503 - Service Unavailable</h1>
 															</body>
-														</html>
-														"""
+														</html>"""
                         .getBytes(StandardCharsets.UTF_8),
                     StandardCharsets.UTF_8),
                 this.request)
@@ -319,8 +325,7 @@ class ApplicationExceptionHandlerTest {
 											<body>
 												<h1>Status 503 - Service Unavailable</h1>
 											</body>
-										</html>
-										"""
+										</html>"""
                         .getBytes(StandardCharsets.UTF_8),
                     StandardCharsets.UTF_8),
                 this.request)
@@ -329,19 +334,20 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void testShouldHandleRestClientResponseExceptionWithJSONResponse()
-      throws JsonProcessingException {
-    final var mapper = new ObjectMapper();
+  void testShouldHandleRestClientResponseExceptionWithJSONResponse() {
     final var mappedJSON =
-        mapper
+        PresentationTestConstantes.JSON_MAPPER
             .createObjectNode()
-            .set("error", mapper.convertValue("Service unavailable", JsonNode.class));
+            .set(
+                "error",
+                PresentationTestConstantes.JSON_MAPPER.convertValue(
+                    "Service unavailable", JsonNode.class));
     final var errorMessage = "{\"error\":\"Service unavailable\"}";
 
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
-    Mockito.when(this.objectMapper.readTree(errorMessage)).thenReturn(mappedJSON);
+    Mockito.when(this.jsonMapper.readTree(errorMessage)).thenReturn(mappedJSON);
 
     Assertions.assertEquals(
         HttpStatus.BAD_REQUEST,
@@ -413,21 +419,22 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void testShouldHandleUnknownContentTypeExceptionWithJsonResponse()
-      throws JsonProcessingException {
+  void testShouldHandleUnknownContentTypeExceptionWithJsonResponse() {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "{\"error\":\"Invalid status code\"}";
-    final var mapper = new ObjectMapper();
     // Do not use mocked ObjectMapper, it will not perform the operation.
     final var mappedJSON =
-        mapper
+        PresentationTestConstantes.JSON_MAPPER
             .createObjectNode()
-            .set("error", mapper.convertValue("Invalid status code", JsonNode.class));
+            .set(
+                "error",
+                PresentationTestConstantes.JSON_MAPPER.convertValue(
+                    "Invalid status code", JsonNode.class));
 
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
-    Mockito.when(this.objectMapper.readTree(invalidStatusCodeMessage)).thenReturn(mappedJSON);
+    Mockito.when(this.jsonMapper.readTree(invalidStatusCodeMessage)).thenReturn(mappedJSON);
 
     Assertions.assertEquals(
         HttpStatusCode.valueOf(invalidStatusCode),
@@ -450,16 +457,15 @@ class ApplicationExceptionHandlerTest {
   }
 
   @Test
-  void testShouldHandleUnknownContentTypeExceptionWithInvalidJsonResponse()
-      throws JsonProcessingException {
+  void testShouldHandleUnknownContentTypeExceptionWithInvalidJsonResponse() {
     final var invalidStatusCode = 999;
     final var invalidStatusCodeMessage = "{\"error\":\"Invalid status code\"}";
 
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
         .thenReturn(ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE + '1');
-    Mockito.when(this.objectMapper.readTree(invalidStatusCodeMessage))
-        .thenThrow(JsonMappingException.class);
+    Mockito.when(this.jsonMapper.readTree(invalidStatusCodeMessage))
+        .thenThrow(JacksonException.class);
 
     Assertions.assertEquals(
         HttpStatusCode.valueOf(invalidStatusCode),
@@ -495,8 +501,7 @@ class ApplicationExceptionHandlerTest {
 					<body>
 						<h1>Status 503 - Service Unavailable</h1>
 					</body>
-				</html>
-				""";
+				</html>""";
 
     Mockito.when(this.request.getRequest()).thenReturn(this.httpRequest);
     Mockito.when(this.httpRequest.getRequestURI())
