@@ -18,13 +18,13 @@ import org.mapstruct.Mapping;
 @Mapper
 @FunctionalInterface
 @Javadoc(
-    """
-            Concrete implementation type responsible for mapping a {@link PurchaseDTO} without a positive numeric identifier to one with as stated in its interface {@link PurchaseCoreMapper}.
+"""
+Concrete implementation type responsible for mapping a {@link PurchaseDTO} without a positive numeric identifier to one with as stated in its interface {@link PurchaseCoreMapper}.
 
-            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
-            @since 1.0.0
-            @version 1.0.0
-            @see PurchaseDTO""")
+@author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+@since 1.0.0
+@version 1.0.0
+@see PurchaseDTO""")
 public interface PurchaseCoreMapper extends BiFunction<Long, PurchaseDTO, PurchaseDTO> {
 
   /**

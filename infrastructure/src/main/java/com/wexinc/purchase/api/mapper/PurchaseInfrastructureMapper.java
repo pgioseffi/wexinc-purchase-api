@@ -18,14 +18,14 @@ import org.mapstruct.Mapper;
  */
 @Mapper
 @Javadoc(
-    """
-            Concrete implementation type responsible for mapping a Purchase object into a PurchaseDTO and vice versa.
+"""
+Concrete implementation type responsible for mapping a Purchase object into a PurchaseDTO and vice versa.
 
-            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
-            @since 1.0.0
-            @version 1.0.0
-            @see Purchase
-            @see PurchaseDTO""")
+@author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+@since 1.0.0
+@version 1.0.0
+@see Purchase
+@see PurchaseDTO""")
 public interface PurchaseInfrastructureMapper {
 
   /**

@@ -19,14 +19,14 @@ import org.mapstruct.Mapper;
 @Mapper(uses = ExchangeRateDataInfrastructureMapper.class)
 @FunctionalInterface
 @Javadoc(
-    """
-            Concrete implementation type responsible for mapping a {@link ExchangeRateResource} object into a {@link ExchangeRateDTO}.
+"""
+Concrete implementation type responsible for mapping a {@link ExchangeRateResource} object into a {@link ExchangeRateDTO}.
 
-            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
-            @since 1.0.0
-            @version 1.0.0
-            @see ExchangeRateDTO
-            @see ExchangeRateResource""")
+@author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+@since 1.0.0
+@version 1.0.0
+@see ExchangeRateDTO
+@see ExchangeRateResource""")
 public interface ExchangeRateInfrastructureMapper
     extends Function<ExchangeRateResource, ExchangeRateDTO> {
 

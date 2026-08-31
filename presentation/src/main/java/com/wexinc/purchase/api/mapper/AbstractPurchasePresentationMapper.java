@@ -12,8 +12,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 /**
- * Interface responsible for mapping a {@link PurchaseRequestModel} into a {@link PurchaseDTO} and a
- * {@link PurchaseDTO} into a {@link PurchaseResponseModel}.
+ * Abstract implementation type responsible for mapping a {@link PurchaseRequestModel} into a {@link
+ * PurchaseDTO} and a {@link PurchaseDTO} into a {@link PurchaseResponseModel}.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
  * @since 1.0.0
@@ -24,16 +24,16 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper
 @Javadoc(
-    """
-            Concrete implementation type responsible for mapping a {@link PurchaseRequestModel} into a {@link PurchaseDTO} and a
-            {@link PurchaseDTO} into a {@link PurchaseResponseModel}.
+"""
+Concrete implementation type responsible for mapping a {@link PurchaseRequestModel} into a {@link PurchaseDTO} and a
+{@link PurchaseDTO} into a {@link PurchaseResponseModel}.
 
-            @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
-            @since 1.0.0
-            @version 1.0.0
-            @see PurchaseDTO
-            @see PurchaseRequestModel
-            @see PurchaseResponseModel""")
+@author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
+@since 1.0.0
+@version 1.0.0
+@see PurchaseDTO
+@see PurchaseRequestModel
+@see PurchaseResponseModel""")
 public abstract class AbstractPurchasePresentationMapper {
 
   private static final ExchangeRatePresentationMapper EXCHANGE_RATE_PRESENTATION_MAPPER =
