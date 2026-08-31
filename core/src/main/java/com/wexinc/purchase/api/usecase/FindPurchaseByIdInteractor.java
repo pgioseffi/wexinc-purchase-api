@@ -35,8 +35,8 @@ public class FindPurchaseByIdInteractor implements FindPurchaseByIdInputBoundary
   /**
    * {@inheritDoc}
    *
-   * @throws com.wexinc.purchase.api.shared.exception.EntityNotFoundException If does not find the
-   *     purchase.
+   * @throws com.wexinc.purchase.api.shared.exception.EntityNotFoundException If this method does
+   *     not find the purchase.
    * @since 1.0.0
    */
   @Override
