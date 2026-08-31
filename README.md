@@ -55,5 +55,5 @@ This application was built using H2 Database. If you want to debug the database 
 - The `docs/postman` folder contains a Postman collection in order to test the application endpoints.
 
 ## Important notes
-- The whole project is documented. Plase refer to `<module>/target/apidocs` folder;
-- The whole project is tested. Plase refer to `<module>/site/jacoco` folder;
+- The whole project is documented. Please refer to `<module>/target/apidocs` folder;
+- The whole project is tested. Please refer to `<module>/site/jacoco` folder;

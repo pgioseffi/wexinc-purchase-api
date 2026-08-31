@@ -9,8 +9,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 /**
- * Class responsible to set the application default locale to the United States, which is the Wex
- * Inc country, in order to handle date and time correctly when currency exchange rate conversion is
+ * Class responsible to set the application default locale to United States, which is the Wex Inc
+ * country, in order to handle date and time correctly when currency exchange rate conversion is
  * needed.
  *
  * @author <a href="mailto:pgioseffi@gmail.com">Philippe Gioseffi &lt;pgioseffi@gmail.com&gt;</a>
@@ -23,12 +23,11 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 public class LocaleConfig implements WebMvcConfigurer {
 
   /**
-   * Method responsible to set the application default locale to the United States, which is the Wex
-   * Inc country, in order to handle date and time correctly when currency exchange rate conversion
-   * is needed.
+   * Method responsible to set the application default locale to United States, which is the Wex Inc
+   * country, in order to handle date and time correctly when currency exchange rate conversion is
+   * needed.
    *
-   * @return The {@link SessionLocaleResolver} object with the default locale set to the United
-   *     States.
+   * @return The {@link SessionLocaleResolver} object with the default locale set to United States.
    * @since 1.0.0
    */
   @Bean

@@ -54,9 +54,9 @@ public class UpdatePurchaseInteractor implements UpdatePurchaseInputBoundary {
   /** {@inheritDoc} */
   @Override
   public PurchaseDTO apply(final Long id, final PurchaseDTO purchaseDTO) {
-    if (this.purchaseGateway.existsById(id)) {
-      Objects.requireNonNull(purchaseDTO, "Parameter purchaseDTO cannot be null.");
+    Objects.requireNonNull(purchaseDTO, "Parameter purchaseDTO cannot be null.");
 
+    if (this.purchaseGateway.existsById(id)) {
       return this.purchaseGateway.save(this.purchaseCoreMapper.apply(id, purchaseDTO));
     }
 

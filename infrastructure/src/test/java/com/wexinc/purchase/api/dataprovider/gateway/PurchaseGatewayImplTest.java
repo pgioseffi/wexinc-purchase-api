@@ -2,10 +2,8 @@ package com.wexinc.purchase.api.dataprovider.gateway;
 
 import com.wexinc.purchase.api.dto.PurchaseDTO;
 import com.wexinc.purchase.api.mapper.PurchaseInfrastructureMapper;
-import com.wexinc.purchase.api.persistence.domain.Purchase;
 import com.wexinc.purchase.api.persistence.repository.PurchaseRepository;
 import com.wexinc.purchase.api.shared.constant.CoreTestConstants;
-import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
 import com.wexinc.purchase.api.shared.fixture.PurchaseDTOFixture;
 import com.wexinc.purchase.api.shared.fixture.PurchaseFixture;
 import java.math.BigDecimal;
@@ -40,68 +38,62 @@ class PurchaseGatewayImplTest {
   void testShouldNotFindAnything() {
     Mockito.when(this.purchaseRepository.findAll()).thenReturn(List.of());
 
-    Assertions.assertEquals(
-        List.of(), this.instance.findAll(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).findAll();
-    Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertIterableEquals(
+                List.of(), this.instance.findAll(), CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseRepository).findAll(),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
   void testShouldFindAll() {
-    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
+    final var expected = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
     Mockito.when(this.purchaseRepository.findAll())
         .thenReturn(List.of(PurchaseFixture.ACTUAL_PURCHASE));
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
-    Assertions.assertEquals(
-        result, this.instance.findAll(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).findAll();
-    Mockito.verify(this.purchaseInfrastructureMapper, Mockito.times(result.size()))
-        .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertIterableEquals(
+                expected, this.instance.findAll(), CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseRepository).findAll(),
+        () ->
+            Mockito.verify(this.purchaseInfrastructureMapper, Mockito.times(expected.size()))
+                .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE));
   }
 
   @Test
   void testShouldFindAllMultipleResults() {
-    final var purchaseDTO02 =
-        new PurchaseDTO(
-            Long.valueOf(Long.MAX_VALUE),
-            StringUtils.EMPTY,
-            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
-            BigDecimal.ZERO);
-    final var purchase02 =
-        new Purchase(
-            Long.valueOf(Long.MAX_VALUE),
-            StringUtils.EMPTY,
-            CoreTestConstants.FIXED_LOCAL_DATE_TIME,
-            BigDecimal.ZERO);
-    final var result = List.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, purchaseDTO02);
-    final var repositoryResult = List.of(PurchaseFixture.ACTUAL_PURCHASE, purchase02);
+    final var expected =
+        List.of(
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
-    Mockito.when(this.purchaseRepository.findAll()).thenReturn(repositoryResult);
-
+    Mockito.when(this.purchaseRepository.findAll())
+        .thenReturn(List.of(PurchaseFixture.ACTUAL_PURCHASE, PurchaseFixture.ACTUAL_PURCHASE));
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
-        .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
-    Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(purchase02))
-        .thenReturn(purchaseDTO02);
+        .thenReturn(
+            PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+            new PurchaseDTO(
+                CoreTestConstants.LONG_MIN_VALUE,
+                StringUtils.EMPTY,
+                CoreTestConstants.FIXED_LOCAL_DATE_TIME,
+                BigDecimal.ZERO));
 
-    // Assert.
-    final var expectedResult = this.instance.findAll();
-    Assertions.assertEquals(expectedResult, result, CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    // Verify that the repository is called just one time.
-    Mockito.verify(this.purchaseRepository).findAll();
-
-    // Verify that the mapper is called for each entity.
-    Mockito.verify(this.purchaseInfrastructureMapper)
-        .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE);
-    Mockito.verify(this.purchaseInfrastructureMapper).fromEntityToDTO(purchase02);
-
-    // Assertion for checking the size of the repositoryResult
-    Assertions.assertEquals(2, expectedResult.size(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertIterableEquals(
+                expected, this.instance.findAll(), CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseRepository).findAll(),
+        () ->
+            Mockito.verify(this.purchaseInfrastructureMapper, Mockito.times(expected.size()))
+                .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE));
   }
 
   @Test
@@ -111,14 +103,17 @@ class PurchaseGatewayImplTest {
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
-    Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
-        this.instance.findById(CoreTestConstants.LONG_MIN_VALUE),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).findById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verify(this.purchaseInfrastructureMapper)
-        .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                Optional.of(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+                this.instance.findById(CoreTestConstants.LONG_MIN_VALUE),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseRepository).findById(CoreTestConstants.LONG_MIN_VALUE),
+        () ->
+            Mockito.verify(this.purchaseInfrastructureMapper)
+                .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE));
   }
 
   @Test
@@ -126,25 +121,30 @@ class PurchaseGatewayImplTest {
     Mockito.when(this.purchaseRepository.findById(CoreTestConstants.LONG_MIN_VALUE))
         .thenReturn(Optional.empty());
 
-    Assertions.assertThrows(
-        EntityNotFoundException.class,
-        () -> this.instance.findById(CoreTestConstants.LONG_MIN_VALUE),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseRepository).findById(CoreTestConstants.LONG_MIN_VALUE);
-    Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                Optional.empty(),
+                this.instance.findById(CoreTestConstants.LONG_MIN_VALUE),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseRepository).findById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
   void testShouldThrowIllegalArgumentExceptionWhenFindingById() {
     Mockito.when(this.purchaseRepository.findById(null)).thenThrow(IllegalArgumentException.class);
 
-    Assertions.assertThrows(
-        IllegalArgumentException.class,
-        () -> this.instance.findById(null),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseRepository).findById(null);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> this.instance.findById(null),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseRepository).findById(null),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
@@ -153,12 +153,14 @@ class PurchaseGatewayImplTest {
             Boolean.valueOf(this.purchaseRepository.existsById(CoreTestConstants.LONG_MIN_VALUE)))
         .thenReturn(Boolean.TRUE);
 
-    Assertions.assertEquals(
-        Boolean.TRUE,
-        Boolean.valueOf(this.instance.existsById(CoreTestConstants.LONG_MIN_VALUE)),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).existsById(CoreTestConstants.LONG_MIN_VALUE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertTrue(
+                this.instance.existsById(CoreTestConstants.LONG_MIN_VALUE),
+                CoreTestConstants.THE_RESULT_SHOULD_HAVE_BEEN_TRUE),
+        () -> Mockito.verify(this.purchaseRepository).existsById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
@@ -167,12 +169,14 @@ class PurchaseGatewayImplTest {
             Boolean.valueOf(this.purchaseRepository.existsById(CoreTestConstants.LONG_MIN_VALUE)))
         .thenReturn(Boolean.FALSE);
 
-    Assertions.assertEquals(
-        Boolean.FALSE,
-        Boolean.valueOf(this.instance.existsById(CoreTestConstants.LONG_MIN_VALUE)),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).existsById(CoreTestConstants.LONG_MIN_VALUE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertFalse(
+                this.instance.existsById(CoreTestConstants.LONG_MIN_VALUE),
+                CoreTestConstants.THE_RESULT_SHOULD_HAVE_BEEN_FALSE),
+        () -> Mockito.verify(this.purchaseRepository).existsById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
@@ -180,12 +184,15 @@ class PurchaseGatewayImplTest {
     Mockito.when(Boolean.valueOf(this.purchaseRepository.existsById(null)))
         .thenThrow(IllegalArgumentException.class);
 
-    Assertions.assertThrows(
-        IllegalArgumentException.class,
-        () -> this.instance.existsById(null),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseRepository).existsById(null);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> this.instance.existsById(null),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseRepository).existsById(null),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
@@ -199,26 +206,37 @@ class PurchaseGatewayImplTest {
     Mockito.when(this.purchaseInfrastructureMapper.fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE))
         .thenReturn(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE);
 
-    Assertions.assertEquals(
-        PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
-        this.instance.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).save(PurchaseFixture.ACTUAL_PURCHASE);
-    Mockito.verify(this.purchaseInfrastructureMapper)
-        .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE,
+                this.instance.save(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () ->
+            Mockito.verify(this.purchaseInfrastructureMapper)
+                .fromDTOToEntity(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
+        () -> Mockito.verify(this.purchaseRepository).save(PurchaseFixture.ACTUAL_PURCHASE),
+        () ->
+            Mockito.verify(this.purchaseInfrastructureMapper)
+                .fromEntityToDTO(PurchaseFixture.ACTUAL_PURCHASE));
   }
 
   @Test
   void testShouldShouldThrowIllegalArgumentExceptionWhenSaving() {
+    Mockito.when(this.purchaseInfrastructureMapper.fromDTOToEntity(null)).thenReturn(null);
     Mockito.when(this.purchaseRepository.save(null)).thenThrow(IllegalArgumentException.class);
 
-    Assertions.assertThrows(
-        IllegalArgumentException.class,
-        () -> this.instance.save(null),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseRepository).save(null);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> this.instance.save(null),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseRepository).save(null),
+        () -> Mockito.verify(this.purchaseInfrastructureMapper).fromDTOToEntity(null),
+        () -> Mockito.verifyNoMoreInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
@@ -228,23 +246,29 @@ class PurchaseGatewayImplTest {
 
     this.instance.deleteById(CoreTestConstants.LONG_MIN_VALUE);
 
-    Assertions.assertEquals(
-        CoreTestConstants.LONG_MIN_VALUE,
-        valueCapture.getValue(),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    Mockito.verify(this.purchaseRepository).deleteById(CoreTestConstants.LONG_MIN_VALUE);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                CoreTestConstants.LONG_MIN_VALUE,
+                valueCapture.getValue(),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () -> Mockito.verify(this.purchaseRepository).deleteById(CoreTestConstants.LONG_MIN_VALUE),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 
   @Test
   void testShouldShouldThrowIllegalArgumentExceptionWhenDeleting() {
     Mockito.doThrow(IllegalArgumentException.class).when(this.purchaseRepository).deleteById(null);
 
-    Assertions.assertThrows(
-        IllegalArgumentException.class,
-        () -> this.instance.deleteById(null),
-        CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
-
-    Mockito.verify(this.purchaseRepository).deleteById(null);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> this.instance.deleteById(null),
+                CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
+        () -> Mockito.verify(this.purchaseRepository).deleteById(null),
+        () -> Mockito.verifyNoInteractions(this.purchaseInfrastructureMapper));
   }
 }
