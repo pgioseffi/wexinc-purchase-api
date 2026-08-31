@@ -15,17 +15,7 @@
 	<name>WEX Inc API - Core Module - Recruitment Test</name>
 	<description>WEX Inc API - Core Module containing business rules - Recruitment Test.</description>
 
-	<properties>
-		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-	</properties>
-
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

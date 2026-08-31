@@ -3,9 +3,9 @@ This is API has been developed to recruitment purposes in the Wex Inc company.
 
 ## Dependencies
 
-- [Java 24 (Programming language)](https://docs.oracle.com/en/java/javase/24/docs/api/index.html)
+- [Java 25 (Programming language)](https://docs.oracle.com/en/java/javase/25/docs/api/index.html)
 - [Spring (Framework web)](https://docs.spring.io/spring-framework/reference/)
-- [Spring Boot](https://docs.spring.io/spring-boot/)
+- [Spring Boot 4.1.1](https://docs.spring.io/spring-boot/)
 - [Tomcat (Web server)](https://tomcat.apache.org/)
 - [Maven (Build tool)](https://maven.apache.org/guides/index.html)
 - [Consul](https://www.consul.io/)

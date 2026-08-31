@@ -1,9 +1,5 @@
 package com.wexinc.purchase.api.shared.exception.handler;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.wexinc.purchase.api.shared.constant.ConstantsCore;
 import com.wexinc.purchase.api.shared.constant.ConstantsPresentation;
 import com.wexinc.purchase.api.shared.exception.EntityNotFoundException;
@@ -16,6 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -26,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -42,6 +38,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.util.WebUtils;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.node.ObjectNode;
 
 /**
  * A class with an {@code @ExceptionHandler} method that handles all Spring MVC raised exceptions by
@@ -69,25 +69,25 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
   private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationExceptionHandler.class);
 
   /**
-   * Field responsible to hold the Jackson {@link ObjectMapper} bean in order to handle JSON errors
+   * Field responsible to hold the Jackson {@link JsonMapper} bean in order to handle JSON errors
    * responses coming from HTTP calls with statues 4xx or 5xx via {@link
-   * org.springframework.web.client.RestTemplate RestTemplate}.
+   * org.springframework.web.client.RestClient RestClient}.
    *
    * @since 1.0.0
-   * @see ObjectMapper
-   * @see org.springframework.web.client.RestTemplate RestTemplate
+   * @see JsonMapper
+   * @see org.springframework.web.client.RestClient RestClient
    */
-  private final ObjectMapper objectMapper;
+  private final JsonMapper jsonMapper;
 
   /**
    * Class complete constructor responsible to initialize all its fields.
    *
-   * @param objectMapperParam Parameter responsible to initialize {@link #objectMapper} class field.
+   * @param jsonMapperParam Parameter responsible to initialize {@link #jsonMapper} class field.
    * @since 1.0.0
    */
-  public ApplicationExceptionHandler(final ObjectMapper objectMapperParam) {
+  public ApplicationExceptionHandler(final JsonMapper jsonMapperParam) {
     super();
-    this.objectMapper = objectMapperParam;
+    this.jsonMapper = jsonMapperParam;
   }
 
   /**
@@ -112,10 +112,12 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     return this.handleExceptionInternal(
         e,
         erros.size() == 1
-            ? Map.of(ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGE, erros.get(0))
+            ? Map.of(
+                ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGE,
+                erros.get(ConstantsCore.ZERO))
             : Map.of(ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGES, erros),
         null,
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         request);
   }
 
@@ -151,7 +153,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
   protected ResponseEntity<Object> handleDataIntegrityViolationException(
       final DataIntegrityViolationException e, final WebRequest request) {
     return this.handleExceptionInternal(
-        e, e.getMessage(), null, HttpStatus.UNPROCESSABLE_ENTITY, request);
+        e, e.getMessage(), null, HttpStatus.UNPROCESSABLE_CONTENT, request);
   }
 
   /**
@@ -172,9 +174,9 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         erros.size() == 1
             ? Map.of(
                 ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGE,
-                erros.get(0) instanceof final FieldError fieldError
+                erros.get(ConstantsCore.ZERO) instanceof final FieldError fieldError
                     ? fieldError.getField() + ' ' + fieldError.getDefaultMessage()
-                    : erros.get(0).toString())
+                    : erros.get(ConstantsCore.ZERO).toString())
             : Map.of(
                 ConstantsPresentation.APPLICATION_EXCEPTION_HANDLER_MESSAGES,
                 Stream.concat(
@@ -184,7 +186,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
                     .sorted()
                     .toList()),
         headers,
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         request);
   }
 
@@ -218,7 +220,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
             : this.handleExceptionInternal(
                 other,
                 MediaType.APPLICATION_JSON.equals(contentType)
-                    ? this.retornarRespostaAsJSON(responseBodyAsString)
+                    ? this.jsonMapper.readTree(responseBodyAsString)
                     : responseBodyAsString,
                 responseHeaders,
                 statusCode,
@@ -249,7 +251,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
   /**
    * Method responsible handle JSON errors responses coming from HTTP calls with statues 4xx or 5xx
-   * via {@link org.springframework.web.client.RestTemplate RestTemplate}.
+   * via {@link org.springframework.web.client.RestClient RestClient}.
    *
    * @param json A possible well-formed JSON {@link String} error response.
    * @return A {@link JsonNode} deserealized ready to be handled by {@link #handleExceptionInternal}
@@ -258,7 +260,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
    */
   private JsonNode retornarRespostaAsJSON(final String json) {
     try {
-      return this.objectMapper.readTree(json);
+      return this.jsonMapper.readTree(json);
     } catch (final JacksonException _) {
       return null;
     }

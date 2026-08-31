@@ -14,16 +14,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@AutoConfigureTestRestTemplate
 class ApplicationExceptionHandlerIntegrationTest {
 
   private final TestRestTemplate restTemplate;
@@ -34,7 +35,7 @@ class ApplicationExceptionHandlerIntegrationTest {
 
   @Test
   void testShouldHandleEntityNotFoundException() {
-    final ResponseEntity<PurchaseResponseModel> response =
+    final var response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE
                 + ConstantsPresentation.ID_REQUEST_PATH_VARIABLE,
@@ -49,7 +50,7 @@ class ApplicationExceptionHandlerIntegrationTest {
 
   @Test
   void testShouldHandleConstraintViolationException() {
-    final ResponseEntity<PurchaseResponseModel> response =
+    final var response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE
                 + ConstantsPresentation.ID_REQUEST_PATH_VARIABLE,
@@ -59,14 +60,14 @@ class ApplicationExceptionHandlerIntegrationTest {
             Long.valueOf(-1L));
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testShouldHandleMethodArgumentNotValidExceptionMultipleErrors() {
-    final ResponseEntity<PurchaseResponseModel> response =
+    final var response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE,
             HttpMethod.POST,
@@ -76,14 +77,14 @@ class ApplicationExceptionHandlerIntegrationTest {
             PurchaseResponseModel.class);
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
 
   @Test
   void testShouldHandleMethodArgumentNotValidExceptionOneError() {
-    final ResponseEntity<PurchaseResponseModel> response =
+    final var response =
         this.restTemplate.exchange(
             ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE,
             HttpMethod.POST,
@@ -95,7 +96,7 @@ class ApplicationExceptionHandlerIntegrationTest {
             PurchaseResponseModel.class);
 
     Assertions.assertEquals(
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.UNPROCESSABLE_CONTENT,
         response.getStatusCode(),
         CoreTestConstants.EXPECTED_THE_SAME_RESULT);
   }
@@ -114,34 +115,39 @@ class ApplicationExceptionHandlerIntegrationTest {
             PurchaseResponseModel.class);
     final var one = Long.valueOf(1L);
 
-    Assertions.assertEquals(
-        HttpStatus.CREATED,
-        saveResponse.getStatusCode(),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-    Assertions.assertEquals(
-        new PurchaseResponseModel(
-            one,
-            CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
-            LocalDateTime.of(1500, Month.DECEMBER, 5, 5, 2, 0, 0),
-            BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
-        saveResponse.getBody(),
-        CoreTestConstants.EXPECTED_THE_SAME_RESULT);
-
-    final var response =
-        this.restTemplate.exchange(
-            UriComponentsBuilder.fromUriString(
-                    ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE
-                        + ConstantsPresentation.ENHANCED_REQUEST_MAPPING_VALUE
-                        + ConstantsPresentation.ID_REQUEST_PATH_VARIABLE)
-                .queryParam("countries", Country.BRAZIL.name())
-                .encode()
-                .toUriString(),
-            HttpMethod.GET,
-            null,
-            EnhancedPurchaseResponseModel.class,
-            one);
-
-    Assertions.assertEquals(
-        HttpStatus.NOT_FOUND, response.getStatusCode(), CoreTestConstants.EXPECTED_THE_SAME_RESULT);
+    Assertions.assertAll(
+        CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
+        () ->
+            Assertions.assertEquals(
+                HttpStatus.CREATED,
+                saveResponse.getStatusCode(),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () ->
+            Assertions.assertEquals(
+                new PurchaseResponseModel(
+                    one,
+                    CoreTestConstants.VALID_PURCHASE_DESCRIPTION,
+                    LocalDateTime.of(1500, Month.DECEMBER, 5, 5, 2, 0, 0),
+                    BigDecimal.TEN.setScale(ConstantsPresentation.TWO, RoundingMode.HALF_EVEN)),
+                saveResponse.getBody(),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT),
+        () ->
+            Assertions.assertEquals(
+                HttpStatus.NOT_FOUND,
+                this.restTemplate
+                    .exchange(
+                        UriComponentsBuilder.fromUriString(
+                                ConstantsPresentation.PURCHASE_REQUEST_MAPPING_VALUE
+                                    + ConstantsPresentation.ENHANCED_REQUEST_MAPPING_VALUE
+                                    + ConstantsPresentation.ID_REQUEST_PATH_VARIABLE)
+                            .queryParam("countries", Country.BRAZIL.name())
+                            .encode()
+                            .toUriString(),
+                        HttpMethod.GET,
+                        null,
+                        EnhancedPurchaseResponseModel.class,
+                        one)
+                    .getStatusCode(),
+                CoreTestConstants.EXPECTED_THE_SAME_RESULT));
   }
 }
