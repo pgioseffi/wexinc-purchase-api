@@ -31,7 +31,7 @@ public interface PurchaseGateway {
    * @param id The positive numeric identifier of a purchase.
    * @return Will return a {@link PurchaseDTO} if found.
    * @since 1.0.0
-   * @throws EntityNotFoundException if not found.
+   * @throws EntityNotFoundException If this method does not find the purchase.
    */
   PurchaseDTO findById(Long id);
 
@@ -40,7 +40,7 @@ public interface PurchaseGateway {
    *
    * @param id The positive numeric identifier of a purchase.
    * @since 1.0.0
-   * @throws EntityNotFoundException if not found.
+   * @throws EntityNotFoundException If this method does not find the purchase.
    */
   void deleteById(Long id);
 
@@ -62,7 +62,7 @@ public interface PurchaseGateway {
    * @param id The positive numeric identifier of a purchase.
    * @return <code>true</code> if found, <code>false</code> otherwise.
    * @since 1.0.0
-   * @throws EntityNotFoundException if not found.
+   * @throws EntityNotFoundException If this method does not find the purchase.
    */
   boolean existsById(Long id);
 }
