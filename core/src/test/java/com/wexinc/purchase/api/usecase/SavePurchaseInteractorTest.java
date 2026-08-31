@@ -26,7 +26,7 @@ class SavePurchaseInteractorTest {
   void testShouldThrowNullPointerException() {
     Mockito.when(this.purchaseGateway.save(null)).thenThrow(NullPointerException.class);
 
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         NullPointerException.class,
         () -> this.instance.apply(null),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);

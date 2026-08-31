@@ -139,7 +139,7 @@ class PurchaseGatewayImplTest {
     Assertions.assertAll(
         CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
         () ->
-            Assertions.assertThrows(
+            Assertions.assertThrowsExactly(
                 IllegalArgumentException.class,
                 () -> this.instance.findById(null),
                 CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),

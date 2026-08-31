@@ -76,7 +76,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.when(requestBodySpec.retrieve()).thenReturn(responseSpec);
     Mockito.when(responseSpec.body(ExchangeRateResource.class)).thenReturn(null);
 
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         NotFound.class,
         () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
@@ -127,7 +127,7 @@ class AmericanTreasuryRateExchangeAPIWebClientTest {
     Mockito.when(responseSpec.body(ExchangeRateResource.class))
         .thenReturn(new ExchangeRateResource(List.of()));
 
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         NotFound.class,
         () -> this.instance.apply(PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE, countries),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);

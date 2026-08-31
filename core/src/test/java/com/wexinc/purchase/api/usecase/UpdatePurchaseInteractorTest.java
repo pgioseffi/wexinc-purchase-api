@@ -33,7 +33,7 @@ class UpdatePurchaseInteractorTest {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
         .thenReturn(Boolean.FALSE);
 
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         EntityNotFoundException.class,
         () ->
             this.instance.apply(
@@ -70,7 +70,7 @@ class UpdatePurchaseInteractorTest {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(null)))
         .thenThrow(NullPointerException.class);
 
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         NullPointerException.class,
         () -> this.instance.apply(null, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
@@ -83,7 +83,7 @@ class UpdatePurchaseInteractorTest {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
         .thenReturn(Boolean.TRUE);
 
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         NullPointerException.class,
         () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE, null),
         CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN);
