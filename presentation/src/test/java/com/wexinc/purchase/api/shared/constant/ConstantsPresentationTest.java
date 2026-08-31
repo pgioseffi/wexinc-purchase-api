@@ -16,7 +16,7 @@ class ConstantsPresentationTest {
         CoreTestConstants.CONSTRUCTOR_IS_NOT_PRIVATE);
 
     constructor.setAccessible(true);
-    Assertions.assertThrows(
+    Assertions.assertThrowsExactly(
         InvocationTargetException.class,
         constructor::newInstance,
         CoreTestConstants.CONSTRUCTOR_CAN_BE_INITIALIZED);

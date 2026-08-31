@@ -90,11 +90,16 @@ class UpdatePurchaseInteractorTest {
                 IllegalArgumentException.class,
                 () -> this.instance.apply(null, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
                 CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
-        () -> Mockito.verify(this.purchaseGateway).existsById(null));
+        () -> Mockito.verify(this.purchaseGateway).existsById(null),
+        () -> Mockito.verifyNoInteractions(this.purchaseCoreMapper),
+        () -> Mockito.verifyNoMoreInteractions(this.purchaseGateway));
   }
 
   @Test
   void testShouldThrowNullPointerExceptionWhenSaving() {
+    Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(CoreTestConstants.LONG_MIN_VALUE)))
+        .thenReturn(Boolean.TRUE);
+
     Assertions.assertAll(
         CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
         () ->
@@ -102,6 +107,6 @@ class UpdatePurchaseInteractorTest {
                 NullPointerException.class,
                 () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE, null),
                 CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
-        () -> Mockito.verifyNoInteractions(this.purchaseGateway, this.purchaseCoreMapper));
+        () -> Mockito.verifyNoMoreInteractions(this.purchaseGateway, this.purchaseCoreMapper));
   }
 }
