@@ -81,13 +81,13 @@ class UpdatePurchaseInteractorTest {
   @Test
   void testShouldThrowNullPointerExceptionInExistsById() {
     Mockito.when(Boolean.valueOf(this.purchaseGateway.existsById(null)))
-        .thenThrow(NullPointerException.class);
+        .thenThrow(IllegalArgumentException.class);
 
     Assertions.assertAll(
         CoreTestConstants.ONE_OR_MORE_TESTS_HAVE_FAILED,
         () ->
             Assertions.assertThrowsExactly(
-                NullPointerException.class,
+                IllegalArgumentException.class,
                 () -> this.instance.apply(null, PurchaseDTOFixture.ACTUAL_PURCHASE_DTO_FIXTURE),
                 CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
         () -> Mockito.verify(this.purchaseGateway).existsById(null),
@@ -107,8 +107,6 @@ class UpdatePurchaseInteractorTest {
                 NullPointerException.class,
                 () -> this.instance.apply(CoreTestConstants.LONG_MIN_VALUE, null),
                 CoreTestConstants.THE_EXCEPTION_WAS_NOT_THROWN),
-        () -> Mockito.verify(this.purchaseGateway).existsById(CoreTestConstants.LONG_MIN_VALUE),
-        () -> Mockito.verifyNoInteractions(this.purchaseCoreMapper),
-        () -> Mockito.verifyNoMoreInteractions(this.purchaseGateway));
+        () -> Mockito.verifyNoMoreInteractions(this.purchaseGateway, this.purchaseCoreMapper));
   }
 }
